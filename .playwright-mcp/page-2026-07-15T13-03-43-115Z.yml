@@ -1,0 +1,388 @@
+- generic [ref=f5e2]:
+  - generic [ref=f5e4]:
+    - generic [ref=f5e5]:
+      - generic [ref=f5e6]: مانشستر، المملكة المتحدة
+      - generic [ref=f5e11]: info@gosoftware.krd
+    - generic [ref=f5e16]:
+      - link "EN" [ref=f5e17] [cursor=pointer]:
+        - /url: http://gosoftware.test
+      - link "عربي" [ref=f5e18] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar
+      - link "کوردی" [ref=f5e19] [cursor=pointer]:
+        - /url: http://gosoftware.test/ckb
+  - generic [ref=f5e20]:
+    - banner [ref=f5e21]:
+      - generic [ref=f5e22]:
+        - link [ref=f5e23] [cursor=pointer]:
+          - /url: http://gosoftware.test/ar#home
+          - img "GoSoftware" [ref=f5e24]
+        - button [active] [ref=f5e26] [cursor=pointer]
+    - generic [ref=f5e592]:
+      - generic [ref=f5e593]:
+        - img "GoSoftware" [ref=f5e594]
+        - button [ref=f5e595] [cursor=pointer]
+      - link "الرئيسية" [ref=f5e598] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar#home
+      - link "من نحن" [ref=f5e599] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar#about
+      - link "خدماتنا" [ref=f5e600] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar#services
+      - link "أعمالنا" [ref=f5e601] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar#projects
+      - link "اتصل بنا" [ref=f5e602] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar#contact
+      - link "اطلب عرض سعر" [ref=f5e603] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar#contact
+  - generic [ref=f5e32]:
+    - generic [ref=f5e33]:
+      - generic [ref=f5e34]:
+        - generic [ref=f5e35]:
+          - generic [ref=f5e36]: تطوير البرمجيات
+          - heading "نبني برمجيات تدفع أعمالك إلى الأمام" [level=1] [ref=f5e39]:
+            - text: نبني برمجيات تدفع أعمالك
+            - generic [ref=f5e40]: إلى الأمام
+          - paragraph [ref=f5e41]: من المواقع وتطبيقات الويب إلى منتجات الموبايل وأنظمة الإدارة المخصصة — تقدّم GoSoftware برمجيات موثوقة تنمو مع أعمالك.
+          - generic [ref=f5e42]:
+            - link "ابدأ مشروعك" [ref=f5e43] [cursor=pointer]:
+              - /url: http://gosoftware.test/ar#contact
+            - link "خدماتنا" [ref=f5e47] [cursor=pointer]:
+              - /url: http://gosoftware.test/ar#services
+        - generic [ref=f5e52]:
+          - generic [ref=f5e53]: منتجات رقمية
+          - heading "أنظمة مخصصة، أثر حقيقي على أعمالك" [level=1] [ref=f5e56]:
+            - text: أنظمة مخصصة،
+            - generic [ref=f5e57]: أثر حقيقي
+            - text: على أعمالك
+          - paragraph [ref=f5e58]: نصمّم ونبني منصات إدارة ولوحات تحكم وأتمتة تقلّل العمل اليدوي وتمنح فريقك البيانات التي يحتاجها — من البداية إلى النهاية.
+          - generic [ref=f5e59]:
+            - link "احصل على عرض مجاني" [ref=f5e60] [cursor=pointer]:
+              - /url: http://gosoftware.test/ar#contact
+            - link "شاهد أعمالنا" [ref=f5e64] [cursor=pointer]:
+              - /url: http://gosoftware.test/ar#projects
+      - generic [ref=f5e69]:
+        - button [ref=f5e70] [cursor=pointer]
+        - button [ref=f5e73] [cursor=pointer]
+        - generic [ref=f5e76]: 02 / 02
+    - generic [ref=f5e77]:
+      - img "GoSoftware team" [ref=f5e79]
+      - generic [ref=f5e85]:
+        - generic [ref=f5e86]: 300+
+        - generic [ref=f5e87]: مشروع منجز
+      - generic [ref=f5e88]:
+        - generic [ref=f5e89]: +15 سنة
+        - generic [ref=f5e90]: من الخبرة الهندسية
+  - generic [ref=f5e93]:
+    - generic [ref=f5e94]:
+      - img "GoSoftware office" [ref=f5e96]
+      - img "Coding" [ref=f5e98]
+      - generic [ref=f5e99]:
+        - generic [ref=f5e100]: 15+
+        - generic [ref=f5e101]: سنة في البرمجيات
+    - generic [ref=f5e102]:
+      - generic [ref=f5e103]: عن GOSOFTWARE
+      - heading "هندسة برمجيات تمكّن أعمالك من النمو" [level=2] [ref=f5e106]
+      - paragraph [ref=f5e107]: نحن استوديو برمجيات مقره المملكة المتحدة نقدّم مواقع وتطبيقات ويب وموبايل وأنظمة إدارة مخصصة. نجمع بين الهندسة المتقنة والفهم الحقيقي للأعمال — ليقدّم كل منتج نبنيه قيمة ملموسة.
+      - generic [ref=f5e108]:
+        - generic [ref=f5e112]:
+          - strong [ref=f5e113]: فرق متخصصة
+          - generic [ref=f5e114]: مهندسون خبراء، بلا وسطاء
+        - generic [ref=f5e118]:
+          - strong [ref=f5e119]: عملية شفافة
+          - generic [ref=f5e120]: نطاق ثابت ومراحل واضحة
+        - generic [ref=f5e124]:
+          - strong [ref=f5e125]: تقنيات حديثة
+          - generic [ref=f5e126]: قابلة للتوسّع وآمنة وسهلة الصيانة
+        - generic [ref=f5e130]:
+          - strong [ref=f5e131]: دعم مستمر
+          - generic [ref=f5e132]: نبقى معك بعد الإطلاق
+      - generic [ref=f5e133]:
+        - link "المزيد عنا" [ref=f5e134] [cursor=pointer]:
+          - /url: http://gosoftware.test/ar#contact
+        - generic [ref=f5e140]:
+          - generic [ref=f5e141]: James Okafor
+          - generic [ref=f5e142]: المؤسس والمدير التنفيذي
+  - generic [ref=f5e146]:
+    - generic [ref=f5e152]:
+      - heading "تطوير المواقع والتطبيقات" [level=3] [ref=f5e153]
+      - paragraph [ref=f5e154]: مواقع وتطبيقات ويب سريعة وآمنة مبنية بتقنيات حديثة.
+    - generic [ref=f5e159]:
+      - heading "تطبيقات الموبايل" [level=3] [ref=f5e160]
+      - paragraph [ref=f5e161]: تطبيقات iOS وAndroid بجودة عالية يحبها المستخدمون.
+    - generic [ref=f5e167]:
+      - heading "أنظمة الإدارة" [level=3] [ref=f5e168]
+      - paragraph [ref=f5e169]: منصات مخصصة تُؤتمت عمليات شركتك.
+  - generic [ref=f5e172]:
+    - generic [ref=f5e173]:
+      - generic [ref=f5e174]: ماذا نقدّم
+      - heading "خدمات تطوير برمجيات مصمّمة للتوسّع" [level=2] [ref=f5e178]
+    - generic [ref=f5e179]:
+      - generic [ref=f5e180]:
+        - generic [ref=f5e181]: 01 · WEB
+        - generic [ref=f5e184]:
+          - generic [ref=f5e185]:
+            - generic [ref=f5e186]: "01"
+            - heading "تطوير المواقع" [level=3] [ref=f5e187]
+          - paragraph [ref=f5e188]: مواقع تسويقية ومتاجر إلكترونية ومنصات شركات — سريعة ومتجاوبة وجاهزة لمحركات البحث من اليوم الأول.
+          - link "اعرف المزيد" [ref=f5e189] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#contact
+      - generic [ref=f5e193]:
+        - generic [ref=f5e194]: 02 · WEB APPS
+        - generic [ref=f5e197]:
+          - generic [ref=f5e198]:
+            - generic [ref=f5e199]: "02"
+            - heading "تطوير تطبيقات الويب" [level=3] [ref=f5e200]
+          - paragraph [ref=f5e201]: منتجات SaaS وبوابات ولوحات تحكم مبنية للأداء والأمان والبيانات اللحظية.
+          - link "اعرف المزيد" [ref=f5e202] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#contact
+      - generic [ref=f5e206]:
+        - generic [ref=f5e207]: 03 · MOBILE
+        - generic [ref=f5e210]:
+          - generic [ref=f5e211]:
+            - generic [ref=f5e212]: "03"
+            - heading "تطوير تطبيقات الموبايل" [level=3] [ref=f5e213]
+          - paragraph [ref=f5e214]: تطبيقات iOS وAndroid ومتعددة المنصات بتجربة استخدام متقنة وتكامل خلفي موثوق.
+          - link "اعرف المزيد" [ref=f5e215] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#contact
+      - generic [ref=f5e219]:
+        - generic [ref=f5e220]: 04 · SYSTEMS
+        - generic [ref=f5e223]:
+          - generic [ref=f5e224]:
+            - generic [ref=f5e225]: "04"
+            - heading "أنظمة الإدارة" [level=3] [ref=f5e226]
+          - paragraph [ref=f5e227]: أنظمة CRM وERP وأدوات داخلية مخصصة تُؤتمت سير العمل وتُركّز بيانات أعمالك.
+          - link "اعرف المزيد" [ref=f5e228] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#contact
+  - generic [ref=f5e233]:
+    - generic [ref=f5e234]:
+      - generic [ref=f5e235]:
+        - generic [ref=f5e236]: لماذا نحن
+        - heading "سجلّ مثبت في تسليم برمجيات عالية الجودة" [level=2] [ref=f5e239]
+        - generic [ref=f5e240]:
+          - generic [ref=f5e245]:
+            - heading "تقنيات متطورة" [level=4] [ref=f5e246]
+            - paragraph [ref=f5e247]: نبني بأفضل أدوات اليوم ليبقى منتجك سريعًا وجاهزًا للمستقبل.
+          - generic [ref=f5e252]:
+            - heading "رضا عملاء مثبت" [level=4] [ref=f5e253]
+            - paragraph [ref=f5e254]: نسبة رضا 98% وشراكات طويلة الأمد في مختلف القطاعات.
+        - link "اكتشف المزيد" [ref=f5e255] [cursor=pointer]:
+          - /url: http://gosoftware.test/ar#about
+      - generic [ref=f5e265]:
+        - generic [ref=f5e266]: الأعلى تقييمًا
+        - generic [ref=f5e267]: وكالة برمجيات 2025
+    - generic [ref=f5e269]:
+      - generic [ref=f5e270]:
+        - generic [ref=f5e271]: تطوير الويب
+        - generic [ref=f5e272]: •
+        - generic [ref=f5e273]: تطبيقات الموبايل
+        - generic [ref=f5e274]: •
+        - generic [ref=f5e275]: السحابة وDevOps
+        - generic [ref=f5e276]: •
+        - generic [ref=f5e277]: أنظمة الإدارة
+        - generic [ref=f5e278]: •
+        - generic [ref=f5e279]: تصميم UI / UX
+        - generic [ref=f5e280]: •
+        - generic [ref=f5e281]: تكامل API
+        - generic [ref=f5e282]: •
+      - generic [ref=f5e283]:
+        - generic [ref=f5e284]: تطوير الويب
+        - generic [ref=f5e285]: •
+        - generic [ref=f5e286]: تطبيقات الموبايل
+        - generic [ref=f5e287]: •
+        - generic [ref=f5e288]: السحابة وDevOps
+        - generic [ref=f5e289]: •
+        - generic [ref=f5e290]: أنظمة الإدارة
+        - generic [ref=f5e291]: •
+        - generic [ref=f5e292]: تصميم UI / UX
+        - generic [ref=f5e293]: •
+        - generic [ref=f5e294]: تكامل API
+        - generic [ref=f5e295]: •
+  - generic [ref=f5e299]:
+    - generic [ref=f5e300]:
+      - generic [ref=f5e301]: كيف نعمل
+      - heading "عملية تسليم واضحة من أربع خطوات" [level=2] [ref=f5e305]
+    - generic [ref=f5e306]:
+      - generic [ref=f5e307]:
+        - generic [ref=f5e308]: "01"
+        - heading "استشارة وفهم" [level=4] [ref=f5e313]
+        - paragraph [ref=f5e314]: نتعمّق في أهدافك ونرسم خارطة طريق واضحة ودقيقة.
+      - generic [ref=f5e315]:
+        - generic [ref=f5e316]: "02"
+        - heading "تخطيط واستراتيجية" [level=4] [ref=f5e321]
+        - paragraph [ref=f5e322]: خطة منظّمة بمراحل مركّزة ونطاق واضح.
+      - generic [ref=f5e323]:
+        - generic [ref=f5e324]: "03"
+        - heading "بناء وتنفيذ" [level=4] [ref=f5e329]
+        - paragraph [ref=f5e330]: نبني بدقة — كود نظيف وتسليم سلس.
+      - generic [ref=f5e331]:
+        - generic [ref=f5e332]: "04"
+        - heading "دعم وتحسين" [level=4] [ref=f5e339]
+        - paragraph [ref=f5e340]: نراقب المنتج ونطوّره وننمّيه على المدى الطويل.
+  - generic [ref=f5e343]:
+    - generic [ref=f5e344]:
+      - generic [ref=f5e345]:
+        - generic [ref=f5e346]: أعمالنا
+        - heading "مشاريع برمجية قمنا بتسليمها" [level=2] [ref=f5e349]
+      - link "كل المشاريع" [ref=f5e350] [cursor=pointer]:
+        - /url: http://gosoftware.test/ar#contact
+    - generic [ref=f5e354]:
+      - generic [ref=f5e358]:
+        - generic [ref=f5e359]: موقع إلكتروني
+        - heading "منصة ويب للشركات" [level=3] [ref=f5e360]
+      - generic [ref=f5e364]:
+        - generic [ref=f5e365]: تطبيق ويب
+        - heading "بوابة تحليلات SaaS" [level=3] [ref=f5e366]
+      - generic [ref=f5e370]:
+        - generic [ref=f5e371]: تطبيق موبايل
+        - heading "تطبيق تتبع التوصيل" [level=3] [ref=f5e372]
+      - generic [ref=f5e376]:
+        - generic [ref=f5e377]: نظام
+        - heading "نظام إدارة المخزون" [level=3] [ref=f5e378]
+  - generic [ref=f5e381]:
+    - generic [ref=f5e382]:
+      - generic [ref=f5e383]: 0+
+      - generic [ref=f5e384]: مشروع منجز
+    - generic [ref=f5e385]:
+      - generic [ref=f5e386]: 0+
+      - generic [ref=f5e387]: عميل سعيد
+    - generic [ref=f5e388]:
+      - generic [ref=f5e389]: 0+
+      - generic [ref=f5e390]: سنة خبرة
+    - generic [ref=f5e391]:
+      - generic [ref=f5e392]: 0%
+      - generic [ref=f5e393]: نسبة الرضا
+  - generic [ref=f5e396]:
+    - generic [ref=f5e397]:
+      - img "James Okafor" [ref=f5e399]
+      - generic [ref=f5e400]:
+        - generic [ref=f5e401]: James Okafor
+        - generic [ref=f5e402]: المؤسس والمدير التنفيذي
+    - generic [ref=f5e403]:
+      - generic [ref=f5e404]: تعرّف على المؤسس
+      - heading "الشخص وراء GoSoftware" [level=2] [ref=f5e407]
+      - paragraph [ref=f5e408]: "بخبرة تتجاوز 15 عامًا في هندسة البرمجيات، أسس مؤسسنا GoSoftware انطلاقًا من قناعة بسيطة: تستحق الشركات في المنطقة برمجيات بمستوى عالمي تُبنى قريبًا منها."
+      - paragraph [ref=f5e409]: واليوم يقود كل مشروع بنفسه — من أول محادثة حتى الإطلاق — ليضمن تسليم كل منتج في موعده وعمله بلا أخطاء واستمرار قيمته بعد الإطلاق.
+      - blockquote [ref=f5e410]: «البرمجيات الرائعة ليست مجرد شيفرة — بل فهم عميق للعمل يجعل إنجازه أبسط.»
+      - generic [ref=f5e411]:
+        - link "اعمل معنا" [ref=f5e412] [cursor=pointer]:
+          - /url: http://gosoftware.test/ar#contact
+        - generic [ref=f5e416]:
+          - link [ref=f5e417] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f5e420] [cursor=pointer]:
+            - /url: "#"
+  - generic [ref=f5e425]:
+    - generic [ref=f5e426]:
+      - generic [ref=f5e427]: آراء العملاء
+      - heading "موثوقون لدى فرق من مختلف القطاعات" [level=2] [ref=f5e431]
+    - generic [ref=f5e433]:
+      - generic [ref=f5e434]:
+        - generic [ref=f5e435]: Northwind
+        - generic [ref=f5e436]: Vertex
+        - generic [ref=f5e437]: Loopline
+        - generic [ref=f5e438]: Brightsend
+        - generic [ref=f5e439]: Corely
+        - generic [ref=f5e440]: Magnify
+      - generic [ref=f5e441]:
+        - generic [ref=f5e442]: Northwind
+        - generic [ref=f5e443]: Vertex
+        - generic [ref=f5e444]: Loopline
+        - generic [ref=f5e445]: Brightsend
+        - generic [ref=f5e446]: Corely
+        - generic [ref=f5e447]: Magnify
+    - generic [ref=f5e448]:
+      - generic [ref=f5e449]:
+        - paragraph [ref=f5e461]: «أعادت GoSoftware بناء منصة الحجوزات لدينا من الصفر. أصبحت أسرع وأنظف وانخفضت تذاكر الدعم إلى النصف. تعاملٌ ممتع حقًا.»
+        - generic [ref=f5e464]:
+          - generic [ref=f5e465]: Tom Harding
+          - generic [ref=f5e466]: المدير التقني، Brightsend
+      - generic [ref=f5e467]:
+        - paragraph [ref=f5e479]: «سلّموا نظام الإدارة الداخلي قبل الموعد، وهو اليوم يدير فريق العمليات بأكمله. موثوقون ودقيقون ومتواصلون باستمرار.»
+        - generic [ref=f5e482]:
+          - generic [ref=f5e483]: Priya Nair
+          - generic [ref=f5e484]: مديرة العمليات، Vertex
+      - generic [ref=f5e485]:
+        - paragraph [ref=f5e497]: «تطبيقنا حاصل على تقييم 4.8 بفضل GoSoftware. اهتموا بالتفاصيل كما نهتم بها نحن — أنصح بالفريق بشدة.»
+        - generic [ref=f5e500]:
+          - generic [ref=f5e501]: Sarah Doyle
+          - generic [ref=f5e502]: مؤسِّسة، Loopline
+  - generic [ref=f5e506]:
+    - generic [ref=f5e507]:
+      - generic [ref=f5e508]: تواصل معنا
+      - heading "لنبنِ مشروعك البرمجي القادم" [level=2] [ref=f5e511]
+      - paragraph [ref=f5e512]: أخبرنا بما تريد بناءه، وسنعاود التواصل خلال يوم عمل واحد مع الخطوات التالية وعرض سعر مجاني.
+      - generic [ref=f5e513]:
+        - generic [ref=f5e518]:
+          - generic [ref=f5e519]: اتصل بنا في أي وقت
+          - link "+9647517110459" [ref=f5e520] [cursor=pointer]:
+            - /url: tel:+9647517110459
+        - generic [ref=f5e526]:
+          - generic [ref=f5e527]: راسلنا
+          - link "info@gosoftware.krd" [ref=f5e528] [cursor=pointer]:
+            - /url: mailto:info@gosoftware.krd
+    - generic [ref=f5e529]:
+      - heading "اطلب مكالمة" [level=3] [ref=f5e530]
+      - paragraph [ref=f5e531]: املأ النموذج وسنتواصل معك.
+      - generic [ref=f5e533]:
+        - textbox "اسمك" [ref=f5e534]
+        - textbox "البريد الإلكتروني" [ref=f5e535]
+        - textbox "رقم الهاتف" [ref=f5e536]
+        - combobox [ref=f5e537]:
+          - option "اختر خدمة" [selected]
+          - option "تطوير المواقع"
+          - option "تطوير تطبيقات الويب"
+          - option "تطوير تطبيقات الموبايل"
+          - option "نظام إدارة"
+          - option "شيء آخر"
+        - textbox "أخبرنا عن مشروعك" [ref=f5e538]
+        - button "أرسل الرسالة" [ref=f5e539] [cursor=pointer]
+  - contentinfo [ref=f5e543]:
+    - generic [ref=f5e544]:
+      - generic [ref=f5e545]:
+        - img "GoSoftware" [ref=f5e546]
+        - paragraph [ref=f5e547]: استوديو برمجيات بريطاني يبني مواقع وتطبيقات وأنظمة إدارة مخصصة تدفع أعمالك إلى الأمام.
+        - generic [ref=f5e548]:
+          - link [ref=f5e549] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f5e552] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f5e555] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f5e558] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f5e561]:
+        - heading "الشركة" [level=4] [ref=f5e562]
+        - generic [ref=f5e563]:
+          - link "من نحن" [ref=f5e564] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#about
+          - link "تعرّف على المؤسس" [ref=f5e565] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#founder
+          - link "اتصل بنا" [ref=f5e566] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#contact
+          - link "الوظائف" [ref=f5e567] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f5e568]:
+        - heading "الخدمات" [level=4] [ref=f5e569]
+        - generic [ref=f5e570]:
+          - link "تطوير المواقع" [ref=f5e571] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#services
+          - link "تطبيقات الويب" [ref=f5e572] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#services
+          - link "تطبيقات الموبايل" [ref=f5e573] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#services
+          - link "أنظمة الإدارة" [ref=f5e574] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#services
+          - link "الدعم والاستضافة" [ref=f5e575] [cursor=pointer]:
+            - /url: http://gosoftware.test/ar#services
+      - generic [ref=f5e576]:
+        - heading "النشرة البريدية" [level=4] [ref=f5e577]
+        - paragraph [ref=f5e578]: اشترك للحصول على أحدث المستجدات والمقالات.
+        - generic [ref=f5e579]:
+          - textbox "بريدك الإلكتروني" [ref=f5e580]
+          - button [ref=f5e581] [cursor=pointer]
+    - generic [ref=f5e584]:
+      - generic [ref=f5e585]: © 2026 GoSoftware. جميع الحقوق محفوظة.
+      - generic [ref=f5e586]:
+        - link "سياسة الخصوصية" [ref=f5e587] [cursor=pointer]:
+          - /url: "#"
+        - link "شروط الاستخدام" [ref=f5e588] [cursor=pointer]:
+          - /url: "#"

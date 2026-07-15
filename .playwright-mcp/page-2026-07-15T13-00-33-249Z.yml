@@ -1,0 +1,398 @@
+- generic [ref=f3e2]:
+  - generic [ref=f3e4]:
+    - generic [ref=f3e5]:
+      - generic [ref=f3e6]: Manchester, United Kingdom
+      - generic [ref=f3e11]: info@gosoftware.krd
+    - generic [ref=f3e15]:
+      - generic [ref=f3e16]:
+        - link "EN" [ref=f3e17] [cursor=pointer]:
+          - /url: http://gosoftware.test
+        - link "عربي" [ref=f3e18] [cursor=pointer]:
+          - /url: http://gosoftware.test/ar
+        - link "کوردی" [ref=f3e19] [cursor=pointer]:
+          - /url: http://gosoftware.test/ckb
+      - generic [ref=f3e20]: Follow us
+      - link [ref=f3e21] [cursor=pointer]:
+        - /url: "#"
+      - link [ref=f3e24] [cursor=pointer]:
+        - /url: "#"
+      - link [ref=f3e27] [cursor=pointer]:
+        - /url: "#"
+      - link [ref=f3e30] [cursor=pointer]:
+        - /url: "#"
+  - generic [ref=f3e33]:
+    - banner [ref=f3e34]:
+      - generic [ref=f3e35]:
+        - link [ref=f3e36] [cursor=pointer]:
+          - /url: http://gosoftware.test#home
+          - img "GoSoftware" [ref=f3e37]
+        - button [active] [ref=f3e39] [cursor=pointer]
+    - generic [ref=f3e605]:
+      - generic [ref=f3e606]:
+        - img "GoSoftware" [ref=f3e607]
+        - button [ref=f3e608] [cursor=pointer]
+      - link "Home" [ref=f3e611] [cursor=pointer]:
+        - /url: http://gosoftware.test#home
+      - link "About" [ref=f3e612] [cursor=pointer]:
+        - /url: http://gosoftware.test#about
+      - link "Services" [ref=f3e613] [cursor=pointer]:
+        - /url: http://gosoftware.test#services
+      - link "Projects" [ref=f3e614] [cursor=pointer]:
+        - /url: http://gosoftware.test#projects
+      - link "Contact" [ref=f3e615] [cursor=pointer]:
+        - /url: http://gosoftware.test#contact
+      - link "Get a Quote" [ref=f3e616] [cursor=pointer]:
+        - /url: http://gosoftware.test#contact
+  - generic [ref=f3e45]:
+    - generic [ref=f3e46]:
+      - generic [ref=f3e47]:
+        - generic [ref=f3e48]:
+          - generic [ref=f3e49]: SOFTWARE DEVELOPMENT
+          - heading "Building software that moves you forward" [level=1] [ref=f3e52]:
+            - text: Building software that moves you
+            - generic [ref=f3e53]: forward
+          - paragraph [ref=f3e54]: From websites and web apps to mobile products and bespoke management systems — GoSoftware ships reliable software that scales with your business.
+          - generic [ref=f3e55]:
+            - link "Start Your Project" [ref=f3e56] [cursor=pointer]:
+              - /url: http://gosoftware.test#contact
+            - link "Our Services" [ref=f3e60] [cursor=pointer]:
+              - /url: http://gosoftware.test#services
+        - generic [ref=f3e65]:
+          - generic [ref=f3e66]: DIGITAL PRODUCTS
+          - heading "Custom systems, real business impact" [level=1] [ref=f3e69]:
+            - text: Custom systems,
+            - generic [ref=f3e70]: real
+            - text: business impact
+          - paragraph [ref=f3e71]: We design and engineer management platforms, dashboards and automation that cut manual work and give your team the data it needs — end to end.
+          - generic [ref=f3e72]:
+            - link "Get a Free Quote" [ref=f3e73] [cursor=pointer]:
+              - /url: http://gosoftware.test#contact
+            - link "See Our Work" [ref=f3e77] [cursor=pointer]:
+              - /url: http://gosoftware.test#projects
+      - generic [ref=f3e82]:
+        - button [ref=f3e83] [cursor=pointer]
+        - button [ref=f3e86] [cursor=pointer]
+        - generic [ref=f3e89]: 01 / 02
+    - generic [ref=f3e90]:
+      - img "GoSoftware team" [ref=f3e92]
+      - generic [ref=f3e98]:
+        - generic [ref=f3e99]: 300+
+        - generic [ref=f3e100]: Projects delivered
+      - generic [ref=f3e101]:
+        - generic [ref=f3e102]: 15+ yrs
+        - generic [ref=f3e103]: of engineering
+  - generic [ref=f3e106]:
+    - generic [ref=f3e107]:
+      - img "GoSoftware office" [ref=f3e109]
+      - img "Coding" [ref=f3e111]
+      - generic [ref=f3e112]:
+        - generic [ref=f3e113]: 15+
+        - generic [ref=f3e114]: Years in software
+    - generic [ref=f3e115]:
+      - generic [ref=f3e116]: ABOUT GOSOFTWARE
+      - heading "Engineering software that empowers your business to grow" [level=2] [ref=f3e119]
+      - paragraph [ref=f3e120]: We're a UK-based software studio delivering websites, web and mobile apps, and custom management systems. We pair clean engineering with real business thinking — so every product we ship earns its keep.
+      - generic [ref=f3e121]:
+        - generic [ref=f3e125]:
+          - strong [ref=f3e126]: Dedicated teams
+          - generic [ref=f3e127]: Senior engineers, no hand-offs
+        - generic [ref=f3e131]:
+          - strong [ref=f3e132]: Transparent process
+          - generic [ref=f3e133]: Fixed scope, clear milestones
+        - generic [ref=f3e137]:
+          - strong [ref=f3e138]: Modern stack
+          - generic [ref=f3e139]: Scalable, secure, maintainable
+        - generic [ref=f3e143]:
+          - strong [ref=f3e144]: Ongoing support
+          - generic [ref=f3e145]: We stay after launch
+      - generic [ref=f3e146]:
+        - link "More About Us" [ref=f3e147] [cursor=pointer]:
+          - /url: http://gosoftware.test#contact
+        - generic [ref=f3e153]:
+          - generic [ref=f3e154]: James Okafor
+          - generic [ref=f3e155]: Founder & CEO
+  - generic [ref=f3e159]:
+    - generic [ref=f3e165]:
+      - heading "Web & App Development" [level=3] [ref=f3e166]
+      - paragraph [ref=f3e167]: Fast, secure websites and web apps on a modern stack.
+    - generic [ref=f3e172]:
+      - heading "Mobile Applications" [level=3] [ref=f3e173]
+      - paragraph [ref=f3e174]: Native-quality iOS & Android apps users love.
+    - generic [ref=f3e180]:
+      - heading "Management Systems" [level=3] [ref=f3e181]
+      - paragraph [ref=f3e182]: Bespoke platforms that automate operations.
+  - generic [ref=f3e185]:
+    - generic [ref=f3e186]:
+      - generic [ref=f3e187]: WHAT WE DO
+      - heading "Software development services built to scale" [level=2] [ref=f3e191]
+    - generic [ref=f3e192]:
+      - generic [ref=f3e193]:
+        - generic [ref=f3e194]: 01 · WEB
+        - generic [ref=f3e197]:
+          - generic [ref=f3e198]:
+            - generic [ref=f3e199]: "01"
+            - heading "Website Development" [level=3] [ref=f3e200]
+          - paragraph [ref=f3e201]: Marketing sites, e-commerce and corporate platforms — fast, responsive and SEO-ready from day one.
+          - link "Learn More" [ref=f3e202] [cursor=pointer]:
+            - /url: http://gosoftware.test#contact
+      - generic [ref=f3e206]:
+        - generic [ref=f3e207]: 02 · WEB APPS
+        - generic [ref=f3e210]:
+          - generic [ref=f3e211]:
+            - generic [ref=f3e212]: "02"
+            - heading "Web App Development" [level=3] [ref=f3e213]
+          - paragraph [ref=f3e214]: SaaS products, portals and dashboards engineered for performance, security and real-time data.
+          - link "Learn More" [ref=f3e215] [cursor=pointer]:
+            - /url: http://gosoftware.test#contact
+      - generic [ref=f3e219]:
+        - generic [ref=f3e220]: 03 · MOBILE
+        - generic [ref=f3e223]:
+          - generic [ref=f3e224]:
+            - generic [ref=f3e225]: "03"
+            - heading "Mobile App Development" [level=3] [ref=f3e226]
+          - paragraph [ref=f3e227]: iOS, Android and cross-platform apps with polished UX and dependable back-end integration.
+          - link "Learn More" [ref=f3e228] [cursor=pointer]:
+            - /url: http://gosoftware.test#contact
+      - generic [ref=f3e232]:
+        - generic [ref=f3e233]: 04 · SYSTEMS
+        - generic [ref=f3e236]:
+          - generic [ref=f3e237]:
+            - generic [ref=f3e238]: "04"
+            - heading "Management Systems" [level=3] [ref=f3e239]
+          - paragraph [ref=f3e240]: Custom CRMs, ERPs and internal tools that automate workflows and centralise your business data.
+          - link "Learn More" [ref=f3e241] [cursor=pointer]:
+            - /url: http://gosoftware.test#contact
+  - generic [ref=f3e246]:
+    - generic [ref=f3e247]:
+      - generic [ref=f3e248]:
+        - generic [ref=f3e249]: WHY CHOOSE US
+        - heading "A proven track record of shipping quality software" [level=2] [ref=f3e252]
+        - generic [ref=f3e253]:
+          - generic [ref=f3e258]:
+            - heading "Cutting-Edge Technology" [level=4] [ref=f3e259]
+            - paragraph [ref=f3e260]: We build on today's best tools so your product stays fast and future-proof.
+          - generic [ref=f3e265]:
+            - heading "Proven Client Satisfaction" [level=4] [ref=f3e266]
+            - paragraph [ref=f3e267]: A 98% satisfaction rate and long-term partnerships across industries.
+        - link "Discover More" [ref=f3e268] [cursor=pointer]:
+          - /url: http://gosoftware.test#about
+      - generic [ref=f3e278]:
+        - generic [ref=f3e279]: Top-rated
+        - generic [ref=f3e280]: Software agency 2025
+    - generic [ref=f3e282]:
+      - generic [ref=f3e283]:
+        - generic [ref=f3e284]: Web Development
+        - generic [ref=f3e285]: •
+        - generic [ref=f3e286]: Mobile Apps
+        - generic [ref=f3e287]: •
+        - generic [ref=f3e288]: Cloud & DevOps
+        - generic [ref=f3e289]: •
+        - generic [ref=f3e290]: Management Systems
+        - generic [ref=f3e291]: •
+        - generic [ref=f3e292]: UI / UX Design
+        - generic [ref=f3e293]: •
+        - generic [ref=f3e294]: API Integration
+        - generic [ref=f3e295]: •
+      - generic [ref=f3e296]:
+        - generic [ref=f3e297]: Web Development
+        - generic [ref=f3e298]: •
+        - generic [ref=f3e299]: Mobile Apps
+        - generic [ref=f3e300]: •
+        - generic [ref=f3e301]: Cloud & DevOps
+        - generic [ref=f3e302]: •
+        - generic [ref=f3e303]: Management Systems
+        - generic [ref=f3e304]: •
+        - generic [ref=f3e305]: UI / UX Design
+        - generic [ref=f3e306]: •
+        - generic [ref=f3e307]: API Integration
+        - generic [ref=f3e308]: •
+  - generic [ref=f3e312]:
+    - generic [ref=f3e313]:
+      - generic [ref=f3e314]: HOW WE WORK
+      - heading "A clear, four-step delivery process" [level=2] [ref=f3e318]
+    - generic [ref=f3e319]:
+      - generic [ref=f3e320]:
+        - generic [ref=f3e321]: "01"
+        - heading "Consult & Understand" [level=4] [ref=f3e326]
+        - paragraph [ref=f3e327]: We dig into your goals and map a clear, accurate roadmap.
+      - generic [ref=f3e328]:
+        - generic [ref=f3e329]: "02"
+        - heading "Plan & Strategise" [level=4] [ref=f3e334]
+        - paragraph [ref=f3e335]: A structured plan with focused milestones and clear scope.
+      - generic [ref=f3e336]:
+        - generic [ref=f3e337]: "03"
+        - heading "Build & Execute" [level=4] [ref=f3e342]
+        - paragraph [ref=f3e343]: We engineer with precision — clean code, smooth delivery.
+      - generic [ref=f3e344]:
+        - generic [ref=f3e345]: "04"
+        - heading "Support & Optimise" [level=4] [ref=f3e352]
+        - paragraph [ref=f3e353]: We monitor, refine and grow the product long-term.
+  - generic [ref=f3e356]:
+    - generic [ref=f3e357]:
+      - generic [ref=f3e358]:
+        - generic [ref=f3e359]: OUR WORK
+        - heading "Software projects we've delivered" [level=2] [ref=f3e362]
+      - link "All Projects" [ref=f3e363] [cursor=pointer]:
+        - /url: http://gosoftware.test#contact
+    - generic [ref=f3e367]:
+      - generic [ref=f3e371]:
+        - generic [ref=f3e372]: WEBSITE
+        - heading "Corporate Web Platform" [level=3] [ref=f3e373]
+      - generic [ref=f3e377]:
+        - generic [ref=f3e378]: WEB APP
+        - heading "SaaS Analytics Portal" [level=3] [ref=f3e379]
+      - generic [ref=f3e383]:
+        - generic [ref=f3e384]: MOBILE APP
+        - heading "Delivery Tracking App" [level=3] [ref=f3e385]
+      - generic [ref=f3e389]:
+        - generic [ref=f3e390]: SYSTEM
+        - heading "Inventory Management System" [level=3] [ref=f3e391]
+  - generic [ref=f3e394]:
+    - generic [ref=f3e395]:
+      - generic [ref=f3e396]: 0+
+      - generic [ref=f3e397]: Projects Delivered
+    - generic [ref=f3e398]:
+      - generic [ref=f3e399]: 0+
+      - generic [ref=f3e400]: Happy Clients
+    - generic [ref=f3e401]:
+      - generic [ref=f3e402]: 0+
+      - generic [ref=f3e403]: Years Experience
+    - generic [ref=f3e404]:
+      - generic [ref=f3e405]: 0%
+      - generic [ref=f3e406]: Satisfaction Rate
+  - generic [ref=f3e409]:
+    - generic [ref=f3e410]:
+      - img "James Okafor" [ref=f3e412]
+      - generic [ref=f3e413]:
+        - generic [ref=f3e414]: James Okafor
+        - generic [ref=f3e415]: Founder & CEO
+    - generic [ref=f3e416]:
+      - generic [ref=f3e417]: MEET THE FOUNDER
+      - heading "The person behind GoSoftware" [level=2] [ref=f3e420]
+      - paragraph [ref=f3e421]: "With over 15 years in software engineering, our founder started GoSoftware with a simple conviction: businesses in the region deserve world-class software built close to home."
+      - paragraph [ref=f3e422]: Today he leads every engagement personally — from the first conversation to launch — making sure each product ships on time, works flawlessly and keeps earning its place after release.
+      - blockquote [ref=f3e423]: “Great software is not about code — it is about understanding a business well enough to make its work simpler.”
+      - generic [ref=f3e424]:
+        - link "Work With Us" [ref=f3e425] [cursor=pointer]:
+          - /url: http://gosoftware.test#contact
+        - generic [ref=f3e429]:
+          - link [ref=f3e430] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f3e433] [cursor=pointer]:
+            - /url: "#"
+  - generic [ref=f3e438]:
+    - generic [ref=f3e439]:
+      - generic [ref=f3e440]: TESTIMONIALS
+      - heading "Trusted by teams across industries" [level=2] [ref=f3e444]
+    - generic [ref=f3e446]:
+      - generic [ref=f3e447]:
+        - generic [ref=f3e448]: Northwind
+        - generic [ref=f3e449]: Vertex
+        - generic [ref=f3e450]: Loopline
+        - generic [ref=f3e451]: Brightsend
+        - generic [ref=f3e452]: Corely
+        - generic [ref=f3e453]: Magnify
+      - generic [ref=f3e454]:
+        - generic [ref=f3e455]: Northwind
+        - generic [ref=f3e456]: Vertex
+        - generic [ref=f3e457]: Loopline
+        - generic [ref=f3e458]: Brightsend
+        - generic [ref=f3e459]: Corely
+        - generic [ref=f3e460]: Magnify
+    - generic [ref=f3e461]:
+      - generic [ref=f3e462]:
+        - paragraph [ref=f3e474]: “GoSoftware rebuilt our booking platform from scratch. It's faster, cleaner and our support tickets dropped by half. Genuinely a pleasure to work with.”
+        - generic [ref=f3e477]:
+          - generic [ref=f3e478]: Tom Harding
+          - generic [ref=f3e479]: CTO, Brightsend
+      - generic [ref=f3e480]:
+        - paragraph [ref=f3e492]: “They delivered our internal management system ahead of schedule and it now runs the whole operations team. Reliable, sharp and communicative.”
+        - generic [ref=f3e495]:
+          - generic [ref=f3e496]: Priya Nair
+          - generic [ref=f3e497]: Ops Director, Vertex
+      - generic [ref=f3e498]:
+        - paragraph [ref=f3e510]: “Our mobile app has a 4.8 rating thanks to GoSoftware. They cared about the details as much as we did — highly recommend the team.”
+        - generic [ref=f3e513]:
+          - generic [ref=f3e514]: Sarah Doyle
+          - generic [ref=f3e515]: Founder, Loopline
+  - generic [ref=f3e519]:
+    - generic [ref=f3e520]:
+      - generic [ref=f3e521]: GET IN TOUCH
+      - heading "Let's build your next software project" [level=2] [ref=f3e524]
+      - paragraph [ref=f3e525]: Tell us what you're building. We'll get back within one working day with next steps and a free quote.
+      - generic [ref=f3e526]:
+        - generic [ref=f3e531]:
+          - generic [ref=f3e532]: Call us anytime
+          - link "+9647517110459" [ref=f3e533] [cursor=pointer]:
+            - /url: tel:+9647517110459
+        - generic [ref=f3e539]:
+          - generic [ref=f3e540]: Email us
+          - link "info@gosoftware.krd" [ref=f3e541] [cursor=pointer]:
+            - /url: mailto:info@gosoftware.krd
+    - generic [ref=f3e542]:
+      - heading "Ask for a call back" [level=3] [ref=f3e543]
+      - paragraph [ref=f3e544]: Fill in the form and we'll be in touch.
+      - generic [ref=f3e546]:
+        - textbox "Your name" [ref=f3e547]
+        - textbox "Email address" [ref=f3e548]
+        - textbox "Phone number" [ref=f3e549]
+        - combobox [ref=f3e550]:
+          - option "Select a service" [selected]
+          - option "Website Development"
+          - option "Web Application Development"
+          - option "Mobile App Development"
+          - option "Management System"
+          - option "Something else"
+        - textbox "Tell us about your project" [ref=f3e551]
+        - button "Send Message" [ref=f3e552] [cursor=pointer]
+  - contentinfo [ref=f3e556]:
+    - generic [ref=f3e557]:
+      - generic [ref=f3e558]:
+        - img "GoSoftware" [ref=f3e559]
+        - paragraph [ref=f3e560]: UK software studio building websites, apps and custom management systems that move your business forward.
+        - generic [ref=f3e561]:
+          - link [ref=f3e562] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f3e565] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f3e568] [cursor=pointer]:
+            - /url: "#"
+          - link [ref=f3e571] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f3e574]:
+        - heading "Company" [level=4] [ref=f3e575]
+        - generic [ref=f3e576]:
+          - link "About Us" [ref=f3e577] [cursor=pointer]:
+            - /url: http://gosoftware.test#about
+          - link "Meet the Founder" [ref=f3e578] [cursor=pointer]:
+            - /url: http://gosoftware.test#founder
+          - link "Contact Us" [ref=f3e579] [cursor=pointer]:
+            - /url: http://gosoftware.test#contact
+          - link "Careers" [ref=f3e580] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=f3e581]:
+        - heading "Services" [level=4] [ref=f3e582]
+        - generic [ref=f3e583]:
+          - link "Website Development" [ref=f3e584] [cursor=pointer]:
+            - /url: http://gosoftware.test#services
+          - link "Web Applications" [ref=f3e585] [cursor=pointer]:
+            - /url: http://gosoftware.test#services
+          - link "Mobile Apps" [ref=f3e586] [cursor=pointer]:
+            - /url: http://gosoftware.test#services
+          - link "Management Systems" [ref=f3e587] [cursor=pointer]:
+            - /url: http://gosoftware.test#services
+          - link "Support & Hosting" [ref=f3e588] [cursor=pointer]:
+            - /url: http://gosoftware.test#services
+      - generic [ref=f3e589]:
+        - heading "Newsletter" [level=4] [ref=f3e590]
+        - paragraph [ref=f3e591]: Subscribe for the latest updates and insights.
+        - generic [ref=f3e592]:
+          - textbox "Your email" [ref=f3e593]
+          - button [ref=f3e594] [cursor=pointer]
+    - generic [ref=f3e597]:
+      - generic [ref=f3e598]: © 2026 GoSoftware. All Rights Reserved.
+      - generic [ref=f3e599]:
+        - link "Privacy Policy" [ref=f3e600] [cursor=pointer]:
+          - /url: "#"
+        - link "Terms of Service" [ref=f3e601] [cursor=pointer]:
+          - /url: "#"

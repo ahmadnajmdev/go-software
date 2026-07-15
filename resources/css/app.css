@@ -1,0 +1,93 @@
+/* GoSoftware design system — ported from the claude.ai/design export.
+   Theme overrides (--gs-accent, --gs-deep-*, --gs-r-*) are emitted per-request
+   by App\Support\Theme into a :root style block; the values here are the
+   "midnight" mood / "soft" shape defaults. */
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+body { font-family: 'DM Sans', sans-serif; color: #55636f; background: #ffffff; -webkit-font-smoothing: antialiased; }
+a { color: #17877e; text-decoration: none; }
+a:hover { color: var(--gs-accent, #2CA69C); }
+::selection { background: var(--gs-accent, #2CA69C); color: #fff; }
+svg { display: block; }
+
+@keyframes gsMarquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes gsFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+
+/* Inline edit mode (admins only — body[data-edit] is toggled by admin-edit.js) */
+.gs-edit:focus { outline: 2px solid #2CA69C; outline-offset: 3px; border-radius: 3px; }
+body[data-edit="true"] .gs-edit:hover { outline: 2px dashed #2CA69C; outline-offset: 3px; border-radius: 3px; cursor: text; }
+
+/* RTL (Arabic / Kurdish Sorani) */
+body[dir="rtl"] { font-family: 'IBM Plex Sans Arabic', 'DM Sans', sans-serif; }
+body[dir="rtl"] h1, body[dir="rtl"] h2, body[dir="rtl"] h3, body[dir="rtl"] h4, body[dir="rtl"] p, body[dir="rtl"] a, body[dir="rtl"] span, body[dir="rtl"] div, body[dir="rtl"] button, body[dir="rtl"] strong, body[dir="rtl"] input, body[dir="rtl"] select, body[dir="rtl"] textarea, body[dir="rtl"] option { font-family: 'IBM Plex Sans Arabic', 'DM Sans', sans-serif !important; letter-spacing: 0 !important; }
+body[dir="rtl"] h1 { line-height: 1.4 !important; }
+body[dir="rtl"] h2 { line-height: 1.5 !important; }
+body[dir="rtl"] svg.gs-flip { transform: scaleX(-1); }
+/* The RTL marquee must scroll the opposite way to stay seamless */
+body[dir="rtl"] .gs-marquee-track { animation-direction: reverse; }
+
+/* Hover/focus utilities replacing the export's style-hover / style-focus attributes */
+.hov-accent-text:hover { color: var(--gs-accent, #2CA69C) !important; }
+.hov-accentlite-text:hover { color: var(--gs-accent-lite, #6FDED3) !important; }
+.hov-accent-bg:hover { background: var(--gs-accent, #2CA69C) !important; color: #fff !important; }
+.hov-accent-solid:hover { background: var(--gs-accent, #2CA69C) !important; }
+.hov-accent-border:hover { background: var(--gs-accent, #2CA69C) !important; border-color: var(--gs-accent, #2CA69C) !important; }
+.hov-white:hover { background: #fff !important; color: #0d1826 !important; }
+.hov-dark:hover { background: #0d1826 !important; }
+.hov-dark-text:hover { background: #0d1826 !important; color: #fff !important; }
+.hov-lift:hover { box-shadow: 0 30px 60px rgba(13,24,38,.1); transform: translateY(-6px); }
+.foc-accent:focus { border-color: var(--gs-accent, #2CA69C) !important; outline: none; }
+
+/* Mobile menu overlay + slide-in drawer (Alpine toggles .open on the overlay).
+   State lives in classes, not :style — a string :style binding would clobber
+   the element's static inline styles when Alpine applies it. */
+.gs-menu-overlay { position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0; transition: opacity .3s; }
+.gs-menu-overlay.open { pointer-events: auto; opacity: 1; }
+.gs-drawer { position: absolute; top: 0; inset-inline-end: 0; height: 100%; width: 300px; max-width: 82vw; background: #fff; padding: 24px; transform: translateX(110%); transition: transform .32s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column; gap: 4px; box-shadow: 0 0 50px rgba(13,24,38,.25); overflow-y: auto; }
+body[dir="rtl"] .gs-drawer { transform: translateX(-110%); }
+.gs-menu-overlay.open .gs-drawer { transform: translateX(0); }
+
+/* Responsive rules (ported from the export's injected #gs-responsive block) */
+@media (max-width: 900px) {
+  .gs-desktop-nav { display: none !important; }
+  .gs-burger { display: flex !important; }
+  .gs-header-cta { display: none !important; }
+  .gs-topbar-social { display: none !important; }
+  .gs-2col { grid-template-columns: 1fr !important; }
+  .gs-3col { grid-template-columns: 1fr !important; }
+  .gs-4col { grid-template-columns: 1fr 1fr !important; }
+  .gs-hero-grid { grid-template-columns: 1fr !important; }
+  .gs-footer-grid { grid-template-columns: 1fr 1fr !important; }
+}
+@media (max-width: 560px) {
+  .gs-4col { grid-template-columns: 1fr !important; }
+  .gs-footer-grid { grid-template-columns: 1fr !important; }
+}
+
+/* Alpine helper */
+[x-cloak] { display: none !important; }
+
+/* Inline edit mode: image + card management affordances */
+.gs-edit-x { display: none; position: absolute; top: 12px; inset-inline-end: 12px; z-index: 6; width: 30px; height: 30px; border: none; border-radius: 8px; background: #c0442e; color: #fff; font-size: 14px; line-height: 1; cursor: pointer; box-shadow: 0 8px 20px rgba(13,24,38,.35); }
+body[data-edit="true"] .gs-edit-x { display: grid; place-items: center; }
+.gs-add-tile { display: none; }
+body[data-edit="true"] .gs-add-tile { display: flex; }
+body[data-edit="true"] [data-edit-image] { cursor: pointer; }
+body[data-edit="true"] [data-edit-image]:hover { outline: 3px dashed var(--gs-accent, #2CA69C); outline-offset: -3px; }
+
+/* Media picker modal */
+#gs-media-modal.open { display: block; position: fixed; inset: 0; z-index: 120; }
+#gs-media-modal .gsm-backdrop { position: absolute; inset: 0; background: rgba(13,24,38,.6); }
+#gs-media-modal .gsm-panel { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: min(92vw, 760px); max-height: 84vh; overflow: auto; background: #fff; border-radius: 16px; padding: 22px; box-shadow: 0 30px 80px rgba(13,24,38,.4); font-family: 'DM Sans', sans-serif; }
+#gs-media-modal .gsm-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+#gs-media-modal .gsm-title { font-family: 'Space Grotesk'; font-weight: 700; font-size: 18px; color: #0d1826; }
+#gs-media-modal .gsm-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; margin-top: 14px; }
+#gs-media-modal .gsm-item { border: 2px solid #eef1f2; border-radius: 10px; overflow: hidden; cursor: pointer; padding: 0; background: #f5f8f8; }
+#gs-media-modal .gsm-item:hover { border-color: var(--gs-accent, #2CA69C); }
+#gs-media-modal .gsm-item img { width: 100%; height: 96px; object-fit: cover; display: block; }
+#gs-media-modal .gsm-item span { display: block; font-size: 11.5px; color: #55636f; padding: 6px 8px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#gs-media-modal .gsm-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+#gs-media-modal .gsm-row input[type="url"] { flex: 1; min-width: 220px; padding: 10px 12px; border: 1px solid #dbe3e6; border-radius: 8px; font-size: 14px; }
+#gs-media-modal .gsm-btn { border: none; background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 13.5px; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
+#gs-media-modal .gsm-btn.ghost { background: #f2f6f6; color: #0d1826; }

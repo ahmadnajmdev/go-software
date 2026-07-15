@@ -1,0 +1,79 @@
+import Alpine from 'alpinejs';
+
+// Hero carousel: 2 slides, auto-advance every 7s (paused in inline-edit mode).
+Alpine.data('heroCarousel', () => ({
+    slide: 0,
+    timer: null,
+    init() {
+        this.timer = setInterval(() => {
+            if (document.body.dataset.edit !== 'true') this.toggle();
+        }, 7000);
+    },
+    toggle() {
+        this.slide = this.slide === 0 ? 1 : 0;
+    },
+    trackTransform() {
+        const rtl = document.body.dir === 'rtl';
+        const shift = rtl ? '50%' : '-50%';
+        return this.slide === 1 ? `translateX(${shift})` : 'translateX(0)';
+    },
+    label() {
+        return `0${this.slide + 1} / 02`;
+    },
+    destroy() {
+        clearInterval(this.timer);
+    },
+}));
+
+// Contact form: fetch-submit and swap to the success panel, like the design.
+Alpine.data('contactForm', () => ({
+    submitted: false,
+    sending: false,
+    async submit(event) {
+        if (this.sending) return;
+        this.sending = true;
+        const form = event.target;
+        try {
+            const response = await fetch(form.action, {
+                method: 'POST',
+                headers: { 'Accept': 'application/json' },
+                body: new FormData(form),
+            });
+            if (response.ok) {
+                this.submitted = true;
+            } else {
+                form.submit(); // fall back to a full POST so validation errors render
+            }
+        } catch {
+            form.submit();
+        } finally {
+            this.sending = false;
+        }
+    },
+}));
+
+window.Alpine = Alpine;
+Alpine.start();
+
+// Stats counters (ported from the design: threshold .4, ~45 rAF steps, run once).
+const counters = document.querySelectorAll('.gs-count');
+if (counters.length && 'IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (!entry.isIntersecting || entry.target.dataset.done) return;
+            entry.target.dataset.done = '1';
+            const el = entry.target;
+            const target = parseInt(el.dataset.count, 10) || 0;
+            const suffix = el.dataset.suffix || '';
+            const steps = 45;
+            let step = 0;
+            const tick = () => {
+                step++;
+                el.textContent = Math.round((target * step) / steps) + suffix;
+                if (step < steps) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+        });
+    }, { threshold: 0.4 });
+    counters.forEach((el) => io.observe(el));
+}
