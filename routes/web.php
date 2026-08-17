@@ -3,7 +3,13 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
+
+// Full project archive, with the same locale prefixes as the home page.
+Route::get('/projects', [ProjectsController::class, '__invoke'])->name('projects');
+Route::get('/{locale}/projects', ProjectsController::class)
+    ->where('locale', 'ar|ckb')->name('projects.locale');
 
 // Path-based locales for SEO: / (en), /ar, /ckb. English stays at the root.
 Route::get('/{locale?}', HomeController::class)
@@ -23,6 +29,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('projects', Admin\ProjectController::class)->except('show');
     Route::resource('testimonials', Admin\TestimonialController::class)->except('show');
     Route::resource('clients', Admin\ClientController::class)->except('show');
+    Route::resource('categories', Admin\CategoryController::class)->except('show');
 
     Route::get('strings', [Admin\UiStringController::class, 'index'])->name('strings.index');
     Route::put('strings', [Admin\UiStringController::class, 'update'])->name('strings.update');

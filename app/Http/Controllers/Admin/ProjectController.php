@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Media;
 use App\Models\Project;
 use App\Support\ImageUpload;
@@ -12,12 +13,16 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        return view('admin.projects.index', ['items' => Project::ordered()->get()]);
+        return view('admin.projects.index', ['items' => Project::with('category')->ordered()->get()]);
     }
 
     public function create()
     {
-        return view('admin.projects.form', ['item' => new Project(), 'media' => $this->library()]);
+        return view('admin.projects.form', [
+            'item' => new Project(),
+            'media' => $this->library(),
+            'categories' => Category::ordered()->get(),
+        ]);
     }
 
     public function store(Request $request)
@@ -29,7 +34,11 @@ class ProjectController extends Controller
 
     public function edit(Project $project)
     {
-        return view('admin.projects.form', ['item' => $project, 'media' => $this->library()]);
+        return view('admin.projects.form', [
+            'item' => $project,
+            'media' => $this->library(),
+            'categories' => Category::ordered()->get(),
+        ]);
     }
 
     public function update(Request $request, Project $project)
@@ -51,9 +60,8 @@ class ProjectController extends Controller
         $data = $request->validate([
             'image' => ['nullable', 'string', 'max:500'],
             'image_file' => ImageUpload::RULES,
-            'category.en' => ['required', 'string', 'max:120'],
-            'category.ar' => ['nullable', 'string', 'max:120'],
-            'category.ckb' => ['nullable', 'string', 'max:120'],
+            'fit' => ['nullable', 'in:cover,contain'],
+            'category_id' => ['nullable', 'exists:categories,id'],
             'title.en' => ['required', 'string', 'max:255'],
             'title.ar' => ['nullable', 'string', 'max:255'],
             'title.ckb' => ['nullable', 'string', 'max:255'],
@@ -63,6 +71,8 @@ class ProjectController extends Controller
         if ($request->hasFile('image_file')) {
             $data['image'] = ImageUpload::store($request->file('image_file'))->path;
         }
+
+        $data['fit'] = $data['fit'] ?? 'cover';
 
         unset($data['image_file']);
 

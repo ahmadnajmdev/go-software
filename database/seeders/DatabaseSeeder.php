@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Category;
 use App\Models\Client;
 use App\Models\Project;
 use App\Models\Section;
@@ -13,6 +14,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
@@ -76,7 +78,8 @@ class DatabaseSeeder extends Seeder
             str_starts_with($key, 'why') || str_starts_with($key, 'mq')
                 || in_array($key, ['topRated', 'agency2025', 'mobileApps']) => 'Why us',
             str_starts_with($key, 'proc') || (bool) preg_match('/^p\d/', $key) => 'Process',
-            str_starts_with($key, 'proj') || (bool) preg_match('/^cat\d/', $key) || $key === 'allProjects' => 'Projects',
+            str_starts_with($key, 'proj') || (bool) preg_match('/^cat\d/', $key)
+                || in_array($key, ['allProjects', 'catAll']) => 'Projects',
             (bool) preg_match('/^st\d/', $key) => 'Stats',
             str_starts_with($key, 'team') || (bool) preg_match('/^role\d/', $key) => 'Team',
             str_starts_with($key, 'founder') => 'Founder',
@@ -118,11 +121,23 @@ class DatabaseSeeder extends Seeder
         }
 
         Project::query()->delete();
+
+        // Categories are shared across projects, so resolve each one once and
+        // reuse it. Keyed by name so re-seeding never duplicates or renames.
+        $categories = [];
+
         foreach ($defaults['projects'] as $i => $prj) {
+            $key = mb_strtolower($prj['cat']['en']);
+
+            $categories[$key] ??= Category::firstOrCreate(
+                ['slug' => Str::slug($prj['cat']['en'])],
+                ['position' => count($categories) + 1, 'name' => $prj['cat']],
+            );
+
             Project::create([
                 'position' => $i + 1,
                 'image' => $prj['img'],
-                'category' => $prj['cat'],
+                'category_id' => $categories[$key]->id,
                 'title' => $prj['title'],
             ]);
         }

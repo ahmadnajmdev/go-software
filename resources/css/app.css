@@ -39,6 +39,49 @@ body[dir="rtl"] .gs-marquee-track { animation-direction: reverse; }
 .hov-lift:hover { box-shadow: 0 30px 60px rgba(13,24,38,.1); transform: translateY(-6px); }
 .foc-accent:focus { border-color: var(--gs-accent, #2CA69C) !important; outline: none; }
 
+/* Category filter chips (Alpine owns the selected state) */
+.gs-chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 26px; }
+.gs-chip {
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: #4a5a6a;
+  background: #fff;
+  border: 1px solid #dfe7e7;
+  border-radius: 999px;
+  padding: 9px 18px;
+  cursor: pointer;
+  transition: background-color .2s, color .2s, border-color .2s;
+}
+.gs-chip:hover { border-color: var(--gs-accent, #2CA69C); color: var(--gs-accent, #2CA69C); }
+.gs-chip.is-on {
+  background: var(--gs-accent, #2CA69C);
+  border-color: var(--gs-accent, #2CA69C);
+  color: #fff;
+}
+
+/* Project tile, "fit whole image" mode: the image is contained so nothing is
+   cropped, over a blurred, scaled copy of itself so the tile still reads as a
+   filled card rather than a letterboxed one. */
+.gs-proj-media { position: absolute; inset: 0; background: #dfe7e7; }
+.gs-proj-blur {
+  position: absolute; inset: 0;
+  background-position: center;
+  background-size: cover;
+  filter: blur(26px) saturate(1.25);
+  transform: scale(1.2);
+  opacity: .6;
+}
+.gs-proj-fit {
+  position: absolute; inset: 0;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  /* keep the image clear of the title gradient at the bottom */
+  padding-bottom: 70px;
+  background-origin: content-box;
+}
+
 /* Client marquee: logos show in full colour at all times. The track pauses on
    hover so a logo linking to the client's site is actually clickable. */
 .gs-client { transition: opacity .3s; }

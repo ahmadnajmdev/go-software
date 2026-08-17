@@ -106,6 +106,21 @@ if (! function_exists('gs_setting')) {
     }
 }
 
+if (! function_exists('gs_route')) {
+    /**
+     * Locale-aware site URL: gs_route('projects') gives /projects in English
+     * and /ar/projects, /ckb/projects in the other locales — matching the
+     * path-based locale routes.
+     */
+    function gs_route(string $path = ''): string
+    {
+        $locale = app()->getLocale();
+        $prefix = $locale === 'en' ? '' : '/'.$locale;
+
+        return url($prefix.'/'.ltrim($path, '/'));
+    }
+}
+
 if (! function_exists('gs_setting_tr')) {
     /**
      * Localized value of a setting stored as a {en,ar,ckb} map, falling back

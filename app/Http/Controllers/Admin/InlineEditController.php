@@ -17,7 +17,7 @@ class InlineEditController extends Controller
     /** Hard whitelist: inline-editable models and their editable fields. */
     private const MODELS = [
         'services' => [Service::class, ['tag', 'title', 'description'], ['image']],
-        'projects' => [Project::class, ['category', 'title'], ['image']],
+        'projects' => [Project::class, ['title'], ['image']],
         'testimonials' => [Testimonial::class, ['author', 'role', 'quote'], ['avatar']],
     ];
 
@@ -171,7 +171,6 @@ class InlineEditController extends Controller
         } else {
             Project::create([
                 'position' => Project::max('position') + 1,
-                'category' => ['en' => 'CATEGORY'],
                 'title' => ['en' => 'New project'],
             ]);
         }

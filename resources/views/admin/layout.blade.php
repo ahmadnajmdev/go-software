@@ -28,6 +28,8 @@
              '<path d="M12 3l2.6 5.6 6 .8-4.4 4.2 1.1 6L12 16.8 6.7 19.6l1.1-6L3.4 9.4l6-.8z"/>'],
             ['admin.projects.index', 'admin.projects.*', 'Projects',
              '<rect x="3" y="5" width="18" height="15" rx="2"/><path d="M3 10h18M9 5V3M15 5V3"/>'],
+            ['admin.categories.index', 'admin.categories.*', 'Categories',
+             '<path d="M3 7h7l2 2h9v10a2 2 0 01-2 2H3a2 2 0 01-2-2V7z" transform="translate(1 0)"/>'],
             ['admin.clients.index', 'admin.clients.*', 'Clients',
              '<path d="M16 20v-2a4 4 0 00-4-4H7a4 4 0 00-4 4v2"/><circle cx="9.5" cy="7" r="3.2"/><path d="M17 11a3 3 0 100-6M21 20v-2a3.5 3.5 0 00-2.5-3.3"/>'],
             ['admin.testimonials.index', 'admin.testimonials.*', 'Testimonials',

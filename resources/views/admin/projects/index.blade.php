@@ -16,7 +16,7 @@
             <tr>
                 <td><img class="thumb" src="{{ media_url($item->image) }}" alt=""></td>
                 <td>{{ $item->tr('title') }}</td>
-                <td><span class="badge">{{ $item->tr('category') }}</span></td>
+                <td>@if($item->category)<span class="badge">{{ $item->category->tr('name') }}</span>@else<span class="badge">uncategorised</span>@endif</td>
                 <td>
                     <div class="row-actions">
                         <a class="btn btn-ghost btn-sm" href="{{ route('admin.projects.edit', $item) }}">Edit</a>

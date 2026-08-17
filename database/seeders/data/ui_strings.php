@@ -933,6 +933,18 @@ return array (
     'ar' => 'راسلنا',
     'ckb' => 'ئیمەیڵمان بۆ بنێرە',
   ),
+  'catAll' =>
+  array (
+    'en' => 'All',
+    'ar' => 'الكل',
+    'ckb' => 'هەموو',
+  ),
+  'projNone' =>
+  array (
+    'en' => 'No projects in this category yet.',
+    'ar' => 'لا توجد مشاريع في هذه الفئة بعد.',
+    'ckb' => 'هێشتا هیچ پرۆژەیەک لەم بەشەدا نییە.',
+  ),
   'visitUs' =>
   array (
     'en' => 'Visit our office',

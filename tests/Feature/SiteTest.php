@@ -269,6 +269,107 @@ class SiteTest extends TestCase
         $this->assertStringContainsString(t('tstTitle', 'en'), $html); // section still renders
     }
 
+    public function test_projects_page_lists_every_project_with_category_chips(): void
+    {
+        $html = $this->get('/projects')->assertOk()->getContent();
+
+        foreach (\App\Models\Project::all() as $project) {
+            $this->assertStringContainsString($project->tr('title'), $html);
+        }
+
+        // one chip per category, plus "All", and Alpine drives the selection
+        foreach (\App\Models\Category::all() as $category) {
+            $this->assertStringContainsString($category->tr('name'), $html);
+            $this->assertStringContainsString("cat === '{$category->slug}'", $html);
+        }
+        $this->assertStringContainsString(t('catAll', 'en'), $html);
+        $this->assertStringContainsString("x-data=\"{ cat: 'all' }\"", $html);
+
+        // the locale-prefixed variants resolve too
+        $this->get('/ar/projects')->assertOk();
+        $this->get('/ckb/projects')->assertOk();
+    }
+
+    public function test_category_query_string_preselects_a_chip(): void
+    {
+        $category = \App\Models\Category::first();
+
+        $this->get('/projects?category='.$category->slug)
+            ->assertOk()
+            ->assertSee("x-data=\"{ cat: '{$category->slug}' }\"", false);
+
+        // an unknown slug falls back to showing everything rather than nothing
+        $this->get('/projects?category=nope')
+            ->assertOk()
+            ->assertSee("x-data=\"{ cat: 'all' }\"", false);
+    }
+
+    public function test_project_form_assigns_a_category(): void
+    {
+        $admin = User::first();
+        $project = \App\Models\Project::first();
+        $target = \App\Models\Category::where('id', '!=', $project->category_id)->first();
+
+        $this->actingAs($admin)->put("/admin/projects/{$project->id}", [
+            'title' => ['en' => 'Recategorised'],
+            'category_id' => $target->id,
+            'fit' => 'contain',
+        ])->assertRedirect('/admin/projects')->assertSessionHasNoErrors();
+
+        $project->refresh();
+        $this->assertSame($target->id, $project->category_id);
+        $this->assertSame('contain', $project->fit);
+        $this->assertSame($target->tr('name'), $project->category->tr('name'));
+
+        // a category that does not exist is rejected
+        $this->actingAs($admin)->put("/admin/projects/{$project->id}", [
+            'title' => ['en' => 'x'], 'category_id' => 99999,
+        ])->assertSessionHasErrors('category_id');
+    }
+
+    public function test_deleting_a_category_leaves_its_projects_uncategorised(): void
+    {
+        $admin = User::first();
+        $category = \App\Models\Category::first();
+        $project = \App\Models\Project::where('category_id', $category->id)->firstOrFail();
+
+        $this->actingAs($admin)->delete("/admin/categories/{$category->id}")
+            ->assertRedirect('/admin/categories');
+
+        $this->assertNull($project->fresh()->category_id);
+        $this->get('/projects')->assertOk();   // page still renders without a category
+        $this->get('/')->assertOk();
+    }
+
+    public function test_category_slug_is_generated_and_unique(): void
+    {
+        $admin = User::first();
+
+        $this->actingAs($admin)->post('/admin/categories', [
+            'name' => ['en' => 'Data Platforms'],
+        ])->assertRedirect('/admin/categories');
+
+        $this->assertSame('data-platforms', \App\Models\Category::latest('id')->first()->slug);
+
+        // slug collisions are rejected rather than silently overwriting
+        $this->actingAs($admin)->post('/admin/categories', [
+            'name' => ['en' => 'Another'], 'slug' => 'data-platforms',
+        ])->assertSessionHasErrors('slug');
+    }
+
+    public function test_project_image_fit_controls_how_the_tile_renders(): void
+    {
+        $project = \App\Models\Project::first();
+
+        $project->update(['fit' => 'cover']);
+        $this->get('/projects')->assertOk()->assertSee('center/cover no-repeat', false);
+
+        $project->update(['fit' => 'contain']);
+        $html = $this->get('/projects')->assertOk()->getContent();
+        $this->assertStringContainsString('gs-proj-fit', $html);
+        $this->assertStringContainsString('gs-proj-blur', $html);
+    }
+
     public function test_settings_page_saves_ceo_name_address_and_map(): void
     {
         $admin = User::first();
