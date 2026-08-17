@@ -62,6 +62,7 @@ class ProjectController extends Controller
             'image_file' => ImageUpload::RULES,
             'fit' => ['nullable', 'in:cover,contain'],
             'category_id' => ['nullable', 'exists:categories,id'],
+            'url' => ['nullable', 'url', 'max:500'],
             'title.en' => ['required', 'string', 'max:255'],
             'title.ar' => ['nullable', 'string', 'max:255'],
             'title.ckb' => ['nullable', 'string', 'max:255'],

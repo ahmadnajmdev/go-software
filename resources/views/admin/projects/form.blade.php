@@ -38,6 +38,12 @@
                 <p class="hint">Drives the filter chips on the projects grid.
                     Manage the list in <a href="{{ route('admin.categories.index') }}">Categories</a>.</p>
             </div>
+
+            <div class="field">
+                <label for="url">Link <span style="font-weight:400;color:#7b858f">(optional)</span></label>
+                <input type="text" id="url" name="url" value="{{ old('url', $item->url) }}" placeholder="https://example.com">
+                <p class="hint">If set, the whole tile becomes a link and opens in a new tab.</p>
+            </div>
         </div>
 
         <button type="submit" class="btn">{{ $item->exists ? 'Save changes' : 'Create project' }}</button>

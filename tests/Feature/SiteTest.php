@@ -362,12 +362,47 @@ class SiteTest extends TestCase
         $project = \App\Models\Project::first();
 
         $project->update(['fit' => 'cover']);
-        $this->get('/projects')->assertOk()->assertSee('center/cover no-repeat', false);
+        $html = $this->get('/projects')->assertOk()->getContent();
+        $this->assertStringContainsString('center/cover no-repeat', $html);
 
         $project->update(['fit' => 'contain']);
         $html = $this->get('/projects')->assertOk()->getContent();
+        // contained logos sit on white, with no dark scrim smudging the ground
         $this->assertStringContainsString('gs-proj-fit', $html);
-        $this->assertStringContainsString('gs-proj-blur', $html);
+        $this->assertStringContainsString('gs-proj-media', $html);
+
+        // tiles are square whichever fit is used
+        $this->assertStringContainsString('aspect-ratio: 1 / 1', $html);
+    }
+
+    public function test_project_link_makes_the_tile_open_in_a_new_tab(): void
+    {
+        $admin = User::first();
+        $project = \App\Models\Project::first();
+
+        // no link: the tile is a plain div
+        $project->update(['url' => null]);
+        $html = $this->get('/projects')->assertOk()->getContent();
+        $this->assertStringNotContainsString('gs-proj is-linked', $html);
+
+        $this->actingAs($admin)->put("/admin/projects/{$project->id}", [
+            'title' => ['en' => $project->tr('title')],
+            'url' => 'https://powerorbits.com',
+        ])->assertRedirect('/admin/projects')->assertSessionHasNoErrors();
+
+        $html = $this->get('/projects')->assertOk()->getContent();
+        $this->assertStringContainsString('gs-proj is-linked', $html);
+        $this->assertStringContainsString('href="https://powerorbits.com"', $html);
+        $this->assertStringContainsString('target="_blank"', $html);
+        $this->assertStringContainsString('rel="noopener"', $html);
+
+        // the same tile links from the home page grid too
+        $this->assertStringContainsString('https://powerorbits.com', $this->get('/')->getContent());
+
+        // a malformed link is rejected rather than rendered
+        $this->actingAs($admin)->put("/admin/projects/{$project->id}", [
+            'title' => ['en' => 'x'], 'url' => 'not-a-url',
+        ])->assertSessionHasErrors('url');
     }
 
     public function test_settings_page_saves_ceo_name_address_and_map(): void

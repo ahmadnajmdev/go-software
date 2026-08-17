@@ -63,24 +63,25 @@ body[dir="rtl"] .gs-marquee-track { animation-direction: reverse; }
 /* Project tile, "fit whole image" mode: the image is contained so nothing is
    cropped, over a blurred, scaled copy of itself so the tile still reads as a
    filled card rather than a letterboxed one. */
-.gs-proj-media { position: absolute; inset: 0; background: #dfe7e7; }
-.gs-proj-blur {
-  position: absolute; inset: 0;
-  background-position: center;
-  background-size: cover;
-  filter: blur(26px) saturate(1.25);
-  transform: scale(1.2);
-  opacity: .6;
-}
+/* White ground: transparent PNG logos need a clean background, not the
+   artwork blurred behind them. */
+.gs-proj-media { position: absolute; inset: 0; background: #fff; }
 .gs-proj-fit {
   position: absolute; inset: 0;
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;
-  /* keep the image clear of the title gradient at the bottom */
-  padding-bottom: 70px;
+  /* keep the image clear of the title gradient at the bottom, and off the
+     rounded corners */
+  padding: 26px 26px 84px;
   background-origin: content-box;
 }
+
+/* Linked tiles lift slightly and reveal their arrow */
+.gs-proj.is-linked { transition: transform .3s cubic-bezier(.22,1,.36,1), box-shadow .3s; }
+.gs-proj.is-linked:hover { transform: translateY(-5px); box-shadow: 0 22px 44px rgba(13,24,38,.16); }
+.gs-proj-arrow { opacity: 0; transform: translate(-4px, 4px); transition: opacity .25s, transform .25s; }
+.gs-proj.is-linked:hover .gs-proj-arrow { opacity: 1; transform: none; }
 
 /* Client marquee: logos show in full colour at all times. The track pauses on
    hover so a logo linking to the client's site is actually clickable. */
