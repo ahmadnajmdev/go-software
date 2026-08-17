@@ -4,16 +4,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Log in — GoSoftware</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo-dark.png') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     @vite(['resources/css/admin.css'])
     <style>
-        body { background: #0d1826; display: grid; place-items: center; min-height: 100vh; }
-        .login-card { background: #fff; border-radius: 14px; padding: 34px 30px; width: min(380px, 92vw); }
-        .login-card img { display: block; margin: 0 auto 24px; }
+        body { background: var(--canvas); display: grid; place-items: center; min-height: 100vh; padding: 20px; }
+        .login-card {
+            background: #fff;
+            border-radius: var(--r-panel);
+            box-shadow: var(--shadow-panel);
+            padding: 34px 30px;
+            width: min(380px, 100%);
+        }
+        .login-card img { display: block; margin: 0 auto 8px; }
+        .login-card .lede { text-align: center; font-size: 13px; color: var(--muted); margin: 0 0 24px; }
     </style>
 </head>
 <body>
 <div class="login-card">
-    <img src="{{ asset('images/logo-dark.png') }}" alt="GoSoftware" height="34">
+    <img src="{{ asset('images/logo-dark.png') }}" alt="GoSoftware" height="30">
+    <p class="lede">Sign in to manage the site</p>
 
     @if($errors->any())
         <div class="flash-err">

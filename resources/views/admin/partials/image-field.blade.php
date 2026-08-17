@@ -30,7 +30,7 @@
 
         <div class="img-controls">
             <div class="img-actions">
-                <label class="btn btn-sm" style="margin:0">
+                <label class="btn btn-sm btn-ghost" style="margin:0">
                     Upload new
                     <input type="file" name="{{ $field }}_file" accept="image/jpeg,image/png,image/webp"
                            data-img-file hidden>
