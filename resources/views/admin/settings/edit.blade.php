@@ -90,11 +90,17 @@
                         <input type="text" name="contact_map_lng" value="{{ old('contact_map_lng', gs_setting('contact.map_lng')) }}" placeholder="43.9785422">
                     </div>
                     <div>
-                        <span class="lang-label">Zoom (3–19)</span>
-                        <input type="number" name="contact_map_zoom" min="3" max="19" value="{{ old('contact_map_zoom', gs_setting('contact.map_zoom', 16)) }}">
+                        <span class="lang-label">Zoom (3–21)</span>
+                        <input type="number" name="contact_map_zoom" min="3" max="21" value="{{ old('contact_map_zoom', gs_setting('contact.map_zoom', 16)) }}">
                     </div>
                 </div>
-                <p class="hint">To get exact numbers: open <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">openstreetmap.org</a>, right-click the building → “Show address”, and copy the lat/lon it shows. Clear latitude or longitude to hide the map.</p>
+                <p class="hint">To get exact numbers: open <a href="https://www.google.com/maps" target="_blank" rel="noopener">Google Maps</a>, right-click your building → the first menu item is the lat/lng, click it to copy. Clear both and the map pins your address by name instead; clear the address too and the map is hidden.</p>
+            </div>
+
+            <div class="field">
+                <label for="contact_map_embed">Google Maps embed <span style="font-weight:400;color:#66757f">(optional — overrides the coordinates)</span></label>
+                <textarea id="contact_map_embed" name="contact_map_embed" rows="3" placeholder="&lt;iframe src=&quot;https://www.google.com/maps/embed?pb=…&quot;&gt;&lt;/iframe&gt;">{{ old('contact_map_embed', gs_setting('contact.map_embed')) }}</textarea>
+                <p class="hint">In Google Maps: find your place → <strong>Share</strong> → <strong>Embed a map</strong> → Copy HTML, and paste it here. Paste the whole <code>&lt;iframe&gt;</code> or just the URL — either works. This pins the map to the exact business listing instead of a coordinate. Only google.com map links are accepted; anything else is ignored and the coordinates are used instead.</p>
             </div>
         </div>
 

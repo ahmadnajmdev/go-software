@@ -48,7 +48,7 @@ body[dir="rtl"] .gs-marquee-track { animation-direction: reverse; }
   .gs-marquee-track { animation: none; flex-wrap: wrap; width: 100% !important; justify-content: center; row-gap: 30px; }
 }
 
-/* Contact map: OSM embed with the address chip floating over it */
+/* Contact map: Google Maps embed with the address chip floating over it */
 .gs-map-chip:hover { background: var(--gs-accent, #2CA69C) !important; }
 .gs-map-chip:hover svg { color: #fff !important; }
 

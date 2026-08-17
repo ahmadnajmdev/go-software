@@ -1,24 +1,30 @@
 @php
+    use App\Support\MapEmbed;
+
     $address = gs_setting_tr('contact.address');
+
+    // A pasted Google "Embed a map" snippet wins; otherwise build a key-less
+    // embed from the coordinates. Either one is enough to show the map.
+    $custom = MapEmbed::custom(gs_setting('contact.map_embed'));
     $lat = gs_setting('contact.map_lat');
     $lng = gs_setting('contact.map_lng');
-    $hasMap = is_numeric($lat) && is_numeric($lng);
+    $hasCoords = is_numeric($lat) && is_numeric($lng);
+    // an address alone is enough — Google's `q` resolves a place name too
+    $hasMap = $custom || $hasCoords || filled($address);
 
     if ($hasMap) {
-        $lat = (float) $lat;
-        $lng = (float) $lng;
-        $zoom = min(19, max(3, (int) gs_setting('contact.map_zoom', 16)));
+        $zoom = min(21, max(3, (int) gs_setting('contact.map_zoom', 16)));
+        $hl = MapEmbed::locale(app()->getLocale());
 
-        // Degrees covered by a ~1100x360 viewport at this zoom (256px tiles).
-        $lngSpan = 1550 / (2 ** $zoom);
-        $latSpan = 500 / (2 ** $zoom);
+        $embed = match (true) {
+            (bool) $custom => $custom,
+            $hasCoords => MapEmbed::forCoordinates((float) $lat, (float) $lng, $zoom, $hl),
+            default => MapEmbed::forQuery($address, $zoom, $hl),
+        };
 
-        $embed = 'https://www.openstreetmap.org/export/embed.html?'.http_build_query([
-            'bbox' => implode(',', [$lng - $lngSpan, $lat - $latSpan, $lng + $lngSpan, $lat + $latSpan]),
-            'layer' => 'mapnik',
-            'marker' => $lat.','.$lng,
-        ]);
-        $directions = "https://www.openstreetmap.org/?mlat={$lat}&mlon={$lng}#map={$zoom}/{$lat}/{$lng}";
+        $directions = $hasCoords
+            ? MapEmbed::directions((float) $lat, (float) $lng)
+            : MapEmbed::search($address ?: 'GoSoftware');
     }
 @endphp
 <!-- ===== CONTACT ===== -->
@@ -85,12 +91,16 @@
     </div>
     @if ($hasMap)
       <div class="gs-map" style="grid-column: 1 / -1; margin-top: 16px; border-radius: var(--gs-r-card, 20px); overflow: hidden; border: 1px solid rgba(255,255,255,.10); background: #e9eef0; position: relative;">
-        <iframe src="{{ $embed }}" title="{{ $address ?: 'GoSoftware office location' }}" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                style="width: 100%; height: 360px; border: 0; display: block; filter: saturate(.92);"></iframe>
+        {{-- not lazy-loaded on purpose: the Google embed sizes its map when it
+             loads, and lazy-loading makes that happen mid-scroll, which leaves
+             a small map floating in a full-width frame --}}
+        <iframe src="{{ $embed }}" title="{{ $address ?: 'GoSoftware office location' }}"
+                width="1200" height="360"
+                referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+                style="width: 100%; height: 360px; border: 0; display: block;"></iframe>
         @if ($address)
-          {{-- pinned left in both directions: OSM keeps its attribution bottom-right --}}
-          <a href="{{ $directions }}" target="_blank" rel="noopener" class="gs-map-chip" style="position: absolute; bottom: 18px; left: 18px; max-width: min(420px, calc(100% - 36px)); display: inline-flex; align-items: center; gap: 11px; background: rgba(13,24,38,.94); color: #fff; padding: 12px 18px; border-radius: var(--gs-r-btn, 10px); box-shadow: 0 14px 34px rgba(13,24,38,.28); transition: .2s;">
+          {{-- top-left in both directions: Google keeps its logo bottom-left and terms bottom-right --}}
+          <a href="{{ $directions }}" target="_blank" rel="noopener" class="gs-map-chip" style="position: absolute; top: 18px; left: 18px; max-width: min(420px, calc(100% - 36px)); display: inline-flex; align-items: center; gap: 11px; background: rgba(13,24,38,.94); color: #fff; padding: 12px 18px; border-radius: var(--gs-r-btn, 10px); box-shadow: 0 14px 34px rgba(13,24,38,.28); transition: .2s;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; color: var(--gs-accent-lite, #6FDED3);"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
             <span style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 14.5px; line-height: 1.4;">{{ $address }}</span>
           </a>

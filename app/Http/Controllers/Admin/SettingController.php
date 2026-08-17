@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Section;
+use App\Support\MapEmbed;
 use App\Support\Settings;
 use App\Support\Theme;
 use Illuminate\Http\Request;
@@ -32,7 +33,17 @@ class SettingController extends Controller
             'contact_address.ckb' => ['nullable', 'string', 'max:300'],
             'contact_map_lat' => ['nullable', 'numeric', 'between:-90,90'],
             'contact_map_lng' => ['nullable', 'numeric', 'between:-180,180'],
-            'contact_map_zoom' => ['nullable', 'integer', 'between:3,19'],
+            'contact_map_zoom' => ['nullable', 'integer', 'between:3,21'],
+            'contact_map_embed' => [
+                'nullable', 'string', 'max:2000',
+                // reject a bad paste loudly rather than silently ignoring it
+                function ($attribute, $value, $fail) {
+                    if (filled($value) && ! MapEmbed::custom($value)) {
+                        $fail('The map embed must be a Google Maps link — paste the '
+                            .'<iframe> from Share → Embed a map, or its https://www.google.com/maps/… URL.');
+                    }
+                },
+            ],
             'about_ceo_name' => ['required', 'string', 'max:120'],
             'social_facebook' => ['nullable', 'string', 'max:300'],
             'social_linkedin' => ['nullable', 'string', 'max:300'],
@@ -60,6 +71,8 @@ class SettingController extends Controller
         Settings::set('contact.map_lat', $data['contact_map_lat'] ?? null);
         Settings::set('contact.map_lng', $data['contact_map_lng'] ?? null);
         Settings::set('contact.map_zoom', (int) ($data['contact_map_zoom'] ?? 16));
+        // store the extracted src, not the pasted markup
+        Settings::set('contact.map_embed', MapEmbed::custom($data['contact_map_embed'] ?? null));
 
         foreach (['facebook', 'linkedin', 'x', 'youtube'] as $network) {
             Settings::set("social.{$network}", $data["social_{$network}"] ?? '#');

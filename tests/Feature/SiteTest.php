@@ -304,13 +304,73 @@ class SiteTest extends TestCase
 
         $this->assertStringContainsString(gs_setting_tr('contact.address'), $html);
         $this->assertStringContainsString(t('visitUs', 'en'), $html);
-        $this->assertStringContainsString('openstreetmap.org/export/embed.html', $html);
-        $this->assertStringContainsString('marker=36.1821139%2C43.9785422', $html);
+        $this->assertStringContainsString('maps.google.com/maps?', $html);
+        $this->assertStringContainsString('q=36.1821139%2C43.9785422', $html);
+        $this->assertStringContainsString('output=embed', $html);
+        $this->assertStringContainsString('google.com/maps/dir/', $html);
 
-        // clearing the coordinates hides the map but keeps the address line
+        // clearing the coordinates falls back to pinning by address name
         \App\Support\Settings::set('contact.map_lat', null);
         $html = $this->get('/')->assertOk()->getContent();
-        $this->assertStringNotContainsString('openstreetmap.org/export/embed.html', $html);
-        $this->assertStringContainsString(gs_setting_tr('contact.address'), $html);
+        $this->assertStringContainsString('output=embed', $html);
+        $this->assertStringContainsString(urlencode('Justice Tower'), $html);
+        $this->assertStringContainsString('google.com/maps/search/', $html);
+
+        // with no address either, the map disappears entirely
+        \App\Support\Settings::set('contact.address', []);
+        $html = $this->get('/')->assertOk()->getContent();
+        $this->assertStringNotContainsString('output=embed', $html);
+        $this->assertStringNotContainsString('gs-map', $html);
+    }
+
+    public function test_pasted_google_maps_embed_overrides_the_coordinates(): void
+    {
+        $iframe = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!2sJustice+Tower" '
+            .'width="600" height="450" style="border:0;" allowfullscreen></iframe>';
+
+        \App\Support\Settings::set('contact.map_embed', \App\Support\MapEmbed::custom($iframe));
+
+        $html = $this->get('/')->assertOk()->getContent();
+        $this->assertStringContainsString('https://www.google.com/maps/embed?pb=!1m18!2sJustice+Tower', $html);
+        // the coordinate-built embed is no longer used
+        $this->assertStringNotContainsString('output=embed', $html);
+
+        // an embed alone (no coordinates) still renders the map
+        \App\Support\Settings::set('contact.map_lat', null);
+        \App\Support\Settings::set('contact.map_lng', null);
+        $html = $this->get('/')->assertOk()->getContent();
+        $this->assertStringContainsString('google.com/maps/embed?pb=', $html);
+        $this->assertStringContainsString('google.com/maps/search/', $html); // directions fall back to a search
+    }
+
+    public function test_non_google_map_embeds_are_rejected(): void
+    {
+        $bad = [
+            '<iframe src="https://evil.example/maps/embed"></iframe>',
+            'https://evil.example/maps',
+            'http://www.google.com/maps/embed?pb=1',            // not https
+            'https://www.google.com.attacker.net/maps/embed',   // lookalike host
+            'https://www.google.com/search?q=maps',             // right host, wrong path
+            '<script>alert(1)</script>',
+        ];
+
+        foreach ($bad as $value) {
+            $this->assertNull(\App\Support\MapEmbed::custom($value), "should reject: {$value}");
+        }
+
+        $this->assertSame(
+            'https://www.google.com/maps/embed?pb=xyz',
+            \App\Support\MapEmbed::custom('<iframe src="https://www.google.com/maps/embed?pb=xyz"></iframe>')
+        );
+
+        // and the settings form refuses it instead of silently dropping it
+        $sections = \App\Models\Section::all()
+            ->mapWithKeys(fn ($s) => [$s->key => ['position' => $s->position, 'visible' => '1']])->all();
+
+        $this->actingAs(User::first())->put('/admin/settings', [
+            'theme_accent' => '#2ca69c', 'theme_mood' => 'midnight', 'theme_shape' => 'soft',
+            'contact_phone' => '+1', 'contact_email' => 'a@b.co', 'about_ceo_name' => 'X',
+            'contact_map_embed' => 'https://evil.example/maps', 'sections' => $sections,
+        ])->assertSessionHasErrors('contact_map_embed');
     }
 }

@@ -178,9 +178,12 @@ class DatabaseSeeder extends Seeder
                 'ckb' => 'تاوەری جەستس، نهۆمی ١٦، ئۆفیسی ٢١ — هەولێر، هەرێمی کوردستان، عێراق',
             ],
             // Adjustable from Admin → Settings → Contact → Map location.
+            // Leave map_embed null to drive the Google Maps embed off these
+            // coordinates; paste a Share → Embed a map link there to override.
             'contact.map_lat' => '36.1821139',
             'contact.map_lng' => '43.9785422',
             'contact.map_zoom' => 17,
+            'contact.map_embed' => null,
             'social.facebook' => '#',
             'social.linkedin' => '#',
             'social.x' => '#',
