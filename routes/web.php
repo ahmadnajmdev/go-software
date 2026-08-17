@@ -22,6 +22,7 @@ Route::prefix('admin')->middleware('auth')->name('admin.')->group(function () {
     Route::resource('services', Admin\ServiceController::class)->except('show');
     Route::resource('projects', Admin\ProjectController::class)->except('show');
     Route::resource('testimonials', Admin\TestimonialController::class)->except('show');
+    Route::resource('clients', Admin\ClientController::class)->except('show');
 
     Route::get('strings', [Admin\UiStringController::class, 'index'])->name('strings.index');
     Route::put('strings', [Admin\UiStringController::class, 'update'])->name('strings.update');

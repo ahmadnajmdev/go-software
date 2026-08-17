@@ -138,6 +138,61 @@ textarea { min-height: 110px; resize: vertical; }
 .check { display: flex; align-items: center; gap: 8px; font-weight: 600; }
 .check input { width: auto; }
 
+/* ---- Image picker field ---- */
+.img-picker { display: grid; grid-template-columns: 190px 1fr; gap: 16px; align-items: start; }
+.img-preview {
+    height: 128px;
+    border: 1px solid #dbe3e6;
+    border-radius: 10px;
+    background: #f4f7f8;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+.img-preview img { width: 100%; height: 100%; object-fit: cover; }
+.img-empty { font-size: 13px; color: #8b99a2; }
+.img-controls { min-width: 0; }
+.img-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+.img-actions .btn { cursor: pointer; }
+.img-library {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(122px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+    padding: 12px;
+    border: 1px solid #e6ecee;
+    border-radius: 10px;
+    background: #fafcfc;
+    max-height: 320px;
+    overflow-y: auto;
+}
+/* class-level display would otherwise beat the UA rule for [hidden] */
+.img-library[hidden] { display: none; }
+.img-library > p { grid-column: 1 / -1; }
+.img-lib-item {
+    border: 1px solid #dbe3e6;
+    background: #fff;
+    border-radius: 8px;
+    padding: 6px;
+    cursor: pointer;
+    text-align: start;
+    font: inherit;
+}
+.img-lib-item:hover { border-color: #2CA69C; box-shadow: 0 0 0 2px rgba(44,166,156,.18); }
+.img-lib-item img { width: 100%; height: 74px; object-fit: cover; border-radius: 5px; display: block; }
+.img-lib-item span {
+    display: block;
+    margin-top: 5px;
+    font-size: 11.5px;
+    color: #66757f;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+@media (max-width: 700px) {
+    .img-picker { grid-template-columns: 1fr; }
+}
+
 /* ---- Language tabs ---- */
 .lang-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
 .lang-label {

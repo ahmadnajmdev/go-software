@@ -5,12 +5,14 @@
       <div style="display: inline-flex; align-items: center; gap: 11px; margin-bottom: 14px;"><span style="width: 30px; height: 2px; background: var(--gs-accent, #2CA69C);"></span><span style="color: var(--gs-accent, #2CA69C); font-family: 'Space Grotesk'; font-weight: 600; letter-spacing: .16em; font-size: 13px;"><x-t k="tstTag"/></span><span style="width: 30px; height: 2px; background: var(--gs-accent, #2CA69C);"></span></div>
       <h2 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: clamp(30px, 3.6vw, 45px); line-height: 1.14; color: #0d1826; letter-spacing: -.02em;"><x-t k="tstTitle"/></h2>
     </div>
-    <div style="overflow: hidden; margin: 28px 0 48px;">
-      <div class="gs-marquee-track" style="display: flex; width: max-content; gap: 60px; align-items: center; animation: gsMarquee 30s linear infinite; opacity: .4;">
-        <span style="display:flex; gap:60px; align-items:center; font-family:'Space Grotesk'; font-weight:700; font-size:25px; color:#0d1826;">@foreach (gs_setting('clients') as $client)<span>{{ $client }}</span>@endforeach</span>
-        <span style="display:flex; gap:60px; align-items:center; font-family:'Space Grotesk'; font-weight:700; font-size:25px; color:#0d1826;" aria-hidden="true">@foreach (gs_setting('clients') as $client)<span>{{ $client }}</span>@endforeach</span>
+    @if ($clients->isNotEmpty())
+      <div style="overflow: hidden; margin: 28px 0 48px;">
+        <div class="gs-marquee-track" style="display: flex; width: max-content; gap: 60px; align-items: center; animation: gsMarquee 30s linear infinite;">
+          @include('partials.clients-track', ['clients' => $clients])
+          @include('partials.clients-track', ['clients' => $clients, 'duplicate' => true])
+        </div>
       </div>
-    </div>
+    @endif
     <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;" class="gs-3col">
       @foreach ($testimonials as $testimonial)
         <div data-item-id="{{ $testimonial->id }}" data-item-model="testimonials" style="background: #fff; border-radius: var(--gs-r-card, 16px); padding: 32px; border: 1px solid #eaefef;">

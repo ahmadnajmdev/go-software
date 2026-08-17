@@ -105,3 +105,22 @@ if (! function_exists('gs_setting')) {
         return \App\Support\Settings::get($key, $default);
     }
 }
+
+if (! function_exists('gs_setting_tr')) {
+    /**
+     * Localized value of a setting stored as a {en,ar,ckb} map, falling back
+     * to English. Plain-string settings pass straight through.
+     */
+    function gs_setting_tr(string $key, mixed $default = null): string
+    {
+        $value = \App\Support\Settings::get($key, $default);
+
+        if (! is_array($value)) {
+            return (string) $value;
+        }
+
+        $locale = app()->getLocale();
+
+        return $value[$locale] ?? $value['en'] ?? '';
+    }
+}

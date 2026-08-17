@@ -39,6 +39,19 @@ body[dir="rtl"] .gs-marquee-track { animation-direction: reverse; }
 .hov-lift:hover { box-shadow: 0 30px 60px rgba(13,24,38,.1); transform: translateY(-6px); }
 .foc-accent:focus { border-color: var(--gs-accent, #2CA69C) !important; outline: none; }
 
+/* Client marquee: logos sit muted until hovered, and the track pauses so a
+   logo linking to the client's site is actually clickable */
+.gs-client { filter: grayscale(1); opacity: .55; transition: filter .3s, opacity .3s; }
+.gs-client:hover, .gs-client:focus-visible { filter: none; opacity: 1; }
+.gs-marquee-track:hover { animation-play-state: paused; }
+@media (prefers-reduced-motion: reduce) {
+  .gs-marquee-track { animation: none; flex-wrap: wrap; width: 100% !important; justify-content: center; row-gap: 30px; }
+}
+
+/* Contact map: OSM embed with the address chip floating over it */
+.gs-map-chip:hover { background: var(--gs-accent, #2CA69C) !important; }
+.gs-map-chip:hover svg { color: #fff !important; }
+
 /* Mobile menu overlay + slide-in drawer (Alpine toggles .open on the overlay).
    State lives in classes, not :style — a string :style binding would clobber
    the element's static inline styles when Alpine applies it. */
@@ -63,6 +76,8 @@ body[dir="rtl"] .gs-drawer { transform: translateX(-110%); }
 @media (max-width: 560px) {
   .gs-4col { grid-template-columns: 1fr !important; }
   .gs-footer-grid { grid-template-columns: 1fr !important; }
+  .gs-map iframe { height: 260px !important; }
+  .gs-map-chip { position: static !important; max-width: none !important; border-radius: 0 !important; }
 }
 
 /* Alpine helper */

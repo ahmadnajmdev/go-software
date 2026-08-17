@@ -27,6 +27,13 @@ class SettingController extends Controller
             'theme_shape' => ['required', Rule::in(Theme::SHAPES)],
             'contact_phone' => ['required', 'string', 'max:40'],
             'contact_email' => ['required', 'email', 'max:190'],
+            'contact_address.en' => ['nullable', 'string', 'max:300'],
+            'contact_address.ar' => ['nullable', 'string', 'max:300'],
+            'contact_address.ckb' => ['nullable', 'string', 'max:300'],
+            'contact_map_lat' => ['nullable', 'numeric', 'between:-90,90'],
+            'contact_map_lng' => ['nullable', 'numeric', 'between:-180,180'],
+            'contact_map_zoom' => ['nullable', 'integer', 'between:3,19'],
+            'about_ceo_name' => ['required', 'string', 'max:120'],
             'social_facebook' => ['nullable', 'string', 'max:300'],
             'social_linkedin' => ['nullable', 'string', 'max:300'],
             'social_x' => ['nullable', 'string', 'max:300'],
@@ -41,6 +48,18 @@ class SettingController extends Controller
         Settings::set('theme.shape', $data['theme_shape']);
         Settings::set('contact.phone', $data['contact_phone']);
         Settings::set('contact.email', $data['contact_email']);
+        Settings::set('about.ceo_name', $data['about_ceo_name']);
+
+        // Address is per-locale; drop blank languages so the en fallback kicks in.
+        Settings::set('contact.address', array_filter([
+            'en' => trim($data['contact_address']['en'] ?? ''),
+            'ar' => trim($data['contact_address']['ar'] ?? ''),
+            'ckb' => trim($data['contact_address']['ckb'] ?? ''),
+        ], fn ($v) => $v !== ''));
+
+        Settings::set('contact.map_lat', $data['contact_map_lat'] ?? null);
+        Settings::set('contact.map_lng', $data['contact_map_lng'] ?? null);
+        Settings::set('contact.map_zoom', (int) ($data['contact_map_zoom'] ?? 16));
 
         foreach (['facebook', 'linkedin', 'x', 'youtube'] as $network) {
             Settings::set("social.{$network}", $data["social_{$network}"] ?? '#');

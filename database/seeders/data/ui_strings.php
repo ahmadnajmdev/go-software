@@ -51,11 +51,11 @@ return array (
     'ar' => 'اطلب عرض سعر',
     'ckb' => 'داوای نرخ بکە',
   ),
-  'location' => 
+  'location' =>
   array (
-    'en' => 'Manchester, United Kingdom',
-    'ar' => 'مانشستر، المملكة المتحدة',
-    'ckb' => 'مانچێستەر، شانشینی یەکگرتوو',
+    'en' => 'Erbil, Iraq',
+    'ar' => 'أربيل، العراق',
+    'ckb' => 'هەولێر، عێراق',
   ),
   'followUs' => 
   array (
@@ -927,11 +927,23 @@ return array (
     'ar' => 'اتصل بنا في أي وقت',
     'ckb' => 'هەر کاتێک پەیوەندی بکە',
   ),
-  'emailUs' => 
+  'emailUs' =>
   array (
     'en' => 'Email us',
     'ar' => 'راسلنا',
     'ckb' => 'ئیمەیڵمان بۆ بنێرە',
+  ),
+  'visitUs' =>
+  array (
+    'en' => 'Visit our office',
+    'ar' => 'زر مكتبنا',
+    'ckb' => 'سەردانی ئۆفیسەکەمان بکە',
+  ),
+  'getDirections' =>
+  array (
+    'en' => 'Get directions',
+    'ar' => 'احصل على الاتجاهات',
+    'ckb' => 'ڕێنمایی ڕێگا',
   ),
   'formTitle' => 
   array (

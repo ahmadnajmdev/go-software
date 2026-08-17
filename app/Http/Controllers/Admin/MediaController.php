@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Media;
+use App\Support\ImageUpload;
 use Illuminate\Http\Request;
 
 class MediaController extends Controller
@@ -26,18 +27,10 @@ class MediaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
+            'file' => ['required', ...ImageUpload::RULES],
         ]);
 
-        $file = $request->file('file');
-        $path = $file->store('uploads/'.now()->format('Y/m'), 'public');
-
-        $media = Media::create([
-            'path' => $path,
-            'original_name' => $file->getClientOriginalName(),
-            'mime' => $file->getMimeType(),
-            'size' => $file->getSize(),
-        ]);
+        $media = ImageUpload::store($request->file('file'));
 
         if ($request->expectsJson()) {
             return response()->json(['id' => $media->id, 'path' => $media->path, 'url' => $media->url()]);

@@ -1,3 +1,26 @@
+@php
+    $address = gs_setting_tr('contact.address');
+    $lat = gs_setting('contact.map_lat');
+    $lng = gs_setting('contact.map_lng');
+    $hasMap = is_numeric($lat) && is_numeric($lng);
+
+    if ($hasMap) {
+        $lat = (float) $lat;
+        $lng = (float) $lng;
+        $zoom = min(19, max(3, (int) gs_setting('contact.map_zoom', 16)));
+
+        // Degrees covered by a ~1100x360 viewport at this zoom (256px tiles).
+        $lngSpan = 1550 / (2 ** $zoom);
+        $latSpan = 500 / (2 ** $zoom);
+
+        $embed = 'https://www.openstreetmap.org/export/embed.html?'.http_build_query([
+            'bbox' => implode(',', [$lng - $lngSpan, $lat - $latSpan, $lng + $lngSpan, $lat + $latSpan]),
+            'layer' => 'mapnik',
+            'marker' => $lat.','.$lng,
+        ]);
+        $directions = "https://www.openstreetmap.org/?mlat={$lat}&mlon={$lng}#map={$zoom}/{$lat}/{$lng}";
+    }
+@endphp
 <!-- ===== CONTACT ===== -->
 <section id="contact" style="background: var(--gs-deep-bg, #0D1826); color: var(--gs-deep-fg, #FFFFFF); padding: 94px 0; position: relative; overflow: hidden;">
   <div style="position: absolute; inset: 0; background-image: linear-gradient(var(--gs-deep-grid, rgba(255,255,255,.025)) 1px, transparent 1px), linear-gradient(90deg, var(--gs-deep-grid, rgba(255,255,255,.025)) 1px, transparent 1px); background-size: 54px 54px; mask-image: radial-gradient(ellipse 60% 80% at 80% 50%, #000 30%, transparent 100%);"></div>
@@ -15,6 +38,18 @@
           <div style="width: 52px; height: 52px; border-radius: var(--gs-r-tile, 12px); background: color-mix(in srgb, var(--gs-accent, #2CA69C) 16%, transparent); color: var(--gs-accent-lite, #6FDED3); display: grid; place-items: center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></div>
           <div><div style="font-size: 13px; color: var(--gs-deep-muted, #A3B0BD);"><x-t k="emailUs"/></div><a href="mailto:{{ gs_setting('contact.email') }}" style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; color: var(--gs-deep-fg, #FFFFFF);">{{ gs_setting('contact.email') }}</a></div>
         </div>
+        @if ($address)
+          <div style="display: flex; align-items: flex-start; gap: 16px;">
+            <div style="width: 52px; height: 52px; flex-shrink: 0; border-radius: var(--gs-r-tile, 12px); background: color-mix(in srgb, var(--gs-accent, #2CA69C) 16%, transparent); color: var(--gs-accent-lite, #6FDED3); display: grid; place-items: center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
+            <div>
+              <div style="font-size: 13px; color: var(--gs-deep-muted, #A3B0BD);"><x-t k="visitUs"/></div>
+              <address style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; line-height: 1.4; font-style: normal; color: var(--gs-deep-fg, #FFFFFF); margin: 0;">{{ $address }}</address>
+              @if ($hasMap)
+                <a href="{{ $directions }}" target="_blank" rel="noopener" class="hov-accent-text" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 7px; font-size: 14px; font-weight: 600; color: var(--gs-accent-lite, #6FDED3);"><x-t k="getDirections"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+              @endif
+            </div>
+          </div>
+        @endif
 
       </div>
     </div>
@@ -48,5 +83,19 @@
         </form>
       </div>
     </div>
+    @if ($hasMap)
+      <div class="gs-map" style="grid-column: 1 / -1; margin-top: 16px; border-radius: var(--gs-r-card, 20px); overflow: hidden; border: 1px solid rgba(255,255,255,.10); background: #e9eef0; position: relative;">
+        <iframe src="{{ $embed }}" title="{{ $address ?: 'GoSoftware office location' }}" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                style="width: 100%; height: 360px; border: 0; display: block; filter: saturate(.92);"></iframe>
+        @if ($address)
+          {{-- pinned left in both directions: OSM keeps its attribution bottom-right --}}
+          <a href="{{ $directions }}" target="_blank" rel="noopener" class="gs-map-chip" style="position: absolute; bottom: 18px; left: 18px; max-width: min(420px, calc(100% - 36px)); display: inline-flex; align-items: center; gap: 11px; background: rgba(13,24,38,.94); color: #fff; padding: 12px 18px; border-radius: var(--gs-r-btn, 10px); box-shadow: 0 14px 34px rgba(13,24,38,.28); transition: .2s;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; color: var(--gs-accent-lite, #6FDED3);"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+            <span style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 14.5px; line-height: 1.4;">{{ $address }}</span>
+          </a>
+        @endif
+      </div>
+    @endif
   </div>
 </section>

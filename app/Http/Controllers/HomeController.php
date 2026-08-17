@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Client;
 use App\Models\Project;
 use App\Models\Section;
 use App\Models\Service;
@@ -17,6 +18,7 @@ class HomeController extends Controller
             'services' => Service::ordered()->get(),
             'projects' => Project::ordered()->get(),
             'testimonials' => Testimonial::ordered()->get(),
+            'clients' => Client::ordered()->get(),
         ]);
     }
 }

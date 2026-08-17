@@ -57,6 +57,54 @@
                 <label for="contact_email">Email</label>
                 <input type="email" id="contact_email" name="contact_email" value="{{ old('contact_email', gs_setting('contact.email')) }}" required>
             </div>
+
+            @php($address = is_array(gs_setting('contact.address')) ? gs_setting('contact.address') : [])
+            <div class="field">
+                <label>Address</label>
+                <div class="lang-tabs">
+                    <div>
+                        <span class="lang-label">EN</span>
+                        <input type="text" name="contact_address[en]" value="{{ old('contact_address.en', $address['en'] ?? '') }}">
+                    </div>
+                    <div>
+                        <span class="lang-label">العربية</span>
+                        <input type="text" name="contact_address[ar]" dir="rtl" value="{{ old('contact_address.ar', $address['ar'] ?? '') }}">
+                    </div>
+                    <div>
+                        <span class="lang-label">کوردی</span>
+                        <input type="text" name="contact_address[ckb]" dir="rtl" value="{{ old('contact_address.ckb', $address['ckb'] ?? '') }}">
+                    </div>
+                </div>
+                <p class="hint">Shown in the Contact section. Leave a language blank to fall back to English.</p>
+            </div>
+
+            <div class="field">
+                <label>Map location</label>
+                <div class="lang-tabs">
+                    <div>
+                        <span class="lang-label">Latitude</span>
+                        <input type="text" name="contact_map_lat" value="{{ old('contact_map_lat', gs_setting('contact.map_lat')) }}" placeholder="36.1821139">
+                    </div>
+                    <div>
+                        <span class="lang-label">Longitude</span>
+                        <input type="text" name="contact_map_lng" value="{{ old('contact_map_lng', gs_setting('contact.map_lng')) }}" placeholder="43.9785422">
+                    </div>
+                    <div>
+                        <span class="lang-label">Zoom (3–19)</span>
+                        <input type="number" name="contact_map_zoom" min="3" max="19" value="{{ old('contact_map_zoom', gs_setting('contact.map_zoom', 16)) }}">
+                    </div>
+                </div>
+                <p class="hint">To get exact numbers: open <a href="https://www.openstreetmap.org/" target="_blank" rel="noopener">openstreetmap.org</a>, right-click the building → “Show address”, and copy the lat/lon it shows. Clear latitude or longitude to hide the map.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>About</h2>
+            <div class="field">
+                <label for="about_ceo_name">CEO name</label>
+                <input type="text" id="about_ceo_name" name="about_ceo_name" value="{{ old('about_ceo_name', gs_setting('about.ceo_name')) }}" required>
+                <p class="hint">Appears in the About section and on the Founder photo badge. The job title next to it lives in <a href="{{ route('admin.strings.index') }}">UI Strings → About → ceoRole</a>.</p>
+            </div>
         </div>
 
         <div class="card">

@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Client;
 use App\Models\Project;
 use App\Models\Section;
 use App\Models\Service;
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->uiStrings();
         $this->sections();
         $this->servicesAndProjects();
+        $this->clients();
         $this->testimonials();
         $this->settings();
 
@@ -83,7 +85,8 @@ class DatabaseSeeder extends Seeder
                 || in_array($key, ['monthly', 'annual', 'save20', 'getStarted', 'mostPopular', 'month', 'year']) => 'Pricing',
             str_starts_with($key, 'blog') || $key === 'readMore' => 'Blog',
             str_starts_with($key, 'ct') || str_starts_with($key, 'ph') || str_starts_with($key, 'opt')
-                || in_array($key, ['callUs', 'emailUs', 'formTitle', 'formSub', 'sendMsg', 'thanksT', 'thanksB']) => 'Contact',
+                || in_array($key, ['callUs', 'emailUs', 'visitUs', 'getDirections', 'formTitle', 'formSub',
+                    'sendMsg', 'thanksT', 'thanksB']) => 'Contact',
             str_starts_with($key, 'ft') || in_array($key, ['copyright', 'privacy', 'terms']) => 'Footer',
             default => 'Other',
         };
@@ -148,6 +151,19 @@ class DatabaseSeeder extends Seeder
         }
     }
 
+    /**
+     * Placeholder marquee names. Keyed by name so re-seeding never wipes a
+     * logo that was uploaded through Admin → Clients.
+     */
+    private function clients(): void
+    {
+        $names = ['Northwind', 'Vertex', 'Loopline', 'Brightsend', 'Corely', 'Magnify'];
+
+        foreach ($names as $i => $name) {
+            Client::updateOrCreate(['name' => $name], ['position' => $i + 1]);
+        }
+    }
+
     private function settings(): void
     {
         $values = [
@@ -156,20 +172,28 @@ class DatabaseSeeder extends Seeder
             'theme.shape' => 'soft',
             'contact.phone' => '+9647517110459',
             'contact.email' => 'info@gosoftware.krd',
+            'contact.address' => [
+                'en' => 'Justice Tower, Floor 16, Office 21 — Erbil, Kurdistan Region, Iraq',
+                'ar' => 'برج جَستِس، الطابق 16، مكتب 21 — أربيل، إقليم كوردستان، العراق',
+                'ckb' => 'تاوەری جەستس، نهۆمی ١٦، ئۆفیسی ٢١ — هەولێر، هەرێمی کوردستان، عێراق',
+            ],
+            // Adjustable from Admin → Settings → Contact → Map location.
+            'contact.map_lat' => '36.1821139',
+            'contact.map_lng' => '43.9785422',
+            'contact.map_zoom' => 17,
             'social.facebook' => '#',
             'social.linkedin' => '#',
             'social.x' => '#',
             'social.youtube' => '#',
             'logo.dark' => 'images/logo-dark.png',
             'logo.light' => 'images/logo-light.png',
-            'about.ceo_name' => 'James Okafor',
+            'about.ceo_name' => 'Ahmad Najm',
             'stats.values' => [
                 ['count' => 300, 'suffix' => '+'],
                 ['count' => 180, 'suffix' => '+'],
                 ['count' => 15, 'suffix' => '+'],
                 ['count' => 98, 'suffix' => '%'],
             ],
-            'clients' => ['Northwind', 'Vertex', 'Loopline', 'Brightsend', 'Corely', 'Magnify'],
             'images.hero' => self::UNSPLASH.'photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80',
             'images.hero_avatars' => [
                 self::UNSPLASH.'photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80',
