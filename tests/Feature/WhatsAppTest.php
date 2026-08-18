@@ -86,6 +86,7 @@ class WhatsAppTest extends TestCase
         $this->assertStringContainsString('data-gs-track="whatsapp_click"', $html);
         $this->assertStringContainsString('data-gs-source="hero"', $html);
         $this->assertStringContainsString('data-gs-source="contact"', $html);
+        $this->assertStringContainsString('data-gs-source="sticky_bar"', $html);
 
         // every wa.me link is target=_blank rel=noopener
         preg_match_all('#<a[^>]+wa\.me[^>]*>#', $html, $anchors);
@@ -97,11 +98,37 @@ class WhatsAppTest extends TestCase
         }
     }
 
-    public function test_whatsapp_is_reachable_from_the_hero_and_the_contact_section(): void
+    public function test_whatsapp_is_reachable_from_the_hero_the_contact_section_and_the_sticky_bar(): void
     {
         $html = $this->get('/')->assertOk()->getContent();
 
         $this->assertGreaterThanOrEqual(3, substr_count($html, 'wa.me/'));
+        $this->assertStringContainsString('id="gs-sticky"', $html);
+    }
+
+    #[DataProvider('locales')]
+    public function test_the_sticky_bar_offers_whatsapp_call_and_an_estimate(string $locale, string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        $bar = $this->stickyBar($html);
+
+        $this->assertStringContainsString('data-gs-source="sticky_bar"', $bar);
+        $this->assertStringContainsString('href="tel:'.gs_setting('contact.phone').'"', $bar);
+        $this->assertStringContainsString('#contact', $bar);
+        $this->assertStringContainsString('data-gs-location="sticky_bar"', $bar);
+
+        // labels in the visitor's language, not raw keys
+        $this->assertStringContainsString(e(t('barCall', $locale)), $bar);
+        $this->assertStringContainsString(e(t('barEstimate', $locale)), $bar);
+        $this->assertStringNotContainsString('barCall', strip_tags($bar));
+    }
+
+    public function test_the_sticky_bar_reports_a_stable_english_cta_label(): void
+    {
+        $bar = $this->stickyBar($this->get('/ckb')->assertOk()->getContent());
+
+        $this->assertStringContainsString('data-gs-label="'.e(t('barEstimate', 'en')).'"', $bar);
     }
 
     private function whatsappMessages(string $html): array
@@ -109,5 +136,13 @@ class WhatsAppTest extends TestCase
         preg_match_all('#wa\.me/\d+\?text=([^"]+)#', $html, $m);
 
         return $m[1];
+    }
+
+    private function stickyBar(string $html): string
+    {
+        $start = strpos($html, '<div class="gs-sticky" id="gs-sticky">');
+        $this->assertNotFalse($start, 'the sticky bar is not rendered');
+
+        return substr($html, $start, strpos($html, '</div>', $start) - $start + 6);
     }
 }

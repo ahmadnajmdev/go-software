@@ -151,3 +151,65 @@ body[data-edit="true"] [data-edit-image]:hover { outline: 3px dashed var(--gs-ac
 #gs-media-modal .gsm-row input[type="url"] { flex: 1; min-width: 220px; padding: 10px 12px; border: 1px solid #dbe3e6; border-radius: 8px; font-size: 14px; }
 #gs-media-modal .gsm-btn { border: none; background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 13.5px; padding: 10px 16px; border-radius: 8px; cursor: pointer; }
 #gs-media-modal .gsm-btn.ghost { background: #f2f6f6; color: #0d1826; }
+
+/* ===== Sticky mobile action bar (CRO-07) =====
+   Phones only. Hidden until 20% scroll so it never covers the hero. The body
+   gets matching bottom padding from the same media query, so the bar can never
+   sit on top of the footer. */
+.gs-sticky { display: none; }
+
+@media (max-width: 767px) {
+  .gs-sticky {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 1fr;
+    gap: 8px;
+    position: fixed;
+    inset-inline: 0;
+    bottom: 0;
+    z-index: 90;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+    background: rgba(13, 24, 38, .97);
+    border-top: 1px solid rgba(255, 255, 255, .10);
+    box-shadow: 0 -8px 28px rgba(13, 24, 38, .28);
+    /* off-screen until revealed; transform keeps it off the main thread */
+    transform: translateY(110%);
+    transition: transform .28s cubic-bezier(.65, 0, .35, 1);
+  }
+
+  .gs-sticky.is-on { transform: translateY(0); }
+
+  /* reserve the bar's height so the footer is never covered */
+  body { padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)); }
+
+  .gs-sticky-item {
+    min-height: 48px;               /* thumb-sized target */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+    padding: 6px 8px;
+    border-radius: var(--gs-r-btn, 10px);
+    background: rgba(255, 255, 255, .08);
+    color: #fff;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: 13.5px;
+    line-height: 1.15;
+    text-align: center;
+  }
+
+  .gs-sticky-item svg { flex-shrink: 0; }
+  .gs-sticky-item.is-wa { background: #25D366; color: #fff; }
+  .gs-sticky-item.is-cta { background: var(--gs-accent, #2CA69C); color: #fff; }
+}
+
+/* Very narrow phones: the icons alone carry the meaning for the two
+   secondary actions, so the labels drop rather than wrapping to two lines. */
+@media (max-width: 359px) {
+  .gs-sticky-item:not(.is-cta) span { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-sticky { transition: none; }
+}

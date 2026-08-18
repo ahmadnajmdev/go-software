@@ -117,3 +117,25 @@ if (counters.length && 'IntersectionObserver' in window) {
     }, { threshold: 0.4 });
     counters.forEach((el) => io.observe(el));
 }
+
+// Sticky mobile action bar: revealed once the visitor is 20% down the page,
+// so it never covers the hero on arrival. Passive listener, rAF-throttled —
+// this runs on mid-range Androids over 4G.
+const stickyBar = document.getElementById('gs-sticky');
+if (stickyBar) {
+    let ticking = false;
+    const update = () => {
+        ticking = false;
+        const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+        const past = scrollable > 0 && window.scrollY / scrollable >= 0.2;
+        stickyBar.classList.toggle('is-on', past);
+    };
+    const onScroll = () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    update();
+}

@@ -37,6 +37,8 @@
 
 </div>
 
+@include('partials.sticky-bar')
+
 @auth
     @include('partials.edit-mode')
 @endauth
