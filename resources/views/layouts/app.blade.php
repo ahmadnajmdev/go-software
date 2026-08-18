@@ -84,6 +84,8 @@
 
 </div>
 
+@stack('scripts')
+
 @include('partials.sticky-bar')
 
 @auth

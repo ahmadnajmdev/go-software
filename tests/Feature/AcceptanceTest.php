@@ -167,7 +167,12 @@ class AcceptanceTest extends TestCase
     public function test_no_raw_translation_key_renders_as_visible_text(string $url): void
     {
         $html = $this->get($url)->assertOk()->getContent();
-        $text = trim(preg_replace('/\s+/', ' ', strip_tags($html)));
+
+        // Drop <script> and <style> bodies first — strip_tags keeps their
+        // contents, and the form hands its strings to Alpine as a JSON object
+        // whose *keys* are key names. Those are never seen by a visitor.
+        $visible = preg_replace('#<(script|style)\b[^>]*>.*?</\1>#is', ' ', $html);
+        $text = trim(preg_replace('/\s+/', ' ', strip_tags($visible)));
 
         foreach ($this->keysUsedInViews() as $key) {
             // Only camelCase keys are checked. Single lowercase keys like

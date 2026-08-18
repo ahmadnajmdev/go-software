@@ -1043,9 +1043,9 @@ return array (
   ),
   'thanksB' => 
   array (
-    'en' => 'We\'ll get back to you within one working day.',
-    'ar' => 'سنعاود التواصل معك خلال يوم عمل واحد.',
-    'ckb' => 'لە ماوەی یەک ڕۆژی کاردا وەڵامت دەدەینەوە.',
+    'en' => 'You\'ll get a reply from Ahmad with 2–3 clarifying questions and an indicative range.',
+    'ar' => 'سيصلك ردّ من أحمد يتضمّن 2–3 أسئلة توضيحية ونطاقاً سعرياً استرشادياً.',
+    'ckb' => 'وەڵامێکت لە ئەحمەدەوە پێدەگات لەگەڵ ٢–٣ پرسیاری ڕوونکردنەوە و مەودایەکی نرخی ئاماژەیی.',
   ),
   'ftBlurb' => 
   array (
@@ -1634,5 +1634,221 @@ return array (
     'en' => 'By type',
     'ar' => 'حسب النوع',
     'ckb' => 'بەپێی جۆر',
+  ),
+  'f4Optional' => 
+  array (
+    'en' => 'Optional',
+    'ar' => 'اختياري',
+    'ckb' => 'ئارەزوومەندانە',
+  ),
+  'svcWebsite' => 
+  array (
+    'en' => 'Website',
+    'ar' => 'موقع إلكتروني',
+    'ckb' => 'ماڵپەڕ',
+  ),
+  'svcMobileApp' => 
+  array (
+    'en' => 'Mobile app',
+    'ar' => 'تطبيق موبايل',
+    'ckb' => 'ئەپی مۆبایل',
+  ),
+  'svcMgmt' => 
+  array (
+    'en' => 'Management system',
+    'ar' => 'نظام إدارة',
+    'ckb' => 'سیستەمی بەڕێوەبردن',
+  ),
+  'svcPos' => 
+  array (
+    'en' => 'POS / Inventory',
+    'ar' => 'نقاط بيع / مخزون',
+    'ckb' => 'فرۆشتن / کۆگا',
+  ),
+  'svcEcom' => 
+  array (
+    'en' => 'E-commerce store',
+    'ar' => 'متجر إلكتروني',
+    'ckb' => 'فرۆشگای ئۆنڵاین',
+  ),
+  'svcOtherOpt' => 
+  array (
+    'en' => 'Something else',
+    'ar' => 'شيء آخر',
+    'ckb' => 'شتێکی تر',
+  ),
+  'phWebsite' => 
+  array (
+    'en' => 'What kind of business is it, and what do you mainly need the site to do — bring in customers, show your services, or sell online?',
+    'ar' => 'ما نوع النشاط، وما الذي تحتاج الموقع أن يفعله أساساً — جلب زبائن، عرض خدماتك، أم البيع أونلاين؟',
+    'ckb' => 'چ جۆرە کارێکە، و زۆرتر پێویستە ماڵپەڕەکە چی بکات — کڕیار بهێنێت، خزمەتگوزارییەکانت پیشان بدات، یان ئۆنڵاین بفرۆشێت؟',
+  ),
+  'phMobileApp' => 
+  array (
+    'en' => 'What should the app do, and who is it for — your customers or your staff?',
+    'ar' => 'ما الذي يجب أن يقوم به التطبيق، ولمن هو — لزبائنك أم لموظفيك؟',
+    'ckb' => 'ئەپەکە دەبێت چی بکات، و بۆ کێیە — بۆ کڕیارەکانت یان کارمەندەکانت؟',
+  ),
+  'phMgmt' => 
+  array (
+    'en' => 'What are you using now (paper, Excel, another system), what kind of business is it, and roughly how many staff?',
+    'ar' => 'ما الذي تستخدمه الآن (ورق، إكسل، نظام آخر)، وما نوع النشاط، وكم عدد الموظفين تقريباً؟',
+    'ckb' => 'ئێستا چی بەکاردەهێنیت (کاغەز، ئێکسڵ، سیستەمێکی تر)، چ جۆرە کارێکە، و بە نزیکەیی چەند کارمەندت هەیە؟',
+  ),
+  'phPos' => 
+  array (
+    'en' => 'What kind of business is it, how many branches or terminals, and what are you using now (paper, Excel, another system)?',
+    'ar' => 'ما نوع النشاط، وكم عدد الفروع أو نقاط البيع، وما الذي تستخدمه الآن (ورق، إكسل، نظام آخر)؟',
+    'ckb' => 'چ جۆرە کارێکە، چەند لق یان چەند دەزگای فرۆشتن، و ئێستا چی بەکاردەهێنیت (کاغەز، ئێکسڵ، سیستەمێکی تر)؟',
+  ),
+  'phEcom' => 
+  array (
+    'en' => 'Roughly how many products, and what do you need — delivery, online payment, Kurdish and Arabic?',
+    'ar' => 'كم عدد المنتجات تقريباً، وما الذي تحتاجه — توصيل، دفع إلكتروني، كردي وعربي؟',
+    'ckb' => 'بە نزیکەیی چەند بەرهەم، و چیت پێویستە — گەیاندن، پارەدانی ئۆنڵاین، کوردی و عەرەبی؟',
+  ),
+  'phOther' => 
+  array (
+    'en' => 'Tell us what you need in your own words. What isn\'t working right now?',
+    'ar' => 'أخبرنا بما تحتاجه بكلماتك. ما الذي لا يعمل حالياً؟',
+    'ckb' => 'بە وشەکانی خۆت پێمان بڵێ چیت پێویستە. ئێستا چی کار ناکات؟',
+  ),
+  'phWhatsapp' => 
+  array (
+    'en' => 'WhatsApp number',
+    'ar' => 'رقم واتساب',
+    'ckb' => 'ژمارەی واتسئەپ',
+  ),
+  'phCompany' => 
+  array (
+    'en' => 'Company (optional)',
+    'ar' => 'الشركة (اختياري)',
+    'ckb' => 'کۆمپانیا (ئارەزوومەندانە)',
+  ),
+  'fBudget' => 
+  array (
+    'en' => 'Budget',
+    'ar' => 'الميزانية',
+    'ckb' => 'بودجە',
+  ),
+  'fTimeline' => 
+  array (
+    'en' => 'Timeline',
+    'ar' => 'الإطار الزمني',
+    'ckb' => 'کاتی جێبەجێکردن',
+  ),
+  'bud1' => 
+  array (
+    'en' => 'Under $3,000',
+    'ar' => 'أقل من 3,000$',
+    'ckb' => 'کەمتر لە ٣٬٠٠٠$',
+  ),
+  'bud2' => 
+  array (
+    'en' => '$3,000 – 8,000',
+    'ar' => '3,000$ – 8,000$',
+    'ckb' => '٣٬٠٠٠$ – ٨٬٠٠٠$',
+  ),
+  'bud3' => 
+  array (
+    'en' => '$8,000 – 20,000',
+    'ar' => '8,000$ – 20,000$',
+    'ckb' => '٨٬٠٠٠$ – ٢٠٬٠٠٠$',
+  ),
+  'bud4' => 
+  array (
+    'en' => '$20,000+',
+    'ar' => 'أكثر من 20,000$',
+    'ckb' => '٢٠٬٠٠٠$+',
+  ),
+  'bud5' => 
+  array (
+    'en' => 'Not sure yet',
+    'ar' => 'لست متأكداً بعد',
+    'ckb' => 'هێشتا دڵنیا نیم',
+  ),
+  'tim1' => 
+  array (
+    'en' => 'As soon as possible',
+    'ar' => 'في أقرب وقت',
+    'ckb' => 'بەزووترین کات',
+  ),
+  'tim2' => 
+  array (
+    'en' => '1–3 months',
+    'ar' => '1–3 أشهر',
+    'ckb' => '١–٣ مانگ',
+  ),
+  'tim3' => 
+  array (
+    'en' => '3–6 months',
+    'ar' => '3–6 أشهر',
+    'ckb' => '٣–٦ مانگ',
+  ),
+  'tim4' => 
+  array (
+    'en' => 'Just exploring',
+    'ar' => 'أستطلع فقط',
+    'ckb' => 'تەنها سەیر دەکەم',
+  ),
+  'fBack' => 
+  array (
+    'en' => 'Back',
+    'ar' => 'رجوع',
+    'ckb' => 'گەڕانەوە',
+  ),
+  'fNext' => 
+  array (
+    'en' => 'Continue',
+    'ar' => 'متابعة',
+    'ckb' => 'بەردەوامبوون',
+  ),
+  'fStep' => 
+  array (
+    'en' => 'Step :n of :total',
+    'ar' => 'الخطوة :n من :total',
+    'ckb' => 'هەنگاوی :n لە :total',
+  ),
+  'fReassure' => 
+  array (
+    'en' => 'We reply within 1 working day. Your details are never shared.',
+    'ar' => 'نردّ خلال يوم عمل واحد. بياناتك لا تُشارك أبداً.',
+    'ckb' => 'لە ماوەی یەک ڕۆژی کاردا وەڵام دەدەینەوە. زانیارییەکانت هەرگیز هاوبەش ناکرێن.',
+  ),
+  'stepWhat' => 
+  array (
+    'en' => 'What do you need?',
+    'ar' => 'ما الذي تحتاجه؟',
+    'ckb' => 'چیت پێویستە؟',
+  ),
+  'stepAbout' => 
+  array (
+    'en' => 'Tell us about your project',
+    'ar' => 'أخبرنا عن مشروعك',
+    'ckb' => 'باسی پرۆژەکەت بۆ بکە',
+  ),
+  'stepReach' => 
+  array (
+    'en' => 'How can we reach you?',
+    'ar' => 'كيف نتواصل معك؟',
+    'ckb' => 'چۆن پەیوەندیت پێوە بکەین؟',
+  ),
+  'stepQuote' => 
+  array (
+    'en' => 'Helps us quote accurately',
+    'ar' => 'يساعدنا على التسعير بدقّة',
+    'ckb' => 'یارمەتیمان دەدات نرخێکی ورد بدەین',
+  ),
+  'errPhone' => 
+  array (
+    'en' => 'Please give a WhatsApp number we can reach you on.',
+    'ar' => 'من فضلك أعطنا رقم واتساب نستطيع التواصل معك عليه.',
+    'ckb' => 'تکایە ژمارەیەکی واتسئەپ بدە کە بتوانین پەیوەندیت پێوە بکەین.',
+  ),
+  'errService' => 
+  array (
+    'en' => 'Please choose what you need.',
+    'ar' => 'من فضلك اختر ما تحتاجه.',
+    'ckb' => 'تکایە هەڵبژێرە چیت پێویستە.',
   ),
 );

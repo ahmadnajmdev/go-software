@@ -135,9 +135,23 @@ class ServicePagesTest extends TestCase
     public function test_no_price_is_invented_anywhere(): void
     {
         foreach (self::SLUGS as $slug) {
-            $html = strip_tags($this->get("/services/{$slug}")->assertOk()->getContent());
+            foreach (['en', 'ar', 'ckb'] as $locale) {
+                $copy = json_encode(ServiceCatalogue::page($slug, $locale), JSON_UNESCAPED_UNICODE);
 
-            $this->assertDoesNotMatchRegularExpression('/\$\s?\d/', $html, "{$slug} shows an invented price");
+                $this->assertDoesNotMatchRegularExpression('/\$\s?\d/', $copy,
+                    "the {$locale} copy for {$slug} quotes a price");
+            }
+
+            // and the cost section itself names no figure. (The contact form's
+            // budget selector does contain ranges — those are what the visitor
+            // chooses from, not what we charge.)
+            $html = $this->get("/services/{$slug}")->assertOk()->getContent();
+            $start = strpos($html, e(t('svcCostTitle', 'en')));
+            $this->assertNotFalse($start, "{$slug} has no cost section");
+            $costSection = substr($html, $start, strpos($html, '</section>', $start) - $start);
+
+            $this->assertDoesNotMatchRegularExpression('/\$\s?\d/', strip_tags($costSection),
+                "{$slug} shows an invented price in its cost section");
         }
     }
 

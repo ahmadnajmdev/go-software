@@ -84,6 +84,9 @@ class UiStringDefaults
             str_starts_with($key, 'blog') || $key === 'readMore' => 'Blog',
             str_starts_with($key, 'ct') || str_starts_with($key, 'ph') || str_starts_with($key, 'opt')
                 || str_starts_with($key, 'err') || str_starts_with($key, 'wa')
+                || str_starts_with($key, 'step') || str_starts_with($key, 'bud')
+                || str_starts_with($key, 'tim')
+                || in_array($key, ['fBudget', 'fTimeline', 'fBack', 'fNext', 'fStep', 'fReassure', 'f4Optional'])
                 || in_array($key, ['callUs', 'emailUs', 'visitUs', 'getDirections', 'formTitle', 'formSub',
                     'sendMsg', 'thanksT', 'thanksB']) => 'Contact',
             str_starts_with($key, 'ft')

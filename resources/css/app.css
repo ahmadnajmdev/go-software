@@ -370,3 +370,34 @@ body[dir="rtl"] .gs-industry:hover .gs-industry-arrow { transform: translateX(-3
 .gs-chips-label { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: #8b99a7; margin-inline-end: 4px; }
 .gs-chip-sm { font-size: 12.5px !important; padding: 6px 13px !important; opacity: .85; }
 .gs-chip-sm.is-on { opacity: 1; }
+
+/* ===== Qualifying form (CRO-18) =====
+   Step one is a single tap with no typing — the cheapest possible first
+   commitment. Everything degrades to one long form when JS is unavailable. */
+.gs-steps { display: flex; align-items: center; gap: 8px; margin-bottom: 22px; }
+.gs-step-dot { flex: 1; height: 4px; border-radius: 99px; background: #e4ebeb; transition: background .25s; }
+.gs-step-dot.is-done { background: var(--gs-accent, #2CA69C); }
+.gs-step-count { font-size: 12.5px; color: #7b8794; white-space: nowrap; margin-inline-start: 6px; }
+
+.gs-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.gs-tile { position: relative; display: flex; align-items: center; gap: 11px; padding: 15px 16px; border: 1.5px solid #e2e8e8; border-radius: var(--gs-r-btn, 11px); cursor: pointer; transition: .18s; background: #fff; }
+.gs-tile:hover { border-color: var(--gs-accent, #2CA69C); background: #f7fcfb; }
+.gs-tile input { position: absolute; opacity: 0; width: 0; height: 0; }
+.gs-tile input:focus-visible + .gs-tile-face { outline: 2px solid var(--gs-accent, #2CA69C); outline-offset: 4px; border-radius: 4px; }
+.gs-tile input:checked ~ .gs-tile-check { opacity: 1; }
+.gs-tile:has(input:checked) { border-color: var(--gs-accent, #2CA69C); background: #eefaf8; }
+.gs-tile-face { display: flex; align-items: center; gap: 11px; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 14.5px; line-height: 1.3; color: #0d1826; }
+.gs-tile-icon { flex-shrink: 0; width: 34px; height: 34px; display: grid; place-items: center; border-radius: 9px; background: #eefaf8; color: #17877e; }
+.gs-tile-check { position: absolute; inset-inline-end: 12px; opacity: 0; color: var(--gs-accent, #2CA69C); transition: opacity .18s; }
+
+.gs-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.gs-form-nav { display: flex; gap: 10px; align-items: center; }
+.gs-form-nav .gs-back { background: #f2f6f6; color: #0d1826; border: none; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 15px; padding: 14px 20px; border-radius: var(--gs-r-btn, 10px); cursor: pointer; }
+.gs-form-nav .gs-next { flex: 1; background: var(--gs-accent, #2CA69C); color: #fff; border: none; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16px; padding: 15px 20px; border-radius: var(--gs-r-btn, 10px); cursor: pointer; }
+.gs-optional-badge { display: inline-block; background: #eef2f2; color: #6a7a8a; font-size: 11.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; padding: 3px 9px; border-radius: 99px; margin-inline-start: 8px; vertical-align: middle; }
+
+@media (max-width: 560px) {
+  .gs-tiles { grid-template-columns: 1fr; }
+  .gs-field-row { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .gs-tile, .gs-step-dot, .gs-tile-check { transition: none; } }

@@ -7,12 +7,34 @@
 @endsection
 
 @section('content')
+    @php
+        // Blade's inline @php() cannot parse an array literal, so these live
+        // in a block.
+        $budgets = [
+            'under-3k' => 'Under $3,000',
+            '3k-8k' => '$3,000 – 8,000',
+            '8k-20k' => '$8,000 – 20,000',
+            '20k-plus' => '$20,000+',
+            'unsure' => 'Not sure yet',
+        ];
+        $timelines = [
+            'asap' => 'As soon as possible',
+            '1-3-months' => '1–3 months',
+            '3-6-months' => '3–6 months',
+            'exploring' => 'Just exploring',
+        ];
+    @endphp
     <div class="card" style="max-width:720px">
         <table class="tbl">
             <tr><th style="width:140px">Name</th><td>{{ $item->name }}</td></tr>
             <tr><th>Email</th><td><a href="mailto:{{ $item->email }}">{{ $item->email }}</a></td></tr>
             <tr><th>Phone</th><td>{{ $item->phone ?? '—' }}</td></tr>
+            <tr><th>Company</th><td>{{ $item->company ?? '—' }}</td></tr>
             <tr><th>Service</th><td>{{ $item->service ?? '—' }}</td></tr>
+            {{-- The qualifying answers. "Not sure yet" and "Just exploring" are
+                 real answers, not blanks — they say the lead is early, not cold. --}}
+            <tr><th>Budget</th><td>{{ $budgets[$item->budget] ?? '—' }}</td></tr>
+            <tr><th>Timeline</th><td>{{ $timelines[$item->timeline] ?? '—' }}</td></tr>
             <tr><th>Language</th><td><span class="badge">{{ strtoupper($item->locale) }}</span></td></tr>
             <tr><th>Received</th><td>{{ $item->created_at->format('Y-m-d H:i') }} ({{ $item->created_at->diffForHumans() }})</td></tr>
             <tr><th>Message</th><td style="white-space:pre-wrap">{{ $item->message }}</td></tr>

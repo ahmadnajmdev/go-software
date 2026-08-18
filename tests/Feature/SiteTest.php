@@ -50,7 +50,11 @@ class SiteTest extends TestCase
 
     public function test_contact_stores_and_honeypot_rejects(): void
     {
-        $payload = ['name' => 'Jane', 'email' => 'jane@example.com', 'message' => 'Hello there'];
+        $payload = [
+            'name' => 'Jane', 'email' => 'jane@example.com', 'message' => 'Hello there',
+            // the qualifying form made these two required
+            'service' => 'website', 'phone' => '+9647510000000',
+        ];
 
         $this->postJson('/contact', $payload)->assertOk()->assertJson(['ok' => true]);
         $this->assertSame(1, ContactSubmission::count());
