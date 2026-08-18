@@ -457,4 +457,41 @@ class AcceptanceTest extends TestCase
         $this->assertNotFalse($shell);
         $this->assertLessThan($nav, $shell, 'the nav is not inside its clipping shell');
     }
+
+    public function test_the_drawer_scrim_cannot_cover_the_menu(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        // The scrim must live inside the shell. Outside it, it sat in the root
+        // stacking context while the drawer was trapped inside the sticky
+        // header's — so it painted over the menu and swallowed every tap.
+        $shell = strpos($html, 'class="gs-nav-shell"');
+        $scrim = strpos($html, 'class="gs-nav-scrim"');
+        $navEnd = strpos($html, '</nav>');
+
+        $this->assertNotFalse($scrim, 'the drawer has no backdrop');
+        $this->assertGreaterThan($shell, $scrim, 'the scrim is outside the nav shell');
+        $this->assertLessThan($navEnd, $scrim);
+    }
+
+    public function test_the_header_carries_no_filter_that_would_trap_the_drawer(): void
+    {
+        $css = file_get_contents(resource_path('css/app.css'));
+
+        // A filter on the header makes it the containing block for its
+        // position:fixed descendants, which sized the drawer to the 76px
+        // header instead of the viewport. The blur belongs on a pseudo-element.
+        $this->assertMatchesRegularExpression('/\.gs-header::before\s*\{[^}]*backdrop-filter/s', $css);
+        $this->assertDoesNotMatchRegularExpression('/\.gs-header\s*\{[^}]*backdrop-filter/s', $css);
+    }
+
+    public function test_a_class_passed_to_the_cta_component_survives(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        // The component emitted its own class attribute as well as merging
+        // $attributes, so the browser kept the first and dropped the caller's.
+        $this->assertStringContainsString('gs-nav-cta', $html);
+        $this->assertDoesNotMatchRegularExpression('/<a [^>]*class="[^"]*"[^>]*class="/', $html);
+    }
 }

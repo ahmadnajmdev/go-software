@@ -32,13 +32,17 @@
     ];
     [$paint, $hover] = $tones[$tone] ?? $tones['accent'];
 @endphp
-<a href="{{ $target }}" class="{{ $hover }}"
+{{-- The hover class goes through merge() with everything else. Emitting a
+     separate class="…" here as well produced two class attributes on the same
+     anchor, and the browser keeps only the first — so any class passed in by
+     a caller was silently dropped. --}}
+<a href="{{ $target }}"
    data-gs-track="cta_click"
    {{-- English label in every locale so one CTA is one row in the report --}}
    data-gs-label="{{ t('ctaEstimate', 'en') }}"
    data-gs-location="{{ $location }}"
    @if ($service) data-gs-service="{{ $service }}" @endif
-   {{ $attributes->merge(['style' => $paint." font-family: 'Space Grotesk'; font-weight: 600; font-size: {$font}; padding: {$padding}; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; justify-content: center; gap: 9px; transition: .25s;"]) }}>
+   {{ $attributes->merge(['class' => $hover, 'style' => $paint." font-family: 'Space Grotesk'; font-weight: 600; font-size: {$font}; padding: {$padding}; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; justify-content: center; gap: 9px; transition: .25s;"]) }}>
     {{ $caption }}
     <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
 </a>
