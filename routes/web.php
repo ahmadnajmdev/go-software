@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProjectsController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,6 +11,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/projects', [ProjectsController::class, '__invoke'])->name('projects');
 Route::get('/{locale}/projects', ProjectsController::class)
     ->where('locale', 'ar|ckb')->name('projects.locale');
+
+// Legal pages. Registered before the /{locale?} catch-all so their paths win.
+foreach (['privacy-policy' => 'privacy', 'terms-of-service' => 'terms'] as $slug => $method) {
+    Route::get("/{$slug}", [LegalController::class, $method])->name($method);
+    Route::get("/{locale}/{$slug}", [LegalController::class, $method])
+        ->where('locale', 'ar|ckb')->name("{$method}.locale");
+}
 
 // Path-based locales for SEO: / (en), /ar, /ckb. English stays at the root.
 Route::get('/{locale?}', HomeController::class)

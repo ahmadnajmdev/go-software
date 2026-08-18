@@ -19,8 +19,8 @@
       <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
         <a href="{{ route('home') }}#contact" class="hov-accent-solid" style="background: #0d1826; color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 14px 28px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="founderCta"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div style="display: flex; gap: 10px;">
-          <a href="{{ gs_setting('social.linkedin', '#') }}" class="hov-accent-bg" style="width: 44px; height: 44px; border-radius: var(--gs-r-btn, 10px); background: #f2f5f5; color: #0d1826; display: grid; place-items: center; transition: .2s;"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5H4V20h2.9V8.5zM5.4 4a1.7 1.7 0 100 3.4 1.7 1.7 0 000-3.4zM20 20v-6.3c0-3.1-1.7-4.6-3.9-4.6-1.8 0-2.6 1-3 1.7V8.5H10V20h2.9v-6c0-1.4.8-2.1 1.8-2.1s1.7.7 1.7 2.1V20H20z"/></svg></a>
-          <a href="{{ gs_setting('social.x', '#') }}" class="hov-accent-bg" style="width: 44px; height: 44px; border-radius: var(--gs-r-btn, 10px); background: #f2f5f5; color: #0d1826; display: grid; place-items: center; transition: .2s;"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3l-6.6 7.5L21.7 21h-6l-4.7-6.1L5.6 21H2.5l7-8L2 3h6.1l4.3 5.6L17.5 3z"/></svg></a>
+          @php($founderSocial = \App\Support\Social::founder())
+          <x-social-links :links="$founderSocial" :size="44" bg="#f2f5f5" color="#0d1826" :icon-size="17"/>
         </div>
       </div>
     </div>

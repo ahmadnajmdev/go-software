@@ -91,7 +91,8 @@ class DatabaseSeeder extends Seeder
                 || str_starts_with($key, 'err')
                 || in_array($key, ['callUs', 'emailUs', 'visitUs', 'getDirections', 'formTitle', 'formSub',
                     'sendMsg', 'thanksT', 'thanksB']) => 'Contact',
-            str_starts_with($key, 'ft') || in_array($key, ['copyright', 'privacy', 'terms']) => 'Footer',
+            str_starts_with($key, 'ft')
+                || in_array($key, ['copyright', 'privacy', 'terms', 'lastUpdated', 'legalContact']) => 'Footer',
             default => 'Other',
         };
     }

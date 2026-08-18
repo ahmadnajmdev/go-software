@@ -45,10 +45,9 @@ class SettingController extends Controller
                 },
             ],
             'about_ceo_name' => ['required', 'string', 'max:120'],
-            'social_facebook' => ['nullable', 'string', 'max:300'],
-            'social_linkedin' => ['nullable', 'string', 'max:300'],
-            'social_x' => ['nullable', 'string', 'max:300'],
-            'social_youtube' => ['nullable', 'string', 'max:300'],
+            // A blank field means "no such channel" and renders nothing; a
+            // filled one must be a real URL, never a "#" placeholder.
+            ...self::socialRules(),
             'sections' => ['required', 'array'],
             'sections.*.position' => ['required', 'integer', 'min:1'],
             'sections.*.visible' => ['nullable'],
@@ -74,8 +73,11 @@ class SettingController extends Controller
         // store the extracted src, not the pasted markup
         Settings::set('contact.map_embed', MapEmbed::custom($data['contact_map_embed'] ?? null));
 
-        foreach (['facebook', 'linkedin', 'x', 'youtube'] as $network) {
-            Settings::set("social.{$network}", $data["social_{$network}"] ?? '#');
+        // Blank stores null, not "#": Social::company() then omits the icon
+        // instead of rendering a dead link.
+        foreach (self::socialFields() as $field => $setting) {
+            $url = trim((string) ($data[$field] ?? ''));
+            Settings::set($setting, $url !== '' ? $url : null);
         }
 
         foreach (Section::all() as $section) {
@@ -89,5 +91,29 @@ class SettingController extends Controller
         }
 
         return back()->with('ok', 'Settings saved.');
+    }
+
+    /** form field => setting key, for both the company and founder profiles */
+    public static function socialFields(): array
+    {
+        $fields = [];
+
+        foreach (array_keys(config('social.networks', [])) as $network) {
+            $fields["social_{$network}"] = "social.{$network}";
+        }
+
+        foreach (array_keys(config('social.founder_networks', [])) as $network) {
+            $fields["founder_{$network}"] = "founder.{$network}";
+        }
+
+        return $fields;
+    }
+
+    private static function socialRules(): array
+    {
+        return array_fill_keys(
+            array_keys(self::socialFields()),
+            ['nullable', 'url:http,https', 'max:300'],
+        );
     }
 }

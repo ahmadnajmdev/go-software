@@ -28,7 +28,7 @@ class AcceptanceTest extends TestCase
         foreach (['en', 'ar', 'ckb'] as $locale) {
             $prefix = $locale === 'en' ? '' : '/'.$locale;
 
-            foreach (['', '/projects'] as $path) {
+            foreach (['', '/projects', '/privacy-policy', '/terms-of-service'] as $path) {
                 $url = ($prefix.$path) ?: '/';
                 $cases["{$locale}{$path}"] = [$url];
             }
@@ -66,5 +66,67 @@ class AcceptanceTest extends TestCase
         $this->get('/')->assertOk()->assertSee('CUSTOM SOFTWARE · ERBIL, KURDISTAN', false);
         $this->get('/ar')->assertOk()->assertSee('أربيل، كردستان', false);
         $this->get('/ckb')->assertOk()->assertSee('هەولێر، کوردستان', false);
+    }
+
+    #[DataProvider('pages')]
+    public function test_no_dead_links(string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        $this->assertStringNotContainsString('href="#"', $html, "{$url} still has a dead link");
+    }
+
+    #[DataProvider('pages')]
+    public function test_the_legal_links_in_the_footer_resolve(string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+        $prefix = str_starts_with($url, '/ar') ? '/ar' : (str_starts_with($url, '/ckb') ? '/ckb' : '');
+
+        $this->assertStringContainsString(url($prefix.'/privacy-policy'), $html);
+        $this->assertStringContainsString(url($prefix.'/terms-of-service'), $html);
+    }
+
+    public function test_legal_pages_render_in_the_right_language(): void
+    {
+        $this->get('/privacy-policy')->assertOk()->assertSee('Privacy Policy');
+        $this->get('/ar/privacy-policy')->assertOk()->assertSee('سياسة الخصوصية', false);
+        $this->get('/ckb/privacy-policy')->assertOk()->assertSee('سیاسەتی تایبەتمەندی', false);
+
+        $this->get('/terms-of-service')->assertOk()->assertSee('Terms of Service');
+        $this->get('/ar/terms-of-service')->assertOk()->assertSee('شروط الخدمة', false);
+        $this->get('/ckb/terms-of-service')->assertOk()->assertSee('مەرجەکانی خزمەتگوزاری', false);
+    }
+
+    public function test_an_unconfigured_social_channel_is_not_rendered(): void
+    {
+        // nothing configured: no icons anywhere, and no "Follow us" label
+        $html = $this->get('/')->assertOk()->getContent();
+        $this->assertStringNotContainsString('aria-label="Facebook"', $html);
+        $this->assertStringNotContainsString(t('followUs', 'en'), $html);
+
+        \App\Support\Settings::set('social.facebook', 'https://facebook.com/gosoftware');
+        \App\Support\Settings::set('social.instagram', 'https://instagram.com/gosoftware');
+
+        $html = $this->get('/')->assertOk()->getContent();
+        $this->assertStringContainsString('href="https://facebook.com/gosoftware"', $html);
+        $this->assertStringContainsString('aria-label="Instagram"', $html);
+        // the ones still unset stay absent
+        $this->assertStringNotContainsString('aria-label="YouTube"', $html);
+        $this->assertStringNotContainsString('href="#"', $html);
+    }
+
+    public function test_a_placeholder_url_is_treated_as_unconfigured(): void
+    {
+        foreach (['#', '', 'javascript:alert(1)', 'not-a-url'] as $junk) {
+            \App\Support\Settings::set('social.linkedin', $junk);
+
+            $html = $this->get('/')->assertOk()->getContent();
+            $this->assertStringNotContainsString('aria-label="LinkedIn"', $html, "“{$junk}” rendered an icon");
+        }
+    }
+
+    public function test_the_careers_link_is_gone(): void
+    {
+        $this->get('/')->assertOk()->assertDontSee(t('ftCareers', 'en'));
     }
 }

@@ -5,12 +5,12 @@
     <div>
       <img src="{{ media_url(gs_setting('logo.light', 'images/logo-light.png')) }}" alt="GoSoftware" style="height: 38px; margin-bottom: 20px;">
       <p style="font-size: 15px; line-height: 1.7; margin-bottom: 22px; max-width: 300px;"><x-t k="ftBlurb"/></p>
-      <div style="display: flex; gap: 10px;">
-        <a href="{{ gs_setting('social.facebook', '#') }}" class="hov-accent-bg" style="width: 40px; height: 40px; border-radius: var(--gs-r-btn, 10px); background: rgba(255,255,255,.06); display: grid; place-items: center; color: #a3b0bd;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 21v-8h2.5l.4-3h-2.9V8.1c0-.9.3-1.5 1.6-1.5H16.5V3.9c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 3.9V10H8v3h2.4v8h3.1z"/></svg></a>
-        <a href="{{ gs_setting('social.linkedin', '#') }}" class="hov-accent-bg" style="width: 40px; height: 40px; border-radius: var(--gs-r-btn, 10px); background: rgba(255,255,255,.06); display: grid; place-items: center; color: #a3b0bd;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6.9 8.5H4V20h2.9V8.5zM5.4 4a1.7 1.7 0 100 3.4 1.7 1.7 0 000-3.4zM20 20v-6.3c0-3.1-1.7-4.6-3.9-4.6-1.8 0-2.6 1-3 1.7V8.5H10V20h2.9v-6c0-1.4.8-2.1 1.8-2.1s1.7.7 1.7 2.1V20H20z"/></svg></a>
-        <a href="{{ gs_setting('social.x', '#') }}" class="hov-accent-bg" style="width: 40px; height: 40px; border-radius: var(--gs-r-btn, 10px); background: rgba(255,255,255,.06); display: grid; place-items: center; color: #a3b0bd;"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 3h3l-6.6 7.5L21.7 21h-6l-4.7-6.1L5.6 21H2.5l7-8L2 3h6.1l4.3 5.6L17.5 3z"/></svg></a>
-        <a href="{{ gs_setting('social.youtube', '#') }}" class="hov-accent-bg" style="width: 40px; height: 40px; border-radius: var(--gs-r-btn, 10px); background: rgba(255,255,255,.06); display: grid; place-items: center; color: #a3b0bd;"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M22 8.2s-.2-1.5-.8-2.1c-.8-.8-1.6-.8-2-.9C16.3 5 12 5 12 5s-4.3 0-7.2.2c-.4.1-1.2.1-2 .9C2.2 6.7 2 8.2 2 8.2S1.8 9.9 1.8 11.6v1.6C1.8 15 2 16.6 2 16.6s.2 1.5.8 2.1c.8.8 1.8.8 2.3.9 1.7.2 6.9.2 6.9.2s4.3 0 7.2-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2.1.8-2.1s.2-1.6.2-3.3v-1.6c0-1.7-.2-3.4-.2-3.4zM9.9 14.6V9.2l4.5 2.7-4.5 2.7z"/></svg></a>
-      </div>
+      @php($social = \App\Support\Social::company())
+      @if ($social)
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <x-social-links :links="$social" :size="40" color="#a3b0bd" :icon-size="16"/>
+        </div>
+      @endif
     </div>
     <div>
       <h4 style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 17px; color: #fff; margin-bottom: 20px;"><x-t k="ftCompany"/></h4>
@@ -24,7 +24,6 @@
         @if (gs_section_visible('contact') || auth()->check())
           <a href="{{ $home }}#contact" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="ftContactUs"/></a>
         @endif
-        <a href="#" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="ftCareers"/></a>
       </div>
     </div>
     <div>
@@ -58,7 +57,7 @@
   </div>
   <div style="max-width: 1240px; margin: 46px auto 0; padding: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px;">
     <span><x-t k="copyright"/></span>
-    <div style="display: flex; gap: 24px;"><a href="#" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="privacy"/></a><a href="#" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="terms"/></a></div>
+    <div style="display: flex; gap: 24px;"><a href="{{ gs_route('privacy-policy') }}" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="privacy"/></a><a href="{{ gs_route('terms-of-service') }}" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="terms"/></a></div>
   </div>
   <div style="height: 20px;"></div>
 </footer>

@@ -59,6 +59,47 @@ currently in the code as a result.
 
 ---
 
+## Social profiles (CRO-04)
+
+- [ ] **Real social media URLs.** None are configured, so **none of the icons
+      render** — they are absent rather than dead. Nothing has been guessed.
+      Fill in whichever exist at **Admin → Settings → Social links**; each one
+      appears the moment it is saved. Must be a full `https://` URL.
+
+      Company: Facebook · Instagram · LinkedIn · YouTube · X (Twitter)
+      Founder (shown on the founder card): Ahmad's LinkedIn · Ahmad's Instagram
+
+      If a channel does not exist, leave it blank — that is a supported state,
+      not an omission.
+
+- [ ] **Careers link: removed.** It pointed at `#`. A dead careers link
+      undermines the "dedicated teams" claim, so it is gone rather than
+      pointing at a stub. Say the word if you want a real careers page.
+
+---
+
+## Legal (CRO-04)
+
+- [ ] **The privacy policy and terms of service need your review before launch.**
+      Both pages are live at `/privacy-policy` and `/terms-of-service` (and the
+      `/ar` and `/ckb` variants), written as standard content for a Kurdistan/
+      Iraq-based software agency. **They have not been reviewed by a lawyer.**
+      The copy is in `resources/legal/privacy.php` and `resources/legal/terms.php`.
+
+      Specific points to confirm, because I chose a sensible default rather than
+      knowing your actual position:
+      - **Data retention:** privacy policy says enquiries are deleted "normally no
+        more than three years after our last contact". Is three years right?
+      - **Governing law:** terms name the laws of the Kurdistan Region of Iraq and
+        the courts of Erbil. Confirm.
+      - **Analytics named:** the policy names Google Analytics 4, Meta Pixel and
+        Microsoft Clarity because CRO-01 assumes those load through GTM. If you
+        load something else, the policy must say so.
+      - The Arabic and Kurdish versions are my translations and should be read
+        alongside the English.
+
+---
+
 ## Assets
 
 - [ ] **The founder photo is missing from disk.**

@@ -115,10 +115,19 @@
 
         <div class="card">
             <h2>Social links</h2>
-            @foreach(['facebook' => 'Facebook', 'linkedin' => 'LinkedIn', 'x' => 'X (Twitter)', 'youtube' => 'YouTube'] as $network => $label)
+            <p class="hint" style="margin:-6px 0 14px">Leave a channel blank and its icon is not rendered at all — no dead link. Must be a full URL starting with https://.</p>
+            @foreach(config('social.networks') as $network => $label)
                 <div class="field">
                     <label for="social_{{ $network }}">{{ $label }}</label>
-                    <input type="text" id="social_{{ $network }}" name="social_{{ $network }}" value="{{ old('social_'.$network, gs_setting('social.'.$network)) }}">
+                    <input type="url" id="social_{{ $network }}" name="social_{{ $network }}" placeholder="https://" value="{{ old('social_'.$network, gs_setting('social.'.$network)) }}">
+                </div>
+            @endforeach
+            <h2 style="margin-top:26px">Founder profiles</h2>
+            <p class="hint" style="margin:-6px 0 14px">Shown on the founder card in the About area.</p>
+            @foreach(config('social.founder_networks') as $network => $label)
+                <div class="field">
+                    <label for="founder_{{ $network }}">{{ $label }}</label>
+                    <input type="url" id="founder_{{ $network }}" name="founder_{{ $network }}" placeholder="https://" value="{{ old('founder_'.$network, gs_setting('founder.'.$network)) }}">
                 </div>
             @endforeach
         </div>
