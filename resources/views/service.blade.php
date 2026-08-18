@@ -131,8 +131,36 @@
     {{-- IP ownership: no local competitor states this (CRO-23) --}}
     <p style="display: flex; gap: 11px; align-items: flex-start; background: #eefaf8; border: 1px solid #cdece7; border-radius: var(--gs-r-tile, 12px); padding: 16px 18px; font-size: 15px; line-height: 1.6; color: #17605a; margin-bottom: 54px;">
       <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
-      <span><x-t k="ownCode"/></span>
+      <span><x-t k="ownCode"/>@if (config('company.warranty_days')) {{ str_replace(':days', (string) config('company.warranty_days'), t('warrantyLine')) }}@endif</span>
     </p>
+
+    {{-- Published response times. Renders only once config/company.php lists
+         real tiers; an unspecified SLA is worse than none. --}}
+    @if ($page['slug'] === 'support-and-maintenance' && config('company.support_tiers'))
+      <section style="margin-bottom: 54px;">
+        <h2 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: clamp(24px, 2.8vw, 33px); color: #0d1826; margin-bottom: 20px; letter-spacing: -.01em;"><x-t k="supportTiersTitle"/></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px;">
+          @foreach (config('company.support_tiers') as $tier)
+            <div style="border: 1px solid #e6eded; border-radius: var(--gs-r-card, 15px); padding: 22px;">
+              <strong style="display: block; font-family: 'Space Grotesk'; font-size: 18px; color: #0d1826; margin-bottom: 6px;">{{ $tier['name'] }}</strong>
+              @if (! empty($tier['price']))<div style="font-size: 15px; color: var(--gs-accent, #2CA69C); font-weight: 600; margin-bottom: 10px;">{{ $tier['price'] }}</div>@endif
+              <div style="font-size: 13px; color: #7b8794; margin-bottom: 4px;"><x-t k="supportResponse"/></div>
+              <div style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 16px; color: #0d1826; margin-bottom: 12px;">{{ $tier['response'] }}</div>
+              @if (! empty($tier['includes']))
+                <ul style="list-style: none; margin: 0; padding: 0; display: grid; gap: 7px;">
+                  @foreach ($tier['includes'] as $line)
+                    <li style="display: flex; gap: 9px; font-size: 14.5px; line-height: 1.55; color: #55646f;">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--gs-accent, #2CA69C)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 3px;" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg>
+                      <span>{{ $line }}</span>
+                    </li>
+                  @endforeach
+                </ul>
+              @endif
+            </div>
+          @endforeach
+        </div>
+      </section>
+    @endif
   </div>
 </div>
 

@@ -36,7 +36,16 @@
     </div>
   </div>
   <div style="max-width: 1240px; margin: 46px auto 0; padding: 24px; border-top: 1px solid rgba(255,255,255,.08); display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; font-size: 14px;">
-    <span><x-t k="copyright"/></span>
+    <div style="display: flex; flex-direction: column; gap: 4px;">
+      <span><x-t k="copyright"/></span>
+      {{-- A registered name and number is the cheapest trust signal there is.
+           Hidden until config/company.php has them — see BLOCKED.md. --}}
+      @if (config('company.legal_name'))
+        <span style="font-size: 12.5px; color: #7b8794;">
+          <x-t k="ftRegistered"/>: {{ config('company.legal_name') }}@if (config('company.registration_number')) · <x-t k="ftRegNo"/> {{ config('company.registration_number') }}@endif
+        </span>
+      @endif
+    </div>
     <div style="display: flex; gap: 24px;"><a href="{{ gs_route('privacy-policy') }}" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="privacy"/></a><a href="{{ gs_route('terms-of-service') }}" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="terms"/></a></div>
   </div>
   <div style="height: 20px;"></div>

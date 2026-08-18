@@ -212,6 +212,41 @@ that made it worse was already removed in an earlier commit.)
 
 ---
 
+## Trust plumbing (CRO-23)
+
+Everything below is wired and hidden. Each appears the moment you fill it in —
+no code change, and nothing unsourced renders in the meantime.
+
+- [ ] **Legal entity name and company registration number.** Set `legal_name`
+      and `registration_number` in **`config/company.php`** and they appear
+      under the footer copyright. Their absence is conspicuous to anyone
+      comparing suppliers, and it is the cheapest trust signal available.
+
+- [ ] **Post-launch warranty: confirm "30 days of free bug fixes".**
+      Set `warranty_days` in `config/company.php` to the number of days and the
+      statement appears on every service page, next to the code-ownership line,
+      in all three languages. Left null it is not claimed anywhere — a warranty
+      is a commitment for you to make, not one I can make on your behalf. **No
+      local competitor publishes one**, so this is a real differentiator.
+
+- [ ] **Support tiers with response times.** Fill `support_tiers` in
+      `config/company.php` — name, price, response time, and what is included —
+      and a comparison table appears on the support page. Currently the page
+      says response times are written into the agreement, which is true but
+      weaker than publishing them.
+
+- [ ] **A team section.** Not built — see below. Even three engineers with
+      first names, roles and real photos would substantiate the "dedicated
+      teams / senior engineers" claim, which currently has no evidence behind
+      it. I need the names, roles and photos before building it, since the
+      whole point is that it is real.
+
+**Already done, no input needed:** the IP-ownership statement — *"You own the
+code and the data. Full source and credentials handed over at launch."* — now
+appears on all seven service pages in all three languages, and as FAQ answer 5.
+
+---
+
 ## Testimonials (CRO-15) — nothing is rendered until you supply real ones
 
 The section was headed **TESTIMONIALS** and contained a client logo marquee,

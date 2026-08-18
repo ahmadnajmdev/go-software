@@ -87,7 +87,8 @@ class UiStringDefaults
                 || in_array($key, ['callUs', 'emailUs', 'visitUs', 'getDirections', 'formTitle', 'formSub',
                     'sendMsg', 'thanksT', 'thanksB']) => 'Contact',
             str_starts_with($key, 'ft')
-                || in_array($key, ['copyright', 'privacy', 'terms', 'lastUpdated', 'legalContact']) => 'Footer',
+                || in_array($key, ['copyright', 'privacy', 'terms', 'lastUpdated', 'legalContact',
+                    'warrantyLine', 'supportTiersTitle', 'supportResponse']) => 'Footer',
             default => 'Other',
         };
     }
