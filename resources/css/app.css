@@ -299,7 +299,93 @@ body[data-edit="true"] [data-edit-image]:hover { outline: 3px dashed var(--gs-ac
   .gs-hero-ctas > * { width: 100%; padding-top: 13px !important; padding-bottom: 13px !important; font-size: 15px !important; }
   .gs-hero-trust li { font-size: 13.5px !important; }
   .gs-hero-media img { height: 210px !important; }
-  .gs-hero-logos { gap: 22px !important; }
+}
+
+/* ===== Client trust band =====
+   A white band between the dark hero and the light problem section.
+
+   The logos are the proof, so they run in whatever colour the client supplied
+   them in — the old strip sat on the dark hero under grayscale(1)
+   brightness(1.9), which pushed every mid-tone to white and left half the row
+   as unreadable smears.
+
+   Each logo is scaled into an identical fixed slot rather than sized off its
+   own height. That is what stops a wide wordmark from carrying four times the
+   visual weight of a square mark, and it means the row reserves its full
+   height before a single image has loaded. */
+.gs-trustbar {
+  background: #ffffff;
+  border-bottom: 1px solid #e7eeed;
+}
+.gs-trustbar-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 30px 24px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+.gs-trustbar-label {
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 11.5px;
+  line-height: 1;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #8a97a4;
+}
+/* The slot size lives here so the breakpoints below only restate two values. */
+.gs-trustbar-logos {
+  --gs-logo-w: 132px;
+  --gs-logo-h: 38px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 18px 44px;
+}
+.gs-trustbar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--gs-logo-w);
+  height: var(--gs-logo-h);
+}
+/* The image box IS the slot, and object-fit does the scaling inside it, so no
+   logo can spill into the row above or below whatever its aspect ratio.
+   The size has to be stated in absolute units: a percentage height here does
+   not resolve against the parent's track and silently falls back to the
+   image's own aspect ratio, which is how a square mark ends up 132px tall. */
+.gs-trustbar-logo {
+  display: block;
+  width: var(--gs-logo-w);
+  height: var(--gs-logo-h);
+  object-fit: contain;
+}
+/* Clients with no logo uploaded still sit on the same baseline. */
+.gs-trustbar-name {
+  font-family: 'Space Grotesk', system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 15.5px;
+  line-height: 1.2;
+  color: #55636f;
+  text-align: center;
+}
+
+@media (max-width: 900px) {
+  .gs-trustbar-inner { padding: 26px 20px 28px; gap: 18px; }
+  .gs-trustbar-logos { --gs-logo-w: 116px; --gs-logo-h: 34px; gap: 16px 32px; }
+}
+
+@media (max-width: 560px) {
+  .gs-trustbar-inner { padding: 22px 18px 24px; gap: 16px; }
+  .gs-trustbar-logos { --gs-logo-w: 96px; --gs-logo-h: 30px; gap: 14px 24px; }
+  .gs-trustbar-name { font-size: 14px; }
 }
 
 /* ===== Missing photography (CRO-11) =====

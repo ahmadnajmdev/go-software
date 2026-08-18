@@ -52,24 +52,40 @@
       </div>
     </div>
   </div>
-
-  {{-- Client logos, static. A marquee here would animate continuously behind
-       the fold on every page view for no conversion benefit. --}}
-  @if ($clients->isNotEmpty())
-    <div style="position: relative; border-top: 1px solid rgba(255,255,255,.08);">
-      <div style="max-width: 1240px; margin: 0 auto; padding: 22px 24px; display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
-        <span style="font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; color: #6d7d8c; flex-shrink: 0;"><x-t k="trustedBy"/></span>
-        <div class="gs-hero-logos" style="display: flex; align-items: center; gap: 34px; flex-wrap: wrap;">
-          @foreach ($clients as $client)
-            @if ($client->logo)
-              <img src="{{ media_url($client->logo) }}" alt="{{ $client->name }}" loading="lazy" decoding="async"
-                   height="26" style="height: 26px; width: auto; max-width: 120px; object-fit: contain; display: block; opacity: .78; filter: grayscale(1) brightness(1.9);">
-            @else
-              <span style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 16px; color: #8b99a7; white-space: nowrap;">{{ $client->name }}</span>
-            @endif
-          @endforeach
-        </div>
-      </div>
-    </div>
-  @endif
 </section>
+
+{{--
+    Client logo band. Two things were wrong with it before.
+
+    It sat inside the dark hero under `grayscale(1) brightness(1.9)`, and that
+    filter burns every mid-tone logo out to a white smear — the proof we were
+    showing was unreadable. The logos now run in their supplied colour on white.
+
+    It also had no shared measure: each logo was sized by its own height, so a
+    wide wordmark rendered four times the area of a square mark and the row
+    read as clutter. Every logo now sits in the same fixed slot and is scaled
+    to fit inside it, which also means the band reserves its height before the
+    images load and contributes nothing to CLS.
+
+    Still static, and it should stay that way: a marquee here would animate
+    continuously behind the fold on every page view for no conversion benefit.
+--}}
+@if ($clients->isNotEmpty())
+  <div class="gs-trustbar">
+    <div class="gs-trustbar-inner">
+      <p class="gs-trustbar-label"><x-t k="trustedBy"/></p>
+      <ul class="gs-trustbar-logos">
+        @foreach ($clients as $client)
+          <li class="gs-trustbar-item">
+            @if ($client->logo)
+              <img src="{{ media_url($client->logo) }}" alt="{{ $client->name }}"
+                   loading="lazy" decoding="async" class="gs-trustbar-logo">
+            @else
+              <span class="gs-trustbar-name">{{ $client->name }}</span>
+            @endif
+          </li>
+        @endforeach
+      </ul>
+    </div>
+  </div>
+@endif
