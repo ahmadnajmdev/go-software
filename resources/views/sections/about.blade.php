@@ -9,7 +9,7 @@
         <img src="{{ media_url(gs_setting('images.about_inset')) }}" alt="Coding" @auth data-edit-image data-image-setting="images.about_inset" @endauth style="width: 100%; height: 150px; object-fit: cover; display: block;">
       </div>
       <div style="position: absolute; top: 22px; left: 22px; background: #0d1826; color: #fff; border-radius: var(--gs-r-tile, 12px); padding: 15px 20px; text-align: center;">
-        <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 32px; color: var(--gs-accent-lite, #6FDED3); line-height: 1;">15+</div>
+        <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 32px; color: var(--gs-accent-lite, #6FDED3); line-height: 1;">{{ config('stats.years_in_software') }}+</div>
         <div style="font-size: 12px; margin-top: 4px; color: #a3b0bd;"><x-t k="yearsIn"/></div>
       </div>
     </div>

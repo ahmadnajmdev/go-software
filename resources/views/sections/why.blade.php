@@ -20,10 +20,14 @@
       <div style="border-radius: var(--gs-r-card, 18px); overflow: hidden;">
         <img src="{{ media_url(gs_setting('images.why')) }}" @auth data-edit-image data-image-setting="images.why" @endauth style="width: 100%; height: 460px; object-fit: cover; display: block;">
       </div>
-      <div style="position: absolute; bottom: -24px; left: -18px; background: #0d1826; color: #fff; border-radius: var(--gs-r-tile, 14px); padding: 22px 24px; box-shadow: 0 24px 50px rgba(13,24,38,.3); display: flex; align-items: center; gap: 14px;">
+      @if (\App\Support\Stats::hasAward())
+        {{-- Rendered only when config/stats.php names who gave the award. An
+             unsourced award claim costs more trust than it earns. --}}
+<div style="position: absolute; bottom: -24px; left: -18px; background: #0d1826; color: #fff; border-radius: var(--gs-r-tile, 14px); padding: 22px 24px; box-shadow: 0 24px 50px rgba(13,24,38,.3); display: flex; align-items: center; gap: 14px;">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="#f5b301"><path d="M12 2l2.9 6.3 6.6.7-4.9 4.5 1.3 6.5L12 17.8 6.1 20.5l1.3-6.5L2.5 9l6.6-.7L12 2z"/></svg>
-        <div><div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px;"><x-t k="topRated"/></div><div style="font-size: 12.5px; color: #a3b0bd;"><x-t k="agency2025"/></div></div>
+        <div><div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px;"><x-t k="topRated"/></div><div style="font-size: 12.5px; color: #a3b0bd;"><x-t k="agency2025"/> — {{ \App\Support\Stats::awardedBy() }}</div></div>
       </div>
+      @endif
     </div>
   </div>
   <!-- marquee -->
