@@ -27,9 +27,15 @@ Alpine.data('heroCarousel', () => ({
 }));
 
 // Contact form: fetch-submit and swap to the success panel, like the design.
-Alpine.data('contactForm', () => ({
-    submitted: false,
+Alpine.data('contactForm', (serverErrors = {}, sent = false) => ({
+    // Seeded from the server so a no-JS submission that came back with errors
+    // keeps showing them once Alpine takes over.
+    errors: serverErrors,
+    submitted: sent,
     sending: false,
+    hasErrors() {
+        return Object.keys(this.errors).length > 0;
+    },
     async submit(event) {
         if (this.sending) return;
         this.sending = true;
@@ -50,26 +56,39 @@ Alpine.data('contactForm', () => ({
                     ...(data.has('budget') ? { budget: data.get('budget') } : {}),
                     ...(data.has('timeline') ? { timeline: data.get('timeline') } : {}),
                 });
+                this.errors = {};
+            } else if (response.status === 422) {
+                await this.showErrors(response);
             } else {
-                await this.reportErrors(response);
-                form.submit(); // fall back to a full POST so validation errors render
+                form.submit(); // 419/429/5xx — let the server render the page
             }
         } catch {
-            form.submit();
+            form.submit(); // offline or blocked: fall back to a full POST
         } finally {
             this.sending = false;
         }
     },
-    /** One form_error per rejected field, so the drop-off field is visible. */
-    async reportErrors(response) {
+    /**
+     * Show each rejected field in place and report one form_error per field,
+     * so the field people give up on is visible in the funnel.
+     */
+    async showErrors(response) {
         try {
             const body = await response.json();
-            const fields = Object.keys(body.errors || {});
-            if (!fields.length) throw new Error('no field errors');
-            fields.forEach((field) => gsTrack('form_error', { field }));
+            this.errors = body.errors || {};
         } catch {
-            gsTrack('form_error', { field: '(unknown)' });
+            this.errors = {};
         }
+        const fields = Object.keys(this.errors);
+        if (!fields.length) {
+            gsTrack('form_error', { field: '(unknown)' });
+            return;
+        }
+        fields.forEach((field) => gsTrack('form_error', { field }));
+        this.$nextTick(() => {
+            const first = this.$el.querySelector(`[name="${fields[0]}"]`);
+            first?.focus({ preventScroll: false });
+        });
     },
 }));
 

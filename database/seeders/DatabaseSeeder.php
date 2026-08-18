@@ -88,6 +88,7 @@ class DatabaseSeeder extends Seeder
                 || in_array($key, ['monthly', 'annual', 'save20', 'getStarted', 'mostPopular', 'month', 'year']) => 'Pricing',
             str_starts_with($key, 'blog') || $key === 'readMore' => 'Blog',
             str_starts_with($key, 'ct') || str_starts_with($key, 'ph') || str_starts_with($key, 'opt')
+                || str_starts_with($key, 'err')
                 || in_array($key, ['callUs', 'emailUs', 'visitUs', 'getDirections', 'formTitle', 'formSub',
                     'sendMsg', 'thanksT', 'thanksB']) => 'Contact',
             str_starts_with($key, 'ft') || in_array($key, ['copyright', 'privacy', 'terms']) => 'Footer',

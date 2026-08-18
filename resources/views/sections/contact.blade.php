@@ -59,33 +59,68 @@
 
       </div>
     </div>
-    <div x-data="contactForm()" style="background: #fff; border-radius: var(--gs-r-card, 20px); padding: 38px; color: #0d1826;">
+    @php($sent = (bool) session('contact_sent'))
+    <div x-data="contactForm(@js($errors->getMessages()), @js($sent))" style="background: #fff; border-radius: var(--gs-r-card, 20px); padding: 38px; color: #0d1826;">
       <h3 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 24px; margin-bottom: 6px;"><x-t k="formTitle"/></h3>
       <p style="font-size: 14px; color: #6a7a8a; margin-bottom: 24px;"><x-t k="formSub"/></p>
-      <div x-show="submitted" x-cloak>
+      {{-- Without JS the server decides which panel is cloaked, so a submission
+           still ends on a visible confirmation rather than a silent reload. --}}
+      <div x-show="submitted" @unless($sent) x-cloak @endunless>
         <div style="background: #eefaf8; border: 1px solid #b8e6e0; border-radius: var(--gs-r-tile, 14px); padding: 30px; text-align: center;">
           <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--gs-accent, #2CA69C); display: grid; place-items: center; margin: 0 auto;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <h4 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; margin: 12px 0 6px; color: #0d1826;"><x-t k="thanksT"/></h4>
           <p style="font-size: 14px; color: #4a5a6a;"><x-t k="thanksB"/></p>
         </div>
       </div>
-      <div x-show="!submitted">
+      <div x-show="!submitted" @if ($sent) x-cloak @endif>
+        <p role="alert" x-show="hasErrors()"
+           style="display: {{ $errors->any() ? 'block' : 'none' }}; background: #fdecea; border: 1px solid #f5c6c2; border-radius: var(--gs-r-tile, 12px); padding: 12px 15px; margin-bottom: 16px; font-size: 14px; color: #a5281c;"><x-t k="errGeneric"/></p>
         <form action="{{ route('contact.store') }}" method="POST" data-gs-form="contact" @submit.prevent="submit($event)" style="display: flex; flex-direction: column; gap: 14px;">
           @csrf
-          <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
-          <input required name="name" placeholder="{{ t('phName') }}" class="foc-accent" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none;">
-          <input required type="email" name="email" placeholder="{{ t('phEmail') }}" class="foc-accent" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none;">
-          <input name="phone" placeholder="{{ t('phPhone') }}" class="foc-accent" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none;">
-          <select required name="service" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none; color: #4a5a6a; background: #fff;">
-            <option value="">{{ t('optSelect') }}</option>
-            <option value="web">{{ t('webDev') }}</option>
-            <option value="webapp">{{ t('optWebApp') }}</option>
-            <option value="mobile">{{ t('svc3T') }}</option>
-            <option value="system">{{ t('optSystem') }}</option>
-            <option value="other">{{ t('optOther') }}</option>
-          </select>
-          <textarea name="message" placeholder="{{ t('phMsg') }}" rows="4" class="foc-accent" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none; resize: vertical;"></textarea>
-          <button type="submit" class="hov-dark" style="background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 16px; padding: 16px; border: none; border-radius: var(--gs-r-btn, 10px); cursor: pointer; transition: .2s; display: inline-flex; align-items: center; justify-content: center; gap: 9px;"><x-t k="sendMsg"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+          {{-- POST /contact has no locale prefix, so the form carries the
+               language and the page it was submitted from. --}}
+          <input type="hidden" name="locale" value="{{ app()->getLocale() }}">
+          <input type="hidden" name="source" value="{{ '/'.ltrim(request()->path(), '/') }}">
+          <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <div>
+            <input required name="name" value="{{ old('name') }}" placeholder="{{ t('phName') }}"
+                   class="foc-accent" aria-describedby="err-name" :aria-invalid="errors.name ? 'true' : 'false'" aria-invalid="{{ $errors->has('name') ? 'true' : 'false' }}" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none;">
+            <p id="err-name" x-show="errors.name" x-text="errors.name?.[0]"
+               style="display: {{ $errors->has('name') ? 'block' : 'none' }}; margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #c0392b;">{{ $errors->first('name') }}</p>
+          </div>
+          <div>
+            <input required type="email" name="email" value="{{ old('email') }}" placeholder="{{ t('phEmail') }}"
+                   class="foc-accent" aria-describedby="err-email" :aria-invalid="errors.email ? 'true' : 'false'" aria-invalid="{{ $errors->has('email') ? 'true' : 'false' }}" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none;">
+            <p id="err-email" x-show="errors.email" x-text="errors.email?.[0]"
+               style="display: {{ $errors->has('email') ? 'block' : 'none' }}; margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #c0392b;">{{ $errors->first('email') }}</p>
+          </div>
+          <div>
+            <input name="phone" value="{{ old('phone') }}" placeholder="{{ t('phPhone') }}" inputmode="tel"
+                   class="foc-accent" aria-describedby="err-phone" :aria-invalid="errors.phone ? 'true' : 'false'" aria-invalid="{{ $errors->has('phone') ? 'true' : 'false' }}" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none;">
+            <p id="err-phone" x-show="errors.phone" x-text="errors.phone?.[0]"
+               style="display: {{ $errors->has('phone') ? 'block' : 'none' }}; margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #c0392b;">{{ $errors->first('phone') }}</p>
+          </div>
+          <div>
+            <select required name="service" aria-describedby="err-service" :aria-invalid="errors.service ? 'true' : 'false'" aria-invalid="{{ $errors->has('service') ? 'true' : 'false' }}"
+                    style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none; color: #4a5a6a; background: #fff;">
+              <option value="">{{ t('optSelect') }}</option>
+              <option value="web" @selected(old('service') === 'web')>{{ t('webDev') }}</option>
+              <option value="webapp" @selected(old('service') === 'webapp')>{{ t('optWebApp') }}</option>
+              <option value="mobile" @selected(old('service') === 'mobile')>{{ t('svc3T') }}</option>
+              <option value="system" @selected(old('service') === 'system')>{{ t('optSystem') }}</option>
+              <option value="other" @selected(old('service') === 'other')>{{ t('optOther') }}</option>
+            </select>
+            <p id="err-service" x-show="errors.service" x-text="errors.service?.[0]"
+               style="display: {{ $errors->has('service') ? 'block' : 'none' }}; margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #c0392b;">{{ $errors->first('service') }}</p>
+          </div>
+          <div>
+            <textarea required name="message" placeholder="{{ t('phMsg') }}" rows="4"
+                      class="foc-accent" aria-describedby="err-message" :aria-invalid="errors.message ? 'true' : 'false'" aria-invalid="{{ $errors->has('message') ? 'true' : 'false' }}"
+                      style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none; resize: vertical;">{{ old('message') }}</textarea>
+            <p id="err-message" x-show="errors.message" x-text="errors.message?.[0]"
+               style="display: {{ $errors->has('message') ? 'block' : 'none' }}; margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #c0392b;">{{ $errors->first('message') }}</p>
+          </div>
+          <button type="submit" class="hov-dark" :disabled="sending" style="background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 16px; padding: 16px; border: none; border-radius: var(--gs-r-btn, 10px); cursor: pointer; transition: .2s; display: inline-flex; align-items: center; justify-content: center; gap: 9px;"><x-t k="sendMsg"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
         </form>
       </div>
     </div>

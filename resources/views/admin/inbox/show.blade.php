@@ -18,6 +18,29 @@
             <tr><th>Message</th><td style="white-space:pre-wrap">{{ $item->message }}</td></tr>
         </table>
 
+        {{-- Where the lead came from: which page asked, and which campaign
+             brought them to the site in the first place. --}}
+        @php
+            $campaign = array_filter([
+                'Source' => $item->utm_source, 'Medium' => $item->utm_medium,
+                'Campaign' => $item->utm_campaign, 'Term' => $item->utm_term,
+                'Content' => $item->utm_content,
+            ]);
+        @endphp
+        <h3 style="margin:22px 0 8px;font-size:14px;letter-spacing:.04em;text-transform:uppercase;opacity:.6">Attribution</h3>
+        <table class="tbl">
+            <tr><th style="width:140px">Page</th><td>{{ $item->source ?? '—' }}</td></tr>
+            <tr><th>Campaign</th><td>
+                @forelse ($campaign as $label => $value)
+                    <span class="badge">{{ $label }}: {{ $value }}</span>
+                @empty
+                    —
+                @endforelse
+            </td></tr>
+            <tr><th>IP</th><td>{{ $item->ip ?? '—' }}</td></tr>
+            <tr><th>Device</th><td style="word-break:break-all;font-size:12px;opacity:.75">{{ $item->user_agent ?? '—' }}</td></tr>
+        </table>
+
         <div class="row-actions" style="margin-top:18px">
             <a class="btn" href="mailto:{{ $item->email }}?subject=Re: your message to GoSoftware">Reply by email</a>
             <form method="POST" action="{{ route('admin.inbox.toggle', $item) }}">

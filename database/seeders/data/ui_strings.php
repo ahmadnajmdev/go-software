@@ -1143,4 +1143,40 @@ return array (
     'ar' => 'شروط الاستخدام',
     'ckb' => 'مەرجەکانی بەکارهێنان',
   ),
+  'errGeneric' => 
+  array (
+    'en' => 'Please check the highlighted fields and try again.',
+    'ar' => 'من فضلك تحقّق من الحقول المحدّدة وحاول مرة أخرى.',
+    'ckb' => 'تکایە ئەو خانانە بپشکنە کە نیشانکراون و دووبارە هەوڵ بدەرەوە.',
+  ),
+  'errName' => 
+  array (
+    'en' => 'Please tell us your name.',
+    'ar' => 'من فضلك اكتب اسمك.',
+    'ckb' => 'تکایە ناوت بنووسە.',
+  ),
+  'errEmail' => 
+  array (
+    'en' => 'Please enter an email address we can reply to.',
+    'ar' => 'من فضلك أدخل بريدًا إلكترونيًا نستطيع الرد عليه.',
+    'ckb' => 'تکایە ئیمەیڵێک بنووسە کە بتوانین وەڵامت بدەینەوە.',
+  ),
+  'errEmailValid' => 
+  array (
+    'en' => 'That email address doesn\'t look right.',
+    'ar' => 'هذا البريد الإلكتروني غير صحيح.',
+    'ckb' => 'ئەم ئیمەیڵە دروست نییە.',
+  ),
+  'errMessage' => 
+  array (
+    'en' => 'Please tell us a little about your project.',
+    'ar' => 'من فضلك أخبرنا قليلاً عن مشروعك.',
+    'ckb' => 'تکایە کەمێک دەربارەی پرۆژەکەت بنووسە.',
+  ),
+  'errTooLong' => 
+  array (
+    'en' => 'That\'s a little too long — please shorten it.',
+    'ar' => 'هذا طويل جدًا — من فضلك اختصره.',
+    'ckb' => 'ئەمە زۆر درێژە — تکایە کورتی بکەرەوە.',
+  ),
 );
