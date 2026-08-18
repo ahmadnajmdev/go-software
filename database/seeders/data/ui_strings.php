@@ -51,11 +51,11 @@ return array (
     'ar' => 'اطلب عرض سعر',
     'ckb' => 'داوای نرخ بکە',
   ),
-  'location' =>
+  'location' => 
   array (
-    'en' => 'Erbil, Iraq',
-    'ar' => 'أربيل، العراق',
-    'ckb' => 'هەولێر، عێراق',
+    'en' => 'Erbil, Justice Tower',
+    'ar' => 'أربيل، برج العدالة',
+    'ckb' => 'هەولێر، تاوەری عەدالە',
   ),
   'followUs' => 
   array (
@@ -65,9 +65,9 @@ return array (
   ),
   'h1Tag' => 
   array (
-    'en' => 'SOFTWARE DEVELOPMENT',
-    'ar' => 'تطوير البرمجيات',
-    'ckb' => 'گەشەپێدانی سۆفتوێر',
+    'en' => 'CUSTOM SOFTWARE · ERBIL, KURDISTAN',
+    'ar' => 'برمجيات مخصّصة · أربيل، كردستان',
+    'ckb' => 'سۆفتوێری تایبەت · هەولێر، کوردستان',
   ),
   'h1TitleA' => 
   array (
@@ -203,9 +203,9 @@ return array (
   ),
   'aboutBody' => 
   array (
-    'en' => 'We\'re a UK-based software studio delivering websites, web and mobile apps, and custom management systems. We pair clean engineering with real business thinking — so every product we ship earns its keep.',
-    'ar' => 'نحن استوديو برمجيات مقره المملكة المتحدة نقدّم مواقع وتطبيقات ويب وموبايل وأنظمة إدارة مخصصة. نجمع بين الهندسة المتقنة والفهم الحقيقي للأعمال — ليقدّم كل منتج نبنيه قيمة ملموسة.',
-    'ckb' => 'ئێمە ستۆدیۆیەکی سۆفتوێرین لە شانشینی یەکگرتوو، ماڵپەڕ و ئەپی وێب و مۆبایل و سیستەمی بەڕێوەبردنی تایبەت دەگەیەنین. ئەندازیاری پاک لەگەڵ بیرکردنەوەی ڕاستەقینەی بازرگانی کۆدەکەینەوە — بۆ ئەوەی هەر بەرهەمێک کە دەیگەیەنین بەهای خۆی بسەلمێنێت.',
+    'en' => 'We\'re an Erbil-based software team, working from Justice Tower with businesses across Kurdistan and Iraq. We build websites, web and mobile apps, and custom management systems. We pair clean engineering with real business thinking — so every product we ship earns its keep.',
+    'ar' => 'نحن فريق برمجيات مقرّه أربيل، نعمل من برج العدالة مع شركات في كردستان وعموم العراق. نبني المواقع وتطبيقات الويب والموبايل وأنظمة الإدارة المخصّصة. نجمع بين الهندسة المتقنة والفهم الحقيقي للأعمال — ليقدّم كل منتج نبنيه قيمة ملموسة.',
+    'ckb' => 'ئێمە تیمێکی سۆفتوێرین لە هەولێر، لە تاوەری عەدالەوە لەگەڵ کۆمپانیاکانی کوردستان و عێراق کار دەکەین. ماڵپەڕ و ئەپی وێب و مۆبایل و سیستەمی بەڕێوەبردنی تایبەت دروست دەکەین. ئەندازیاری پاک لەگەڵ بیرکردنەوەی ڕاستەقینەی بازرگانی کۆدەکەینەوە — بۆ ئەوەی هەر بەرهەمێک کە دەیگەیەنین بەهای خۆی بسەلمێنێت.',
   ),
   'ab1T' => 
   array (
@@ -1049,9 +1049,9 @@ return array (
   ),
   'ftBlurb' => 
   array (
-    'en' => 'UK software studio building websites, apps and custom management systems that move your business forward.',
-    'ar' => 'استوديو برمجيات بريطاني يبني مواقع وتطبيقات وأنظمة إدارة مخصصة تدفع أعمالك إلى الأمام.',
-    'ckb' => 'ستۆدیۆی سۆفتوێری بەریتانی کە ماڵپەڕ و ئەپ و سیستەمی بەڕێوەبردنی تایبەت دروست دەکات کە کارەکەت بەرەو پێش دەبات.',
+    'en' => 'Erbil-based software team building websites, apps and management systems for businesses across Kurdistan and Iraq.',
+    'ar' => 'فريق برمجيات مقرّه أربيل يبني المواقع والتطبيقات وأنظمة الإدارة لشركات في كردستان وعموم العراق.',
+    'ckb' => 'تیمێکی سۆفتوێری هەولێر کە ماڵپەڕ و ئەپ و سیستەمی بەڕێوەبردن بۆ کۆمپانیاکانی کوردستان و عێراق دروست دەکات.',
   ),
   'ftCompany' => 
   array (
