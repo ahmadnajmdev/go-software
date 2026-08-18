@@ -267,6 +267,45 @@ appears on all seven service pages in all three languages, and as FAQ answer 5.
 
 ---
 
+## Project case studies (CRO-14) — the biggest content gap
+
+Seven projects had no detail page at all. Four linked straight off-site (App
+Store, shopp.krd, powerorbits.com, climax.krd) with no way back, and three had
+no link whatsoever. The section that should create the most desire was the one
+causing the most exits.
+
+The pages are built. **Each one turns itself on as soon as it has content** —
+fill in the problem, what you built, or the result at **Admin → Projects** and
+that project gets a page at `/projects/<slug>`, its tile starts linking there
+instead of off-site, and the live-site link becomes a "Visit live site" button
+*inside* the page. Leave a project empty and nothing changes for it — no empty
+page is ever linked.
+
+Every section renders only if it has content, so nothing is invented to fill a
+gap. For each of the seven projects I need:
+
+| Field | What it is |
+|---|---|
+| **Industry** | Retail · Restaurants · Academies · Real estate · Delivery · E-commerce · Services. This is now the **primary** filter — buyers recognise their own industry long before they recognise "web app". |
+| **Client name** | As you are permitted to name them. |
+| **One-line outcome** | The hero line. e.g. "Cut monthly stock-taking from three days to two hours." |
+| **The problem** | What was going wrong before. A paragraph or two. |
+| **What we built** | The solution, in plain terms. |
+| **The result** | 2–3 **quantified** outcomes. This is the section that sells. |
+| **Screenshots** | 3–5 per project. Upload in Media first, then paste the paths. |
+| **Technology** | Comma separated; renders as tags. |
+| **Platforms / timeline / live since** | For the "At a glance" bar. |
+| **Client quote** | Only with permission. Needs the quote, who said it, and their role. |
+
+The seven: **KurdGPT · Folivya Academy · Fantasy Town · Asaari · Zuu · Power
+Orbits · Climax**.
+
+If that is too much at once, do **two** properly — ideally the two with the
+best numbers. Two real case studies beat seven thin ones, and the rest can
+keep their current tiles until you get to them.
+
+---
+
 ## Testimonials (CRO-15) — nothing is rendered until you supply real ones
 
 The section was headed **TESTIMONIALS** and contained a client logo marquee,

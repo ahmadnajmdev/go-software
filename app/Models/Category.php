@@ -25,4 +25,16 @@ class Category extends Model
     {
         return $query->orderBy('position');
     }
+
+    /** What we built. */
+    public function scopeTypes($query)
+    {
+        return $query->where('kind', 'type');
+    }
+
+    /** Who the client is. */
+    public function scopeIndustries($query)
+    {
+        return $query->where('kind', 'industry');
+    }
 }

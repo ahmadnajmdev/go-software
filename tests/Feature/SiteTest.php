@@ -283,9 +283,10 @@ class SiteTest extends TestCase
             $this->assertStringContainsString($project->tr('title'), $html);
         }
 
-        // one chip per category, plus "All", and Alpine drives the selection
+        // one chip per taxonomy entry, plus "All", and Alpine drives the
+        // selection. Industry names contain "&", so compare escaped.
         foreach (\App\Models\Category::all() as $category) {
-            $this->assertStringContainsString($category->tr('name'), $html);
+            $this->assertStringContainsString(e($category->tr('name')), $html);
             $this->assertStringContainsString("cat === '{$category->slug}'", $html);
         }
         $this->assertStringContainsString(t('catAll', 'en'), $html);
@@ -336,8 +337,9 @@ class SiteTest extends TestCase
     public function test_deleting_a_category_leaves_its_projects_uncategorised(): void
     {
         $admin = User::first();
-        $category = \App\Models\Category::first();
-        $project = \App\Models\Project::where('category_id', $category->id)->firstOrFail();
+        // pick a type that actually has projects — industries are seeded empty
+        $project = \App\Models\Project::whereNotNull('category_id')->firstOrFail();
+        $category = $project->category;
 
         $this->actingAs($admin)->delete("/admin/categories/{$category->id}")
             ->assertRedirect('/admin/categories');

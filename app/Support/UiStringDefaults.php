@@ -70,7 +70,7 @@ class UiStringDefaults
             str_starts_with($key, 'why') || str_starts_with($key, 'mq')
                 || in_array($key, ['topRated', 'agency2025', 'mobileApps']) => 'Why us',
             str_starts_with($key, 'proc') || (bool) preg_match('/^p\d/', $key) => 'Process',
-            str_starts_with($key, 'proj') || (bool) preg_match('/^cat\d/', $key)
+            str_starts_with($key, 'proj') || str_starts_with($key, 'prj') || (bool) preg_match('/^cat\d/', $key)
                 || in_array($key, ['allProjects', 'catAll']) => 'Projects',
             str_starts_with($key, 'meta') => 'SEO',
             str_starts_with($key, 'prob') => 'Problem',

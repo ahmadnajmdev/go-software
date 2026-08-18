@@ -112,6 +112,7 @@ class DatabaseSeeder extends Seeder
 
             Project::create([
                 'position' => $i + 1,
+                'slug' => Str::slug($prj['title']['en']) ?: 'project-'.($i + 1),
                 'image' => $prj['img'],
                 'category_id' => $categories[$key]->id,
                 'title' => $prj['title'],

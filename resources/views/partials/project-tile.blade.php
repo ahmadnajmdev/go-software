@@ -4,15 +4,28 @@
 @php
     $src = media_url($project->image);
     $contain = ($project->fit ?? 'cover') === 'contain';
-    $tag = filled($project->url) ? 'a' : 'div';
+
+    // A project with a story goes to its own page. Four tiles used to send
+    // people straight off-site with no way back, which is why the section that
+    // should create the most desire was causing the most exits.
+    $detail = $project->detailUrl();
+    $href = $detail ?: $project->url;
+    $external = ! $detail && filled($project->url);
+    $tag = $href ? 'a' : 'div';
+
+    $filterSlugs = array_values(array_filter([
+        $project->industry?->slug,
+        $project->category?->slug,
+    ]));
 @endphp
-<{{ $tag }} class="gs-proj{{ filled($project->url) ? ' is-linked' : '' }}"
+<{{ $tag }} class="gs-proj{{ $href ? ' is-linked' : '' }}"
     data-item-id="{{ $project->id }}" data-item-model="projects"
-    @if (filled($project->url))
-        href="{{ $project->url }}" target="_blank" rel="noopener"
+    @if ($href)
+        href="{{ $href }}"
+        @if ($external) target="_blank" rel="noopener" @endif
         data-gs-track="project_view" data-gs-project="{{ $project->tr('title', 'en') }}"
     @endif
-    x-show="cat === 'all' || cat === '{{ $project->category?->slug ?? '' }}'" x-transition.opacity
+    x-show="cat === 'all' || {{ \Illuminate\Support\Js::from($filterSlugs) }}.includes(cat)" x-transition.opacity
     style="position: relative; border-radius: var(--gs-r-card, 16px); overflow: hidden; aspect-ratio: 1 / 1; display: block;">
 
     @if ($contain)
@@ -41,7 +54,7 @@
         @endif
         <h3 style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 19px; color: {{ $contain ? '#0d1826' : '#fff' }}; margin-top: 6px; display: flex; align-items: center; gap: 8px;">
             <span class="gs-edit" @auth data-edit-model="projects" data-edit-id="{{ $project->id }}" data-edit-field="title" @endauth>{{ $project->tr('title') }}</span>
-            @if (filled($project->url))
+            @if ($href)
                 <svg class="gs-proj-arrow" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;"><path d="M7 17L17 7M9 7h8v8"/></svg>
             @endif
         </h3>

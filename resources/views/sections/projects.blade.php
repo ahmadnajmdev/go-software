@@ -9,7 +9,7 @@
       <a href="{{ gs_route('projects') }}" class="hov-accent-solid" style="background: #0d1826; color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 14px 28px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="allProjects"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
     </div>
 
-    @include('partials.category-chips', ['categories' => $categories])
+    @include('partials.category-chips', ['industries' => $categories->where('kind', 'industry')->values(), 'types' => $categories->where('kind', 'type')->values()])
 
     <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;" class="gs-4col">
       @foreach ($projects as $project)
@@ -18,6 +18,14 @@
       @auth
         <button type="button" class="gs-add-tile" data-edit-add="projects" style="min-height: 220px; border: 2px dashed #b9c6c9; border-radius: var(--gs-r-card, 16px); background: transparent; color: #6a7a8a; font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; cursor: pointer; align-items: center; justify-content: center; gap: 8px;">＋ Add project</button>
       @endauth
+    </div>
+
+    {{-- A CTA right after the grid, while the work is still on screen —
+         waiting until the very bottom of the page loses the people the grid
+         just convinced. --}}
+    <div style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 40px;">
+      <x-cta-primary location="projects_grid"/>
+      <x-whatsapp-cta source="hero" variant="light"/>
     </div>
   </div>
 </section>

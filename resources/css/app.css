@@ -361,3 +361,12 @@ body[dir="rtl"] .gs-industry:hover .gs-industry-arrow { transform: translateX(-3
     linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
   background-size: auto, 30px 30px, 30px 30px;
 }
+
+/* ===== Project filters (CRO-14) =====
+   Industry is the primary cut — a buyer recognises their own industry long
+   before they recognise "web app" — with type kept as a smaller second row. */
+.gs-filters { display: flex; flex-direction: column; gap: 10px; }
+.gs-chips-secondary { align-items: center; gap: 8px; }
+.gs-chips-label { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: #8b99a7; margin-inline-end: 4px; }
+.gs-chip-sm { font-size: 12.5px !important; padding: 6px 13px !important; opacity: .85; }
+.gs-chip-sm.is-on { opacity: 1; }

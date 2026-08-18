@@ -1533,4 +1533,106 @@ return array (
     'ar' => 'تُحمَّل خرائط جوجل عند الضغط.',
     'ckb' => 'کاتێک دەیپەستیت گووگڵ مەپس بار دەکات.',
   ),
+  'prjGlance' => 
+  array (
+    'en' => 'At a glance',
+    'ar' => 'لمحة سريعة',
+    'ckb' => 'بە کورتی',
+  ),
+  'prjIndustry' => 
+  array (
+    'en' => 'Industry',
+    'ar' => 'القطاع',
+    'ckb' => 'بوار',
+  ),
+  'prjType' => 
+  array (
+    'en' => 'Type',
+    'ar' => 'النوع',
+    'ckb' => 'جۆر',
+  ),
+  'prjPlatforms' => 
+  array (
+    'en' => 'Platforms',
+    'ar' => 'المنصّات',
+    'ckb' => 'پلاتفۆڕمەکان',
+  ),
+  'prjTimeline' => 
+  array (
+    'en' => 'Timeline',
+    'ar' => 'المدة',
+    'ckb' => 'ماوە',
+  ),
+  'prjLiveSince' => 
+  array (
+    'en' => 'Live since',
+    'ar' => 'يعمل منذ',
+    'ckb' => 'لە کارە لە',
+  ),
+  'prjTech' => 
+  array (
+    'en' => 'Technology',
+    'ar' => 'التقنيات',
+    'ckb' => 'تەکنەلۆژیا',
+  ),
+  'prjProblem' => 
+  array (
+    'en' => 'The problem',
+    'ar' => 'المشكلة',
+    'ckb' => 'کێشەکە',
+  ),
+  'prjSolution' => 
+  array (
+    'en' => 'What we built',
+    'ar' => 'ما بنيناه',
+    'ckb' => 'چیمان دروستکرد',
+  ),
+  'prjResult' => 
+  array (
+    'en' => 'The result',
+    'ar' => 'النتيجة',
+    'ckb' => 'ئەنجامەکە',
+  ),
+  'prjScreens' => 
+  array (
+    'en' => 'Screens',
+    'ar' => 'لقطات من المنتج',
+    'ckb' => 'شاشەکان',
+  ),
+  'prjVisit' => 
+  array (
+    'en' => 'Visit live site',
+    'ar' => 'زيارة الموقع',
+    'ckb' => 'سەردانی ماڵپەڕەکە',
+  ),
+  'prjRelated' => 
+  array (
+    'en' => 'More work like this',
+    'ar' => 'أعمال مشابهة',
+    'ckb' => 'کاری هاوشێوەی ئەمە',
+  ),
+  'prjCtaTitle' => 
+  array (
+    'en' => 'Want something like this for your business?',
+    'ar' => 'تريد شيئاً كهذا لعملك؟',
+    'ckb' => 'شتێکی وەک ئەمەت بۆ کارەکەت دەوێت؟',
+  ),
+  'prjAllWork' => 
+  array (
+    'en' => 'See all our work',
+    'ar' => 'شاهد كل أعمالنا',
+    'ckb' => 'هەموو کارەکانمان ببینە',
+  ),
+  'prjFilterInd' => 
+  array (
+    'en' => 'By industry',
+    'ar' => 'حسب القطاع',
+    'ckb' => 'بەپێی بوار',
+  ),
+  'prjFilterType' => 
+  array (
+    'en' => 'By type',
+    'ar' => 'حسب النوع',
+    'ckb' => 'بەپێی جۆر',
+  ),
 );

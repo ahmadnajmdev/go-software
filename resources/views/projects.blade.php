@@ -16,7 +16,7 @@
                 <h1 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: clamp(32px, 4vw, 48px); line-height: 1.12; color: #0d1826; letter-spacing: -.02em;"><x-t k="projTitle"/></h1>
             </div>
 
-            @include('partials.category-chips', ['categories' => $categories, 'align' => 'center'])
+            @include('partials.category-chips', ['industries' => $industries, 'types' => $types, 'align' => 'center'])
 
             <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;" class="gs-4col">
                 @foreach ($projects as $project)
@@ -30,11 +30,9 @@
                 <x-t k="projNone"/>
             </p>
 
-            <div style="text-align: center; margin-top: 46px;">
-                <a href="{{ gs_route('') }}#contact" class="hov-accent-solid" style="background: #0d1826; color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 15px 30px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;">
-                    <x-t k="ctTag"/>
-                    <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                </a>
+            <div style="display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; margin-top: 46px;">
+<x-cta-primary location="projects_footer"/>
+                <x-whatsapp-cta source="hero" variant="light"/>
             </div>
         </div>
     </section>
