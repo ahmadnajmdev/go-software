@@ -8,7 +8,11 @@
             $gsFormStrings = [];
 
             foreach (['fStep', 'phMsg', 'phWebsite', 'phMobileApp', 'phMgmt',
-                'phPos', 'phEcom', 'phOther'] as $gsKey) {
+                'phPos', 'phEcom', 'phOther',
+                // validation wording, so a client-side message reads exactly
+                // like the one the server would have sent
+                'errGeneric', 'errName', 'errEmail', 'errEmailValid',
+                'errMessage', 'errPhone', 'errService'] as $gsKey) {
                 $gsFormStrings[$gsKey] = t($gsKey);
             }
         @endphp
@@ -122,7 +126,11 @@
         <p role="alert" x-show="hasErrors()"
            style="display: {{ $errors->any() ? 'block' : 'none' }}; background: #fdecea; border: 1px solid #f5c6c2; border-radius: var(--gs-r-tile, 12px); padding: 12px 15px; margin-bottom: 16px; font-size: 14px; color: #a5281c;"><x-t k="errGeneric"/></p>
 
-        <form action="{{ route('contact.store') }}" method="POST" data-gs-form="contact" @submit.prevent="submit($event)" style="display: flex; flex-direction: column; gap: 16px;">
+        <form action="{{ route('contact.store') }}" method="POST" data-gs-form="contact"
+                @submit.prevent="submit($event)"
+                @keydown.enter="onEnter($event)"
+                @input="clearError($event.target.name)"
+                style="display: flex; flex-direction: column; gap: 16px;">
           @csrf
           <input type="hidden" name="locale" value="{{ app()->getLocale() }}">
           <input type="hidden" name="source" value="{{ '/'.ltrim(request()->path(), '/') }}">

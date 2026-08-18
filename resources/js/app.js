@@ -5,7 +5,12 @@ import { gsTrack } from './analytics';
 //
 // Step one is a single tap with no typing — the cheapest first commitment we
 // can ask for. Everything degrades to one long form when Alpine is absent,
-// because x-show simply does not run and every fieldset stays visible.
+// because x-show does not run and every fieldset stays visible.
+//
+// Each step is checked before it will let you past it. Without that a visitor
+// can tap through to the end with nothing filled in and only discover it when
+// the server rejects the whole thing — which is exactly the experience a
+// stepped form is supposed to prevent.
 Alpine.data('contactForm', (serverErrors = {}, sent = false, service = '') => ({
     total: 4,
     step: 1,
@@ -14,16 +19,32 @@ Alpine.data('contactForm', (serverErrors = {}, sent = false, service = '') => ({
     submitted: sent,
     sending: false,
 
+    // Alpine's $el is "the element the expression is on", so inside a method
+    // reached from @click on a button it is that button — which contains no
+    // fields. Captured here in init(), where $el really is the component root.
+    root: null,
+
+    /** Which step owns a field, so an error is never reported off-screen. */
+    stepOf(field) {
+        return { service: 1, message: 2, name: 3, phone: 3, email: 3, company: 3 }[field] ?? this.total;
+    },
+
     init() {
+        this.root = this.$el;
+
+        // We do our own per-step checking and render the messages inline. The
+        // browser's own validation would refuse to submit because the earlier
+        // steps are display:none by then, and it cannot focus a hidden field
+        // to complain about it — the click would do nothing at all. The
+        // required attributes stay in the markup for the no-JS path.
+        this.$nextTick(() => {
+            const form = this.root.querySelector('form');
+            if (form) form.noValidate = true;
+        });
+
         // Come back from a failed submit and land on the step that broke.
         const first = Object.keys(this.errors)[0];
         if (first) this.step = this.stepOf(first);
-    },
-
-    /** Which step owns a given field, so errors are never off-screen. */
-    stepOf(field) {
-        const map = { service: 1, message: 2, name: 3, phone: 3, email: 3, company: 3 };
-        return map[field] ?? this.total;
     },
 
     stepLabel() {
@@ -45,31 +66,136 @@ Alpine.data('contactForm', (serverErrors = {}, sent = false, service = '') => ({
         return (window.gsStrings || {})[key] ?? '';
     },
 
-    advance() {
-        if (this.step === 1 && !this.service) return;
-        if (this.step >= this.total) return;
+    /** The fields belonging to a step, in document order. */
+    fieldsOf(step) {
+        const fieldset = this.root.querySelectorAll('form fieldset')[step - 1];
+        if (!fieldset) return [];
 
-        window.gsTrack?.('form_step_complete', { step: this.step, service: this.service || '(none)' });
-        this.step++;
-        this.focusStep();
+        return [...fieldset.querySelectorAll('input, textarea, select')]
+            .filter((el) => el.name && el.type !== 'hidden' && el.type !== 'radio' && !el.disabled);
     },
 
-    back() {
-        if (this.step > 1) this.step--;
+    /** The same wording the server would use, in the visitor's language. */
+    messageFor(field, kind) {
+        const key = {
+            service: 'errService',
+            message: 'errMessage',
+            name: 'errName',
+            phone: 'errPhone',
+            email: kind === 'format' ? 'errEmailValid' : 'errEmail',
+        }[field];
+
+        return this.t(key) || this.t('errGeneric');
     },
 
-    focusStep() {
-        this.$nextTick(() => {
-            this.$el.querySelector(`fieldset:not([style*="display: none"]) textarea, fieldset:not([style*="display: none"]) input:not([type=hidden]):not([type=radio])`)?.focus();
+    /**
+     * Check the current step. Errors on other steps are left alone so a
+     * server-reported problem elsewhere does not vanish silently.
+     */
+    validateStep() {
+        const errors = { ...this.errors };
+        this.fieldsOf(this.step).forEach((el) => delete errors[el.name]);
+        if (this.step === 1) delete errors.service;
+
+        if (this.step === 1 && !this.service) {
+            errors.service = [this.messageFor('service')];
+        }
+
+        this.fieldsOf(this.step).forEach((el) => {
+            const value = (el.value || '').trim();
+
+            if (el.required && !value) {
+                errors[el.name] = [this.messageFor(el.name)];
+                return;
+            }
+
+            if (!value) return;
+
+            // A phone needs actual digits. The field starts at "+964", which
+            // is not empty but is not a number either — the server counts
+            // digits, so the browser has to as well or people are bounced
+            // back for something we could have caught here.
+            if (el.name === 'phone' && (value.match(/\d/g) || []).length < 6) {
+                errors.phone = [this.messageFor('phone')];
+                return;
+            }
+
+            if (!el.checkValidity()) {
+                errors[el.name] = [this.messageFor(el.name, 'format')];
+            }
         });
+
+        this.errors = errors;
+
+        return !this.fieldsOf(this.step).some((el) => this.errors[el.name])
+            && !(this.step === 1 && this.errors.service);
+    },
+
+    /** Clear a field's error as soon as the visitor starts fixing it. */
+    clearError(field) {
+        if (field && this.errors[field]) {
+            const { [field]: _removed, ...rest } = this.errors;
+            this.errors = rest;
+        }
     },
 
     hasErrors() {
         return Object.keys(this.errors).length > 0;
     },
 
+    focusFirstInvalid() {
+        this.$nextTick(() => {
+            const target = this.fieldsOf(this.step).find((el) => this.errors[el.name]);
+            (target || this.fieldsOf(this.step)[0])?.focus({ preventScroll: false });
+        });
+    },
+
+    advance() {
+        if (this.step >= this.total) return;
+
+        if (!this.validateStep()) {
+            this.focusFirstInvalid();
+            return;
+        }
+
+        window.gsTrack?.('form_step_complete', { step: this.step, service: this.service || '(none)' });
+        this.step++;
+        this.$nextTick(() => this.fieldsOf(this.step)[0]?.focus({ preventScroll: true }));
+    },
+
+    back() {
+        if (this.step > 1) this.step--;
+    },
+
+    /** Enter should move to the next step, not submit from halfway through. */
+    onEnter(event) {
+        if (event.target.tagName === 'TEXTAREA') return;
+
+        if (this.step < this.total) {
+            event.preventDefault();
+            this.advance();
+        }
+    },
+
     async submit(event) {
         if (this.sending) return;
+
+        // Re-check every step, not just the last one — someone can reach the
+        // end and then go back and empty a field.
+        for (let step = 1; step <= this.total; step++) {
+            const at = this.step;
+            this.step = step;
+            const ok = this.validateStep();
+            this.step = at;
+
+            if (!ok) {
+                this.step = step;
+                this.focusFirstInvalid();
+                Object.keys(this.errors).forEach((field) => gsTrack('form_error', { field }));
+                return;
+            }
+        }
+
         this.sending = true;
         const form = event.target;
         const data = new FormData(form);
@@ -101,8 +227,8 @@ Alpine.data('contactForm', (serverErrors = {}, sent = false, service = '') => ({
     },
 
     /**
-     * Show each rejected field in place, on its own step, and report one
-     * form_error per field so the field people give up on is visible.
+     * Show each rejected field on its own step, and report one form_error per
+     * field so the field people give up on is visible in the funnel.
      */
     async showErrors(response) {
         try {
@@ -117,8 +243,8 @@ Alpine.data('contactForm', (serverErrors = {}, sent = false, service = '') => ({
             return;
         }
         fields.forEach((field) => gsTrack('form_error', { field }));
-        this.step = this.stepOf(fields[0]);
-        this.$nextTick(() => this.$el.querySelector(`[name="${fields[0]}"]`)?.focus({ preventScroll: false }));
+        this.step = Math.min(...fields.map((field) => this.stepOf(field)));
+        this.focusFirstInvalid();
     },
 }));
 

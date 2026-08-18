@@ -213,4 +213,51 @@ class QualifyingFormTest extends TestCase
             ->assertSee('pos')
             ->assertSee('Folivya');
     }
+
+    #[DataProvider('locales')]
+    public function test_the_validation_wording_is_available_to_the_client(string $locale, string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        // A message shown before the request is made must read exactly like
+        // the one the server would have sent, in the visitor's language.
+        foreach (['errName', 'errEmail', 'errEmailValid', 'errMessage', 'errPhone', 'errService'] as $key) {
+            $this->assertStringContainsString(
+                json_encode(t($key, $locale), JSON_UNESCAPED_UNICODE),
+                $html,
+                "the {$locale} wording for {$key} never reaches the form"
+            );
+        }
+    }
+
+    #[DataProvider('locales')]
+    public function test_the_form_guards_each_step_and_handles_enter(string $locale, string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        // Enter must move on rather than submit from halfway through, and a
+        // field's error has to clear as soon as it is being fixed.
+        $this->assertStringContainsString('@keydown.enter="onEnter($event)"', $html);
+        $this->assertStringContainsString('@input="clearError($event.target.name)"', $html);
+    }
+
+    #[DataProvider('locales')]
+    public function test_native_validation_still_guards_the_no_javascript_path(string $locale, string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+        $form = substr($html, strpos($html, '<form action='));
+        $form = substr($form, 0, strpos($form, '</form>'));
+
+        // novalidate is applied by the component at runtime, never in markup —
+        // without JS the browser's own required checks are the only guard.
+        $this->assertStringNotContainsString('novalidate', strtolower($form));
+
+        foreach (['message', 'name', 'phone', 'email'] as $field) {
+            $this->assertMatchesRegularExpression(
+                '/<(input|textarea)[^>]*\brequired\b[^>]*name="'.$field.'"|<(input|textarea)[^>]*name="'.$field.'"[^>]*\brequired\b/',
+                $form,
+                "{$field} is not required in the markup"
+            );
+        }
+    }
 }
