@@ -13,6 +13,7 @@
           <div style="display: flex; align-items: center; gap: 28px; margin-top: 34px; flex-wrap: wrap;">
             <a data-gs-track="cta_click" data-gs-label="{{ t('h1Cta1', 'en') }}" data-gs-location="hero_slide1" href="{{ route('home') }}#contact" class="hov-white" style="background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 15px 30px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="h1Cta1"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a data-gs-track="cta_click" data-gs-label="{{ t('h1Cta2', 'en') }}" data-gs-location="hero_slide1" href="{{ route('home') }}#services" class="hov-accentlite-text" style="color: var(--gs-deep-fg, #FFFFFF); font-family: 'Space Grotesk'; font-weight: 600; display: inline-flex; align-items: center; gap: 12px;"><span style="width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gs-deep-line, rgba(255,255,255,.22)); display: grid; place-items: center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8V4z"/></svg></span> <x-t k="h1Cta2"/></a>
+            <x-whatsapp-cta source="hero" variant="secondary"/>
           </div>
         </div>
         <!-- slide 2 -->
@@ -23,6 +24,7 @@
           <div style="display: flex; align-items: center; gap: 28px; margin-top: 34px; flex-wrap: wrap;">
             <a data-gs-track="cta_click" data-gs-label="{{ t('h2Cta1', 'en') }}" data-gs-location="hero_slide2" href="{{ route('home') }}#contact" class="hov-white" style="background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 15px 30px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="h2Cta1"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
             <a data-gs-track="cta_click" data-gs-label="{{ t('h2Cta2', 'en') }}" data-gs-location="hero_slide2" href="{{ route('home') }}#projects" class="hov-accentlite-text" style="color: var(--gs-deep-fg, #FFFFFF); font-family: 'Space Grotesk'; font-weight: 600; display: inline-flex; align-items: center; gap: 12px;"><span style="width: 46px; height: 46px; border-radius: 50%; border: 1px solid var(--gs-deep-line, rgba(255,255,255,.22)); display: grid; place-items: center;"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4l14 8-14 8V4z"/></svg></span> <x-t k="h2Cta2"/></a>
+            <x-whatsapp-cta source="hero" variant="secondary"/>
           </div>
         </div>
       </div>

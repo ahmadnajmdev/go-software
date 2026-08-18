@@ -1191,4 +1191,82 @@ return array (
     'ar' => 'أسئلة حول هذه الصفحة',
     'ckb' => 'پرسیار دەربارەی ئەم لاپەڕەیە',
   ),
+  'waTalk' => 
+  array (
+    'en' => 'Talk on WhatsApp',
+    'ar' => 'تحدّث عبر واتساب',
+    'ckb' => 'لە واتسئەپ قسە بکە',
+  ),
+  'waAsk' => 
+  array (
+    'en' => 'Ask a quick question',
+    'ar' => 'اسأل سؤالاً سريعاً',
+    'ckb' => 'پرسیارێکی خێرا بکە',
+  ),
+  'waPrefer' => 
+  array (
+    'en' => 'Prefer to talk now?',
+    'ar' => 'تفضّل التحدّث الآن؟',
+    'ckb' => 'پێت باشترە ئێستا قسە بکەیت؟',
+  ),
+  'waSendDetails' => 
+  array (
+    'en' => 'Send project details',
+    'ar' => 'أرسل تفاصيل المشروع',
+    'ckb' => 'وردەکاری پرۆژەکە بنێرە',
+  ),
+  'waMsgHero' => 
+  array (
+    'en' => 'Hi GoSoftware — I\'d like an estimate for a project. Here\'s what I need: ',
+    'ar' => 'مرحباً GoSoftware — أريد تقديراً لمشروع. هذا ما أحتاجه: ',
+    'ckb' => 'سڵاو GoSoftware — دەمەوێت خەمڵاندنێکم بۆ پرۆژەیەک بکەن. ئەمە ئەوەیە کە پێویستمە: ',
+  ),
+  'waMsgContact' => 
+  array (
+    'en' => 'Hi GoSoftware — I have a question before I decide: ',
+    'ar' => 'مرحباً GoSoftware — لديّ سؤال قبل أن أقرّر: ',
+    'ckb' => 'سڵاو GoSoftware — پرسیارێکم هەیە پێش ئەوەی بڕیار بدەم: ',
+  ),
+  'waMsgWebsite' => 
+  array (
+    'en' => 'Hi GoSoftware — I need a website for my business. It\'s a [type of business] and I mainly need it to [get customers / show my services / sell online]. Could you send me an estimate?',
+    'ar' => 'مرحباً GoSoftware — أحتاج موقعاً إلكترونياً لعملي. النشاط هو [نوع النشاط] وأحتاجه أساساً كي [أجلب زبائن / أعرض خدماتي / أبيع أونلاين]. هل يمكنكم إرسال تقدير؟',
+    'ckb' => 'سڵاو GoSoftware — پێویستم بە ماڵپەڕێکە بۆ کارەکەم. کارەکەم [جۆری کار]ە و زۆرتر پێویستمە بۆ ئەوەی [کڕیار بهێنم / خزمەتگوزارییەکانم پیشان بدەم / ئۆنڵاین بفرۆشم]. دەتوانن خەمڵاندنێکم بۆ بنێرن؟',
+  ),
+  'waMsgWebApp' => 
+  array (
+    'en' => 'Hi GoSoftware — I need a web application my team can log into. Here\'s what it needs to do: [describe in one line]. Could you send me an estimate?',
+    'ar' => 'مرحباً GoSoftware — أحتاج تطبيق ويب يستطيع فريقي تسجيل الدخول إليه. هذا ما يجب أن يقوم به: [صفه بسطر واحد]. هل يمكنكم إرسال تقدير؟',
+    'ckb' => 'سڵاو GoSoftware — پێویستم بە ئەپێکی وێبە کە تیمەکەم بتوانێت بچێتە ژوورەوە. ئەمە ئەوەیە کە دەبێت بیکات: [بە یەک دێڕ باسی بکە]. دەتوانن خەمڵاندنێکم بۆ بنێرن؟',
+  ),
+  'waMsgMobile' => 
+  array (
+    'en' => 'Hi GoSoftware — I want to build a mobile app (iPhone + Android). The idea is: [describe in one line]. What would it cost and how long would it take?',
+    'ar' => 'مرحباً GoSoftware — أريد بناء تطبيق موبايل (آيفون + أندرويد). الفكرة هي: [صفها بسطر واحد]. كم التكلفة وكم يستغرق؟',
+    'ckb' => 'سڵاو GoSoftware — دەمەوێت ئەپێکی مۆبایل دروست بکەم (ئایفۆن + ئەندرۆید). بیرۆکەکە ئەمەیە: [بە یەک دێڕ باسی بکە]. چەند تێدەچێت و چەند دەخایەنێت؟',
+  ),
+  'waMsgSystem' => 
+  array (
+    'en' => 'Hi GoSoftware — I want to replace how we currently work (we use [Excel / paper / another system]) with a proper system. We\'re a [type of business] with about [X] staff. Can you help?',
+    'ar' => 'مرحباً GoSoftware — أريد استبدال طريقة عملنا الحالية (نستخدم [إكسل / ورق / نظام آخر]) بنظام حقيقي. نحن [نوع النشاط] ولدينا حوالي [X] موظفاً. هل يمكنكم المساعدة؟',
+    'ckb' => 'سڵاو GoSoftware — دەمەوێت ئەو شێوازە بگۆڕم کە ئێستا کاری پێدەکەین (ئێمە [ئێکسڵ / کاغەز / سیستەمێکی تر] بەکاردەهێنین) بۆ سیستەمێکی ڕاستەقینە. ئێمە [جۆری کار]ین و نزیکەی [X] کارمەندمان هەیە. دەتوانن یارمەتیمان بدەن؟',
+  ),
+  'waMsgPos' => 
+  array (
+    'en' => 'Hi GoSoftware — I need a POS and inventory system for my [shop / restaurant / pharmacy]. We have [X] branches and [X] terminals. Can you show me what you\'ve built before?',
+    'ar' => 'مرحباً GoSoftware — أحتاج نظام نقاط بيع ومخزون لـ [محلّي / مطعمي / صيدليتي]. لدينا [X] فرعاً و[X] نقطة بيع. هل يمكنكم أن تروني أعمالاً سابقة؟',
+    'ckb' => 'سڵاو GoSoftware — پێویستم بە سیستەمی فرۆشتن و کۆگا (POS) هەیە بۆ [دوکانەکەم / چێشتخانەکەم / دەرمانخانەکەم]. [X] لقمان هەیە و [X] دەزگای فرۆشتن. دەتوانن ئەو کارانەم پیشان بدەن کە پێشتر کردوونە؟',
+  ),
+  'waMsgEcommerce' => 
+  array (
+    'en' => 'Hi GoSoftware — I want to sell online. I have [X] products and need [delivery / online payment / Kurdish + Arabic]. What\'s the cost?',
+    'ar' => 'مرحباً GoSoftware — أريد البيع أونلاين. لديّ [X] منتجاً وأحتاج [توصيل / دفع إلكتروني / كردي + عربي]. كم التكلفة؟',
+    'ckb' => 'سڵاو GoSoftware — دەمەوێت ئۆنڵاین بفرۆشم. [X] بەرهەمم هەیە و پێویستم بە [گەیاندن / پارەدانی ئۆنڵاین / کوردی + عەرەبی]ە. نرخەکەی چەندە؟',
+  ),
+  'waMsgSupport' => 
+  array (
+    'en' => 'Hi GoSoftware — I already have a website/system built by someone else and I need someone to maintain it. Can you take it over?',
+    'ar' => 'مرحباً GoSoftware — لديّ موقع/نظام بناه شخص آخر وأحتاج من يتولّى صيانته. هل يمكنكم استلامه؟',
+    'ckb' => 'سڵاو GoSoftware — ماڵپەڕ/سیستەمێکم هەیە کە کەسێکی تر دروستی کردووە و پێویستم بە کەسێکە چاودێری بکات. دەتوانن وەریبگرن؟',
+  ),
 );

@@ -44,6 +44,16 @@
           <div style="width: 52px; height: 52px; border-radius: var(--gs-r-tile, 12px); background: color-mix(in srgb, var(--gs-accent, #2CA69C) 16%, transparent); color: var(--gs-accent-lite, #6FDED3); display: grid; place-items: center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/></svg></div>
           <div><div style="font-size: 13px; color: var(--gs-deep-muted, #A3B0BD);"><x-t k="emailUs"/></div><a href="mailto:{{ gs_setting('contact.email') }}" style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; color: var(--gs-deep-fg, #FFFFFF);">{{ gs_setting('contact.email') }}</a></div>
         </div>
+        @if (\App\Support\WhatsApp::isConfigured())
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <div style="width: 52px; height: 52px; border-radius: var(--gs-r-tile, 12px); background: rgba(37,211,102,.16); color: #25D366; display: grid; place-items: center; flex-shrink: 0;"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 18.15h-.01a8.23 8.23 0 01-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.23 8.25-8.23 2.2 0 4.27.86 5.83 2.42a8.18 8.18 0 012.41 5.82c0 4.54-3.7 8.23-8.24 8.23z"/></svg></div>
+            <div>
+              <div style="font-size: 13px; color: var(--gs-deep-muted, #A3B0BD);">WhatsApp</div>
+              <x-whatsapp-cta source="contact" variant="link" :label="t('waAsk')"
+                              style="font-size: 20px; font-weight: 700; color: #fff; margin-top: 2px;"/>
+            </div>
+          </div>
+        @endif
         @if ($address)
           <div style="display: flex; align-items: flex-start; gap: 16px;">
             <div style="width: 52px; height: 52px; flex-shrink: 0; border-radius: var(--gs-r-tile, 12px); background: color-mix(in srgb, var(--gs-accent, #2CA69C) 16%, transparent); color: var(--gs-accent-lite, #6FDED3); display: grid; place-items: center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg></div>
@@ -70,6 +80,10 @@
           <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--gs-accent, #2CA69C); display: grid; place-items: center; margin: 0 auto;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <h4 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; margin: 12px 0 6px; color: #0d1826;"><x-t k="thanksT"/></h4>
           <p style="font-size: 14px; color: #4a5a6a;"><x-t k="thanksB"/></p>
+          @if (\App\Support\WhatsApp::isConfigured())
+            <p style="font-size: 14px; color: #4a5a6a; margin-top: 16px;"><x-t k="waPrefer"/></p>
+            <x-whatsapp-cta source="form_success" variant="light" style="margin-top: 10px;"/>
+          @endif
         </div>
       </div>
       <div x-show="!submitted" @if ($sent) x-cloak @endif>
