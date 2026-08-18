@@ -1,7 +1,7 @@
 @php($home = route('home'))
 <!-- ===== FOOTER ===== -->
 <footer style="background: #0a1420; color: #a3b0bd; padding: 70px 0 0;">
-  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 40px;" class="gs-footer-grid">
+  <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px;" class="gs-footer-grid">
     <div>
       <img src="{{ media_url(gs_setting('logo.light', 'images/logo-light.png')) }}" alt="GoSoftware" style="height: 38px; margin-bottom: 20px;">
       <p style="font-size: 15px; line-height: 1.7; margin-bottom: 22px; max-width: 300px;"><x-t k="ftBlurb"/></p>
@@ -32,14 +32,6 @@
         @foreach (\App\Support\ServiceCatalogue::published() as $footerService)
           <a href="{{ gs_route('services/'.$footerService->slug) }}" class="hov-accent-text" style="color: #a3b0bd;">{{ \App\Support\ServiceCatalogue::page($footerService->slug)['name'] }}</a>
         @endforeach
-      </div>
-    </div>
-    <div>
-      <h4 style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 17px; color: #fff; margin-bottom: 20px;"><x-t k="ftNews"/></h4>
-      <p style="font-size: 15px; line-height: 1.6; margin-bottom: 16px;"><x-t k="ftNewsBody"/></p>
-      <div style="display: flex; background: rgba(255,255,255,.06); border-radius: 40px; padding: 5px 5px 5px 18px;">
-        <input placeholder="{{ t('phYourEmail') }}" style="flex: 1; background: transparent; border: none; outline: none; color: #fff; font-family: 'DM Sans'; font-size: 14px; min-width: 0;">
-        <button style="background: var(--gs-accent, #2CA69C); color: #fff; border: none; width: 44px; height: 44px; border-radius: 50%; cursor: pointer; display: grid; place-items: center; flex-shrink: 0;"><svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
       </div>
     </div>
   </div>

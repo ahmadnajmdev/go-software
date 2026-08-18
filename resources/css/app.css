@@ -90,6 +90,7 @@ body[dir="rtl"] .gs-marquee-track { animation-direction: reverse; }
 a.gs-client:hover, a.gs-client:focus-visible { opacity: .75; }
 .gs-marquee-track:hover { animation-play-state: paused; }
 @media (prefers-reduced-motion: reduce) {
+  .gs-nav { transition: none; }
   .gs-marquee-track { animation: none; flex-wrap: wrap; width: 100% !important; justify-content: center; row-gap: 30px; }
 }
 
@@ -100,17 +101,43 @@ a.gs-client:hover, a.gs-client:focus-visible { opacity: .75; }
 /* Mobile menu overlay + slide-in drawer (Alpine toggles .open on the overlay).
    State lives in classes, not :style — a string :style binding would clobber
    the element's static inline styles when Alpine applies it. */
-.gs-menu-overlay { position: fixed; inset: 0; z-index: 60; pointer-events: none; opacity: 0; transition: opacity .3s; }
-.gs-menu-overlay.open { pointer-events: auto; opacity: 1; }
-.gs-drawer { position: absolute; top: 0; inset-inline-end: 0; height: 100%; width: 300px; max-width: 82vw; background: #fff; padding: 24px; transform: translateX(110%); transition: transform .32s cubic-bezier(.4,0,.2,1); display: flex; flex-direction: column; gap: 4px; box-shadow: 0 0 50px rgba(13,24,38,.25); overflow-y: auto; }
-body[dir="rtl"] .gs-drawer { transform: translateX(-110%); }
-.gs-menu-overlay.open .gs-drawer { transform: translateX(0); }
+/* ===== Navigation (CRO-19) =====
+   One <nav> serves both layouts: a horizontal bar on desktop, an off-canvas
+   drawer on phones. The links and the logo used to be written out twice and
+   shipped to every visitor twice. */
+.gs-nav { display: flex; align-items: center; gap: 32px; }
+.gs-nav-link { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 15px; color: #0d1826; }
+.gs-nav-close { display: none; }
+.gs-nav-scrim { position: fixed; inset: 0; z-index: 59; background: rgba(13, 24, 38, .55); opacity: 0; pointer-events: none; transition: opacity .3s; }
+.gs-nav-scrim.is-open { opacity: 1; pointer-events: auto; }
 
 /* Responsive rules (ported from the export's injected #gs-responsive block) */
 @media (max-width: 900px) {
-  .gs-desktop-nav { display: none !important; }
   .gs-burger { display: flex !important; }
-  .gs-header-cta { display: none !important; }
+
+  /* the same nav element, repositioned as a drawer */
+  .gs-nav {
+    position: fixed; top: 0; inset-inline-end: 0; z-index: 60;
+    height: 100%; width: 300px; max-width: 82vw;
+    flex-direction: column; align-items: stretch; gap: 4px;
+    background: #fff; padding: 24px; overflow-y: auto;
+    box-shadow: 0 0 50px rgba(13, 24, 38, .25);
+    transform: translateX(110%);
+    transition: transform .32s cubic-bezier(.4, 0, .2, 1);
+  }
+  body[dir="rtl"] .gs-nav { transform: translateX(-110%); }
+  /* the open rule has to out-specify body[dir="rtl"] .gs-nav, or the drawer
+     never slides in on the Arabic and Kurdish pages */
+  .gs-nav.is-open,
+  body[dir="rtl"] .gs-nav.is-open { transform: translateX(0); }
+  .gs-nav-link { padding: 13px 6px; border-bottom: 1px solid #eef1f2; }
+  .gs-nav-cta { margin-top: 16px; width: 100%; }
+  .gs-nav-close {
+    display: grid; place-items: center; align-self: flex-end;
+    width: 40px; height: 40px; margin-bottom: 10px;
+    background: #f2f5f5; border: none; border-radius: var(--gs-r-btn, 10px);
+    color: #0d1826; cursor: pointer;
+  }
   .gs-topbar-social { display: none !important; }
   .gs-2col { grid-template-columns: 1fr !important; }
   .gs-3col { grid-template-columns: 1fr !important; }

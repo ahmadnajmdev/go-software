@@ -307,4 +307,52 @@ class AcceptanceTest extends TestCase
 
         $this->assertStringContainsString('real-office.jpg', $html);
     }
+
+    public function test_the_newsletter_signup_is_gone(): void
+    {
+        // wrong goal for a B2B agency site; it competed with the estimate CTA
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString(t('ftNews', 'en'), $html);
+        $this->assertStringNotContainsString(t('ftNewsBody', 'en'), $html);
+        $this->assertStringNotContainsString(t('phYourEmail', 'en'), $html);
+    }
+
+    public function test_no_marquee_animates_behind_the_fold(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString('gs-marquee-track', $html);
+        // the technology strip duplicated every label into the DOM twice
+        $this->assertStringNotContainsString(t('mq1', 'en'), $html);
+    }
+
+    #[DataProvider('pages')]
+    public function test_the_nav_and_logo_appear_once_each(string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        // one <nav>, and each link written once rather than once per layout
+        $this->assertSame(1, substr_count($html, '<nav id="gs-nav"'));
+
+        $start = strpos($html, '<nav id="gs-nav"');
+        $nav = substr($html, $start, strpos($html, '</nav>', $start) - $start);
+        $this->assertSame(5, substr_count($nav, 'class="gs-nav-link'), 'nav links are duplicated');
+
+        // the logo used to render again inside the mobile drawer
+        $body = substr($html, strpos($html, '<body'));
+        $this->assertSame(1, substr_count($body, 'logo-dark'));
+    }
+
+    public function test_client_logos_render_once_not_twice(): void
+    {
+        $client = \App\Models\Client::ordered()->first();
+        $client->update(['logo' => 'uploads/2026/08/logo.png']);
+
+        $html = $this->get('/')->assertOk()->getContent();
+
+        // the marquee used to duplicate the whole strip for its scroll loop.
+        // one in the hero trust row, one in the clients section.
+        $this->assertSame(2, substr_count($html, media_url($client->logo)));
+    }
 }

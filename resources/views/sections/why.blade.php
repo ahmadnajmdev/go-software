@@ -30,11 +30,4 @@
       @endif
     </div>
   </div>
-  <!-- marquee -->
-  <div style="margin-top: 60px; border-top: 1px solid #eef1f2; border-bottom: 1px solid #eef1f2; padding: 22px 0; overflow: hidden;">
-    <div class="gs-marquee-track" style="display: flex; width: max-content; gap: 0; animation: gsMarquee 26s linear infinite; font-family: 'Space Grotesk'; font-weight: 600; font-size: 24px; color: #0d1826;">
-      <span style="display:flex; align-items:center; gap:44px; padding-right:44px;"><span><x-t k="mq1"/></span><span style="color:#cfd8d8;">•</span><span style="color:var(--gs-accent, #2CA69C);"><x-t k="mobileApps"/></span><span style="color:#cfd8d8;">•</span><span><x-t k="mq3"/></span><span style="color:#cfd8d8;">•</span><span style="color:var(--gs-accent, #2CA69C);"><x-t k="mgmtSystems"/></span><span style="color:#cfd8d8;">•</span><span><x-t k="mq5"/></span><span style="color:#cfd8d8;">•</span><span style="color:var(--gs-accent, #2CA69C);"><x-t k="mq6"/></span><span style="color:#cfd8d8;">•</span></span>
-      <span style="display:flex; align-items:center; gap:44px; padding-right:44px;" aria-hidden="true"><span><x-t k="mq1"/></span><span style="color:#cfd8d8;">•</span><span style="color:var(--gs-accent, #2CA69C);"><x-t k="mobileApps"/></span><span style="color:#cfd8d8;">•</span><span><x-t k="mq3"/></span><span style="color:#cfd8d8;">•</span><span style="color:var(--gs-accent, #2CA69C);"><x-t k="mgmtSystems"/></span><span style="color:#cfd8d8;">•</span><span><x-t k="mq5"/></span><span style="color:#cfd8d8;">•</span><span style="color:var(--gs-accent, #2CA69C);"><x-t k="mq6"/></span><span style="color:#cfd8d8;">•</span></span>
-    </div>
-  </div>
 </section>
