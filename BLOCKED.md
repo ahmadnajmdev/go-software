@@ -100,7 +100,36 @@ currently in the code as a result.
 
 ---
 
-## Assets
+## Assets (CRO-08)
+
+- [ ] **Google Play URL for the Asaari app.** The App Store link is fixed
+      (see below) but there is no Play Store link anywhere on the site, and
+      Android is the majority platform in this market. Send me the URL.
+
+- [ ] **Run `php artisan media:localise --apply` on production, or upload the
+      two remaining logos yourself.** Three client logos were hot-linked from
+      servers we do not control. The Zuu logo is now downloaded and committed
+      to `public/images/clients/zuu.svg`. The other two I could not fetch —
+      the audit gave truncated URLs:
+      - Asaari — `play-lh.googleusercontent.com/…` (a Play Store CDN path)
+      - Suli Shopping — `encrypted-tbn0.gstatic.com/…` (a Google **Images
+        thumbnail**, which is designed to expire — this one will break)
+
+      Because site content is admin-managed, these live in the production
+      database, not in this repository, so I cannot reach them from here. The
+      new `media:localise` command walks whatever is actually stored,
+      downloads it and repoints the reference. Run it with no flags first to
+      see the list, then with `--apply`. Anything it fails to fetch is left
+      untouched rather than replaced with a broken path. Best of all: send me
+      the original high-resolution logo files and I will commit them properly.
+
+- [ ] **The App Store storefront is fixed automatically on deploy.** No action
+      needed — a migration rewrites `apps.apple.com/<country>/…` to `/iq/…`
+      for every project link. Noting it so you know it happened.
+
+---
+
+## Assets — photography
 
 - [ ] **The founder photo is missing from disk.**
       Found while verifying pages in a browser: the `images.founder` setting
