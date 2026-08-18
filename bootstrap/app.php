@@ -12,6 +12,10 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // The event collector is stateless, public and rate limited; a
+        // beacon cannot attach a CSRF token.
+        $middleware->validateCsrfTokens(except: ['analytics/collect']);
+
         $middleware->web(append: [
             \App\Http\Middleware\SetLocale::class,
             \App\Http\Middleware\CaptureAttribution::class,

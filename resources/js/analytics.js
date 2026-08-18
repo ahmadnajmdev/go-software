@@ -34,26 +34,90 @@ function baseParams() {
 }
 
 /**
- * Push one event. Safe to call before GTM loads — the container replays
- * whatever is already sitting on the dataLayer when it initialises.
+ * Batched delivery to our own collector.
+ *
+ * One request per event turned out to be the wrong shape: a handful of clicks
+ * in the same second put several writes in flight at once, and on a
+ * database-backed cache the rate limiter's own counter update is what locks,
+ * which fails the request before it reaches the handler. Events are queued and
+ * sent together instead — far fewer requests, one insert, one limiter hit.
+ */
+const QUEUE = [];
+const BATCH_LIMIT = 20;
+let flushTimer = null;
+
+function endpoint() {
+    return document.querySelector('meta[name="gs-collect"]')?.content;
+}
+
+function flush() {
+    clearTimeout(flushTimer);
+    flushTimer = null;
+
+    const url = endpoint();
+    if (!url || !QUEUE.length) return;
+
+    const events = QUEUE.splice(0, BATCH_LIMIT);
+    const body = JSON.stringify({ events });
+
+    try {
+        if (navigator.sendBeacon) {
+            // Survives the page being navigated away from, which is exactly
+            // what a click on an outbound WhatsApp link does.
+            const queued = navigator.sendBeacon(url, new Blob([body], { type: 'application/json' }));
+            if (queued) return;
+        }
+        fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body,
+            keepalive: true,
+        }).catch(() => {});
+    } catch {
+        /* analytics must never break the page */
+    }
+}
+
+function collect(payload) {
+    if (!endpoint()) return;
+
+    QUEUE.push(payload);
+
+    if (QUEUE.length >= BATCH_LIMIT) {
+        flush();
+        return;
+    }
+
+    // Short enough that a bounce still reports, long enough to gather a burst.
+    clearTimeout(flushTimer);
+    flushTimer = setTimeout(flush, 800);
+}
+
+// Whatever is still queued when the page goes away must still be sent.
+// pagehide covers navigation and the back/forward cache; visibilitychange
+// covers a phone being locked or the tab being switched, which on iOS is
+// often the only signal that arrives.
+addEventListener('pagehide', flush);
+addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') flush();
+});
+
+/**
+ * Record one event. Goes to the GTM dataLayer (where GA4 and the pixels live)
+ * and, batched, to our own collector (which feeds the admin dashboard). Safe to
+ * call before GTM loads — the container replays whatever is already on the
+ * dataLayer when it initialises.
  */
 export function gsTrack(event, params = {}) {
     if (!trackingAllowed()) return;
 
+    const payload = { event, ...baseParams(), ...params };
+
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event, ...baseParams(), ...params });
-}
+    window.dataLayer.push(payload);
 
-/** `data-gs-label="x"` → `{ label: 'x' }`. */
-function paramsFrom(el) {
-    const params = {};
-
-    for (const { name, value } of el.attributes) {
-        if (!name.startsWith('data-gs-') || name === 'data-gs-track') continue;
-        params[name.slice(8).replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = value;
-    }
-
-    return params;
+    const { event: name, ...rest } = payload;
+    collect({ name, ...rest });
 }
 
 const SELECTOR = [
@@ -102,3 +166,7 @@ document.addEventListener('toggle', (event) => {
 
 // Available to Blade and to the Alpine components that own their own submit.
 window.gsTrack = gsTrack;
+
+// One page_view per page, so every other number has a denominator — a
+// conversion rate needs to know how many people arrived.
+gsTrack('page_view');

@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+{{-- Where the first-party event collector lives, for analytics.js --}}
+<meta name="gs-collect" content="{{ route('analytics.collect') }}">
 @include('partials.gtm-head')
 @php
     use App\Support\Seo;

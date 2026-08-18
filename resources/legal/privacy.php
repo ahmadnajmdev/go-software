@@ -43,6 +43,7 @@ return [
                 'body' => [
                     'We use Google Tag Manager to load analytics tools, which may include Google Analytics 4, the Meta (Facebook) Pixel and Microsoft Clarity. These set cookies and record how the site is used.',
                     'If your browser sends a Do Not Track signal, we do not load these tools at all. You can also block or delete cookies in your browser settings.',
+                    'We also keep our own record of how the site is used — which pages are viewed, which buttons are clicked, and where people stop in the contact form. It holds no personal data at all: no name, no IP address, no browser details. Visits are counted using a one-way code that changes every day, so it cannot be traced back to you or linked to you tomorrow. It stays on our own server, is never sent to anyone else, and is deleted after twelve months.',
                 ],
             ],
             [
@@ -128,6 +129,7 @@ return [
                 'body' => [
                     'نستخدم Google Tag Manager لتحميل أدوات التحليل، وقد تشمل Google Analytics 4 وMeta (Facebook) Pixel وMicrosoft Clarity. تضع هذه الأدوات ملفات تعريف ارتباط وتسجّل طريقة استخدام الموقع.',
                     'إذا كان متصفّحك يرسل إشارة Do Not Track فإننا لا نحمّل هذه الأدوات إطلاقاً. ويمكنك أيضاً حظر ملفات تعريف الارتباط أو حذفها من إعدادات متصفّحك.',
+                    'نحتفظ أيضاً بسجلّ خاص بنا لكيفية استخدام الموقع — أي الصفحات تُزار، وأي الأزرار يُضغط عليها، وأين يتوقّف الناس في نموذج التواصل. لا يتضمّن هذا السجلّ أي بيانات شخصية إطلاقاً: لا اسم ولا عنوان IP ولا تفاصيل متصفّح. تُحتسب الزيارات برمز أحادي الاتجاه يتغيّر كل يوم، فلا يمكن تتبّعه إليك ولا ربطه بك غداً. ويبقى على خادمنا، ولا يُرسَل إلى أي جهة أخرى، ويُحذَف بعد اثني عشر شهراً.',
                 ],
             ],
             [
@@ -213,6 +215,7 @@ return [
                 'body' => [
                     'Google Tag Manager بەکاردەهێنین بۆ بارکردنی ئامرازەکانی شیکاری، کە لەوانەیە Google Analytics 4 و Meta (Facebook) Pixel و Microsoft Clarity لەخۆبگرن. ئەمانە کووکی دادەنێن و شێوازی بەکارهێنانی ماڵپەڕەکە تۆمار دەکەن.',
                     'ئەگەر وێبگەڕەکەت سیگناڵی Do Not Track بنێرێت، ئەم ئامرازانە هەرگیز بار ناکەین. هەروەها دەتوانیت لە ڕێکخستنەکانی وێبگەڕەکەتەوە کووکی ڕێگری بکەیت یان بیانسڕیتەوە.',
+                    'هەروەها تۆمارێکی تایبەت بە خۆمان هەڵدەگرین لەوەی ماڵپەڕەکە چۆن بەکاردەهێنرێت — کام لاپەڕە سەیر دەکرێن، کام دوگمە دەپەسترێن، و خەڵک لە کوێی فۆڕمی پەیوەندیدا دەوەستن. هیچ زانیارییەکی کەسی تێدا نییە: نە ناو، نە ناونیشانی IP، نە وردەکاری وێبگەڕ. سەردانەکان بە کۆدێکی یەک ئاراستە دەژمێردرێن کە هەموو ڕۆژێک دەگۆڕێت، بۆیە ناتوانرێت بۆ تۆ بگەڕێندرێتەوە یان سبەینێ بە تۆوە ببەسترێت. لەسەر سێرڤەری خۆمان دەمێنێتەوە، بۆ هیچ لایەنێکی تر نانێردرێت، و دوای دوازدە مانگ دەسڕدرێتەوە.',
                 ],
             ],
             [

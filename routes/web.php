@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LegalController;
@@ -38,6 +39,11 @@ foreach (['privacy-policy' => 'privacy', 'terms-of-service' => 'terms'] as $slug
 // Path-based locales for SEO: / (en), /ar, /ckb. English stays at the root.
 Route::get('/{locale?}', HomeController::class)
     ->where('locale', 'ar|ckb')->name('home');
+// First-party event collector. Rate limited hard: it is public, and one
+// visitor has no legitimate reason to fire this often.
+Route::post('/analytics/collect', AnalyticsController::class)
+    ->middleware('throttle:60,1')->name('analytics.collect');
+
 Route::post('/contact', [ContactController::class, 'store'])
     ->middleware('throttle:10,1')->name('contact.store');
 

@@ -8,7 +8,29 @@ currently in the code as a result.
 
 ---
 
-## Analytics (CRO-01)
+## Analytics
+
+**The admin dashboard now reports on its own, with no third party involved.**
+It shows page views, visitors, enquiries and conversion rate against the
+previous period, a daily traffic chart, the form drop-off funnel, which CTA
+gets clicked, how people reach out, top pages, language split, which FAQs get
+opened, and the service/budget/timeline/campaign mix of enquiries. Nothing is
+estimated — every number is an event this site recorded or a row in the inbox.
+
+It holds no personal data: no IP, no user agent, no identifiers. Visits are
+counted with a one-way code that changes daily, Do Not Track is honoured, your
+own visits are excluded while logged in, and `analytics:prune` deletes anything
+older than twelve months (scheduled weekly). The privacy policy was updated in
+all three languages to say so.
+
+**The dashboard is empty until people visit** — that is expected, not a fault.
+
+- [ ] **A scheduler must be running in production** for the twelve-month
+      deletion the privacy policy promises: `php artisan schedule:run` every
+      minute via cron. If you cannot run one, tell me and I will move the prune
+      into the request cycle instead.
+
+## Analytics — GTM (CRO-01)
 
 - [ ] **Google Tag Manager container ID.**
       Needed: the `GTM-XXXXXXX` value.
