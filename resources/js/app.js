@@ -26,10 +26,6 @@ Alpine.data('contactForm', (serverErrors = {}, sent = false, service = '') => ({
         return map[field] ?? this.total;
     },
 
-    title() {
-        return [this.t('stepWhat'), this.t('stepAbout'), this.t('stepReach'), this.t('stepQuote')][this.step - 1];
-    },
-
     stepLabel() {
         return this.t('fStep').replace(':n', this.step).replace(':total', this.total);
     },

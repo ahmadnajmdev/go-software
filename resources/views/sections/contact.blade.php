@@ -1,13 +1,14 @@
 @once
     @push('scripts')
         @php
-            // The step titles and the per-service prompts, handed to the Alpine
-            // component so it can switch them without a round trip. Blade cannot
-            // parse a nested array literal inside @json(), so it is built here.
+            // The per-service prompts and the step counter, handed to the
+            // Alpine component so it can switch them without a round trip.
+            // Blade cannot parse a nested array literal inside @json(), so
+            // this is built in a block.
             $gsFormStrings = [];
 
-            foreach (['stepWhat', 'stepAbout', 'stepReach', 'stepQuote', 'fStep', 'phMsg',
-                'phWebsite', 'phMobileApp', 'phMgmt', 'phPos', 'phEcom', 'phOther'] as $gsKey) {
+            foreach (['fStep', 'phMsg', 'phWebsite', 'phMobileApp', 'phMgmt',
+                'phPos', 'phEcom', 'phOther'] as $gsKey) {
                 $gsFormStrings[$gsKey] = t($gsKey);
             }
         @endphp
@@ -93,7 +94,7 @@
         <div style="background: #eefaf8; border: 1px solid #b8e6e0; border-radius: var(--gs-r-tile, 14px); padding: 30px; text-align: center;">
           <div style="width: 54px; height: 54px; border-radius: 50%; background: var(--gs-accent, #2CA69C); display: grid; place-items: center; margin: 0 auto;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></div>
           <h4 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 20px; margin: 12px 0 6px; color: #0d1826;"><x-t k="thanksT"/></h4>
-          {-- Says what the reply will actually contain, so the wait has a shape --}
+          {{-- Says what the reply will actually contain, so the wait has a shape --}}
           <p style="font-size: 14.5px; line-height: 1.6; color: #4a5a6a;"><x-t k="thanksB"/></p>
           @if (\App\Support\WhatsApp::isConfigured())
             <p style="font-size: 14px; color: #4a5a6a; margin-top: 16px;"><x-t k="waPrefer"/></p>
@@ -103,7 +104,7 @@
       </div>
 
       <div x-show="!submitted" @if ($sent) x-cloak @endif>
-        {-- Progress. Hidden without JS, where the form is simply one page. --}
+        {{-- Progress. Hidden without JS, where the form is simply one page. --}}
         <div class="gs-steps" x-cloak>
           <template x-for="n in total" :key="n">
             <span class="gs-step-dot" :class="n <= step && 'is-done'"></span>
@@ -112,8 +113,9 @@
         </div>
 
         <h3 style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 22px; margin-bottom: 6px;">
-          <span x-text="title()" x-cloak></span>
-          <span x-show="false"><x-t k="formTitle"/></span>
+          {{-- The form's own heading. Each step's title is its <legend>,
+               which is where a fieldset's label belongs anyway. --}}
+          <x-t k="formTitle"/>
         </h3>
         <p style="font-size: 14px; color: #6a7a8a; margin-bottom: 20px;"><x-t k="formSub"/></p>
 
@@ -126,7 +128,7 @@
           <input type="hidden" name="source" value="{{ '/'.ltrim(request()->path(), '/') }}">
           <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
 
-          {-- STEP 1 — one tap, no typing --}
+          {{-- STEP 1 — one tap, no typing --}}
           <fieldset x-show="step === 1" style="border: 0; padding: 0; margin: 0;">
             <legend style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; margin-bottom: 12px;"><x-t k="stepWhat"/></legend>
             <div class="gs-tiles">
@@ -183,7 +185,7 @@
                style="display: {{ $errors->has('service') ? 'block' : 'none' }}; margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #c0392b;">{{ $errors->first('service') }}</p>
           </fieldset>
 
-          {-- STEP 2 — one question, prompted by the step 1 answer --}
+          {{-- STEP 2 — one question, prompted by the step 1 answer --}}
           <fieldset x-show="step === 2" style="border: 0; padding: 0; margin: 0;">
             <legend style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; margin-bottom: 12px;"><x-t k="stepAbout"/></legend>
             <textarea required name="message" rows="5" class="foc-accent"
@@ -194,7 +196,7 @@
                style="display: {{ $errors->has('message') ? 'block' : 'none' }}; margin: 6px 2px 0; font-size: 13px; line-height: 1.45; color: #c0392b;">{{ $errors->first('message') }}</p>
           </fieldset>
 
-          {-- STEP 3 --}
+          {{-- STEP 3 --}}
           <fieldset x-show="step === 3" style="border: 0; padding: 0; margin: 0; display: grid; gap: 12px;">
             <legend style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; margin-bottom: 12px;"><x-t k="stepReach"/></legend>
             <div>
@@ -224,9 +226,9 @@
             </div>
           </fieldset>
 
-          {-- STEP 4 — optional, and visibly so. "Not sure yet" and "Just
+          {{-- STEP 4 — optional, and visibly so. "Not sure yet" and "Just
                exploring" are the whole point: without them the budget question
-               causes abandonment instead of producing answers. --}
+               causes abandonment instead of producing answers. --}}
           <fieldset x-show="step === 4" style="border: 0; padding: 0; margin: 0; display: grid; gap: 12px;">
             <legend style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; margin-bottom: 12px;"><x-t k="stepQuote"/><span class="gs-optional-badge"><x-t k="f4Optional"/></span></legend>
             <div class="gs-field-row">
@@ -254,8 +256,8 @@
             </div>
           </fieldset>
 
-          {-- Navigation only exists when JS does; otherwise every step is
-               already on screen and the submit button is the only control. --}
+          {{-- Navigation only exists when JS does; otherwise every step is
+               already on screen and the submit button is the only control. --}}
           <div class="gs-form-nav" x-cloak x-show="step < total">
             <button type="button" class="gs-back" x-show="step > 1" @click="back()"><x-t k="fBack"/></button>
             <button type="button" class="gs-next" @click="advance()"><x-t k="fNext"/></button>

@@ -959,15 +959,15 @@ return array (
   ),
   'formTitle' => 
   array (
-    'en' => 'Ask for a call back',
-    'ar' => 'اطلب مكالمة',
-    'ckb' => 'داوای پەیوەندیکردنەوە بکە',
+    'en' => 'Get your free estimate',
+    'ar' => 'احصل على تقديرك المجاني',
+    'ckb' => 'خەمڵاندنی خۆڕاییەکەت وەربگرە',
   ),
   'formSub' => 
   array (
-    'en' => 'Fill in the form and we\'ll be in touch.',
-    'ar' => 'املأ النموذج وسنتواصل معك.',
-    'ckb' => 'فۆرمەکە پڕ بکەرەوە و پەیوەندیت پێوە دەکەین.',
+    'en' => 'Four quick questions — the last two are optional. You\'ll get an indicative range within one working day.',
+    'ar' => 'أربعة أسئلة سريعة — الأخيران اختياريان. ستحصل على نطاق سعري استرشادي خلال يوم عمل واحد.',
+    'ckb' => 'چوار پرسیاری خێرا — دوو دوایینەکە ئارەزوومەندانەن. لە یەک ڕۆژی کاردا مەودایەکی نرخی ئاماژەیی وەردەگریت.',
   ),
   'phName' => 
   array (
