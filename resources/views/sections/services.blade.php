@@ -7,6 +7,14 @@
     </div>
     <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px;" class="gs-2col">
       @foreach ($services as $i => $service)
+        @php
+            $page = $service->slug ? \App\Support\ServiceCatalogue::page($service->slug) : null;
+            // Outcome-led headline from the catalogue; the database title is
+            // the fallback for a service added in the admin panel.
+            $headline = $page['h1'] ?? $service->tr('title');
+            $cardCopy = $page['card'] ?? $service->tr('description');
+            $href = $page ? gs_route('services/'.$service->slug) : route('home').'#contact';
+        @endphp
         <div class="gs-service-card hov-lift" data-item-id="{{ $service->id }}" data-item-model="services" style="background: #fff; border-radius: var(--gs-r-card, 18px); overflow: hidden; border: 1px solid #eaefef; transition: .3s; position: relative;">
           <div style="position: relative; overflow: hidden; height: 220px;">
             @php($serviceImage = media_url($service->image))
@@ -16,11 +24,11 @@
             <span style="position: absolute; top: 16px; left: 16px; background: rgba(13,24,38,.85); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 12px; padding: 6px 13px; border-radius: var(--gs-r-sm, 8px); letter-spacing: .06em;">{{ sprintf('%02d', $i + 1) }} · <span class="gs-edit" @auth data-edit-model="services" data-edit-id="{{ $service->id }}" data-edit-field="tag" @endauth>{{ $service->tag }}</span></span>
           </div>
           <div style="padding: 28px;">
-            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;"><span style="width: 46px; height: 46px; border-radius: var(--gs-r-tile, 11px); background: #eefaf8; color: #17877e; display: grid; place-items: center; flex-shrink: 0; font-family: 'Space Grotesk'; font-weight: 700; font-size: 17px;">{{ sprintf('%02d', $i + 1) }}</span><h3 style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 22px; color: #0d1826;"><span class="gs-edit" @auth data-edit-model="services" data-edit-id="{{ $service->id }}" data-edit-field="title" @endauth>{{ $service->tr('title') }}</span></h3></div>
-            <p style="font-size: 15px; color: #6a7a8a; line-height: 1.7; margin-bottom: 18px;"><span class="gs-edit" @auth data-edit-model="services" data-edit-id="{{ $service->id }}" data-edit-field="description" @endauth>{{ $service->tr('description') }}</span></p>
-            <a href="{{ route('home') }}#contact" class="hov-accent-text" data-gs-track="cta_click" data-gs-label="{{ t('learnMore', 'en') }}" data-gs-location="service_card" data-gs-service="{{ $service->tr('title', 'en') }}" style="font-family: 'Space Grotesk'; font-weight: 600; color: #0d1826; display: inline-flex; align-items: center; gap: 8px;"><x-t k="learnMore"/> <svg class="gs-flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <x-whatsapp-cta :source="\App\Support\WhatsApp::sourceForService($service->tag)"
-                            :service="$service->tr('title', 'en')"
+            <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 12px;"><span style="width: 46px; height: 46px; border-radius: var(--gs-r-tile, 11px); background: #eefaf8; color: #17877e; display: grid; place-items: center; flex-shrink: 0; font-family: 'Space Grotesk'; font-weight: 700; font-size: 17px;">{{ sprintf('%02d', $i + 1) }}</span><h3 style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 19.5px; line-height: 1.32; color: #0d1826;">{{ $headline }}</h3></div>
+            <p style="font-size: 15px; color: #6a7a8a; line-height: 1.7; margin-bottom: 18px;">{{ $cardCopy }}</p>
+            <a href="{{ $href }}" class="hov-accent-text" data-gs-track="cta_click" data-gs-label="{{ t('learnMore', 'en') }}" data-gs-location="service_card" data-gs-service="{{ $service->slug ?? $service->tr('title', 'en') }}" style="font-family: 'Space Grotesk'; font-weight: 600; color: #0d1826; display: inline-flex; align-items: center; gap: 8px;"><x-t k="learnMore"/> <svg class="gs-flip" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <x-whatsapp-cta :source="$page['whatsapp'] ?? \App\Support\WhatsApp::sourceForService($service->tag)"
+                            :service="$service->slug ?? $service->tr('title', 'en')"
                             variant="link" :label="t('waAsk')"
                             style="margin-inline-start: 18px;"/>
           </div>

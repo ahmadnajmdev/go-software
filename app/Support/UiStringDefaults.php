@@ -66,7 +66,7 @@ class UiStringDefaults
             (bool) preg_match('/^f\d/', $key) => 'Feature strip',
             str_starts_with($key, 'about') || (bool) preg_match('/^ab\d/', $key)
                 || in_array($key, ['ceoRole', 'yearsIn']) => 'About',
-            str_starts_with($key, 'svc') || in_array($key, ['webDev', 'mgmtSystems', 'learnMore']) => 'Services',
+            str_starts_with($key, 'svc') || in_array($key, ['webDev', 'mgmtSystems', 'learnMore', 'ownCode']) => 'Services',
             str_starts_with($key, 'why') || str_starts_with($key, 'mq')
                 || in_array($key, ['topRated', 'agency2025', 'mobileApps']) => 'Why us',
             str_starts_with($key, 'proc') || (bool) preg_match('/^p\d/', $key) => 'Process',

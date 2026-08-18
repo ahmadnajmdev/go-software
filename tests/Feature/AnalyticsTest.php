@@ -88,7 +88,8 @@ class AnalyticsTest extends TestCase
         $html = $this->get('/')->assertOk()->getContent();
 
         $this->assertStringContainsString('data-gs-location="service_card"', $html);
-        $this->assertStringContainsString('data-gs-service="'.e(\App\Models\Service::first()->tr('title', 'en')).'"', $html);
+        // cards report the slug, so one service aggregates into one row
+        $this->assertStringContainsString('data-gs-service="'.\App\Models\Service::first()->slug.'"', $html);
 
         // form_start is bound from this attribute
         $this->assertStringContainsString('data-gs-form="contact"', $html);

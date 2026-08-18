@@ -100,6 +100,34 @@ currently in the code as a result.
 
 ---
 
+## Service pages (CRO-13)
+
+- [ ] **Pricing.** Every service page has a "What it costs" section, and none of
+      them states a number — nothing has been invented. Each currently says the
+      project is priced individually and promises an indicative range within one
+      working day. To publish real figures I need:
+      - Website packages — what tiers, and what is in each?
+      - **POS: price per terminal**, and the one-off central system charge. The
+        page already says pricing works this way, so this is the one I most need.
+      - Indicative ranges for mobile apps and custom management systems.
+      - E-commerce: setup, and anything ongoing.
+
+- [ ] **Which payment and delivery integrations have you ACTUALLY built?**
+      The e-commerce page deliberately **does not name FIB, Zain Cash or Nass
+      Wallet**, because I cannot source the claim and naming an integration you
+      have not built is the kind of thing a prospect discovers at the worst
+      moment. It currently says cash on delivery is handled properly (which is
+      the real differentiator here) and that we confirm which providers we can
+      connect before promising. Tell me which of these you have shipped and I
+      will name them explicitly — it is the strongest section on that page:
+      FIB · Zain Cash · Nass Wallet · FastPay · any courier APIs.
+
+- [ ] **Support response times (CRO-23 too).** The support page says response
+      times are written into the agreement rather than left vague, and that the
+      exact tiers are being finalised. Give me the tiers and I will publish them.
+
+---
+
 ## Statistics (CRO-09) — the numbers on the homepage are unverified
 
 Every figure now lives in **`config/stats.php`**. Correct them there and each

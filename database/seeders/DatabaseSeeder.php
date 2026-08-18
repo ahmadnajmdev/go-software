@@ -10,6 +10,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\UiString;
+use App\Support\ServiceCatalogue;
 use App\Support\UiStringDefaults;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -72,14 +73,23 @@ class DatabaseSeeder extends Seeder
     {
         $defaults = require database_path('seeders/data/cms_defaults.php');
 
+        // Every service in the catalogue gets a row, in catalogue order, so a
+        // fresh install has all seven — including POS, e-commerce and support,
+        // which are real offerings that appeared nowhere on the old site. The
+        // card image comes from cms_defaults where one exists.
+        $images = collect($defaults['services'])->keyBy('tag');
+
         Service::query()->delete();
-        foreach ($defaults['services'] as $i => $svc) {
+        $position = 0;
+
+        foreach (ServiceCatalogue::all() as $slug => $page) {
             Service::create([
-                'position' => $i + 1,
-                'image' => $svc['img'],
-                'tag' => $svc['tag'],
-                'title' => $svc['title'],
-                'description' => $svc['desc'],
+                'slug' => $slug,
+                'position' => ++$position,
+                'image' => $images[$page['tag']]['img'] ?? null,
+                'tag' => $page['tag'],
+                'title' => ['en' => $page['en']['name'], 'ar' => $page['ar']['name'], 'ckb' => $page['ckb']['name']],
+                'description' => ['en' => $page['en']['card'], 'ar' => $page['ar']['card'], 'ckb' => $page['ckb']['card']],
             ]);
         }
 

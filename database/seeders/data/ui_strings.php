@@ -1323,4 +1323,40 @@ return array (
     'ar' => 'يثق بنا',
     'ckb' => 'متمانەیان پێمان هەیە',
   ),
+  'svcCostTitle' => 
+  array (
+    'en' => 'What it costs',
+    'ar' => 'كم يكلّف',
+    'ckb' => 'چەند تێدەچێت',
+  ),
+  'svcCostBody' => 
+  array (
+    'en' => 'Every project is priced individually, because a five-page site and a five-branch system are not the same job. Tell us what you need and you will get an indicative range within one working day — before any meeting, and with no obligation. The scope and the price are fixed in writing before we start.',
+    'ar' => 'كل مشروع يُسعَّر على حدة، لأن موقعاً من خمس صفحات ونظاماً لخمسة فروع ليسا العمل نفسه. أخبرنا بما تحتاجه وستحصل على نطاق سعري استرشادي خلال يوم عمل واحد — قبل أي اجتماع ودون أي التزام. النطاق والسعر يُثبَّتان كتابةً قبل أن نبدأ.',
+    'ckb' => 'هەر پرۆژەیەک بە جیا نرخی بۆ دادەنرێت، چونکە ماڵپەڕێکی پێنج لاپەڕەیی و سیستەمێکی پێنج لق هەمان کار نین. پێمان بڵێ چیت پێویستە و لە یەک ڕۆژی کاردا مەودایەکی نرخی ئاماژەیی وەردەگریت — پێش هەر کۆبوونەوەیەک و بەبێ هیچ پابەندبوونێک. پێکهاتە و نرخ بە نووسراوی جێگیر دەکرێن پێش دەستپێکردن.',
+  ),
+  'svcWorkTitle' => 
+  array (
+    'en' => 'Work we have delivered',
+    'ar' => 'أعمال أنجزناها',
+    'ckb' => 'ئەو کارانەی ئەنجاممانداون',
+  ),
+  'svcOthers' => 
+  array (
+    'en' => 'Other things we build',
+    'ar' => 'أشياء أخرى نبنيها',
+    'ckb' => 'شتی تری کە دروستیان دەکەین',
+  ),
+  'ownCode' => 
+  array (
+    'en' => 'You own the code and the data. Full source and credentials are handed over at launch.',
+    'ar' => 'أنت تملك الشيفرة والبيانات. الشيفرة المصدرية كاملة وبيانات الدخول تُسلَّم عند الإطلاق.',
+    'ckb' => 'کۆد و داتا هی تۆن. کۆدی سەرچاوەی تەواو و زانیاری چوونەژوورەوە لە کاتی دەستپێکردندا ڕادەست دەکرێن.',
+  ),
+  'svcAll' => 
+  array (
+    'en' => 'All services',
+    'ar' => 'كل الخدمات',
+    'ckb' => 'هەموو خزمەتگوزارییەکان',
+  ),
 );

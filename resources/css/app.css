@@ -265,3 +265,31 @@ body[data-edit="true"] [data-edit-image]:hover { outline: 3px dashed var(--gs-ac
 :root {
   --gs-photo-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='2.5'/%3E%3Ccircle cx='8.6' cy='9.6' r='1.7'/%3E%3Cpath d='M3.5 17l4.8-4.6 3.4 3.2 3-2.7 5.8 5'/%3E%3C/svg%3E");
 }
+
+/* ===== FAQ accordion (CRO-13, CRO-17) =====
+   Native <details>/<summary>: keyboard-accessible and screen-reader-correct
+   without a line of JavaScript, and it still works if JS fails to load. */
+.gs-faq { border-bottom: 1px solid #e6eded; }
+.gs-faq summary {
+  cursor: pointer; list-style: none; padding: 17px 40px 17px 0;
+  font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 16.5px;
+  line-height: 1.5; color: #0d1826; position: relative;
+}
+[dir="rtl"] .gs-faq summary { padding: 17px 0 17px 40px; }
+.gs-faq summary::-webkit-details-marker { display: none; }
+.gs-faq summary:focus-visible { outline: 2px solid var(--gs-accent, #2CA69C); outline-offset: 3px; border-radius: 4px; }
+.gs-faq-mark { position: absolute; inset-inline-end: 4px; top: 50%; width: 15px; height: 15px; margin-top: -7px; }
+.gs-faq-mark::before,
+.gs-faq-mark::after {
+  content: ""; position: absolute; background: var(--gs-accent, #2CA69C);
+  transition: transform .2s ease, opacity .2s ease;
+}
+.gs-faq-mark::before { inset: 6px 0 auto; height: 2.5px; }
+.gs-faq-mark::after { inset: 0 6px; width: 2.5px; }
+.gs-faq[open] .gs-faq-mark::after { transform: rotate(90deg); opacity: 0; }
+.gs-faq-body { padding: 0 40px 20px 0; font-size: 15.5px; line-height: 1.72; color: #55646f; }
+[dir="rtl"] .gs-faq-body { padding: 0 0 20px 40px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .gs-faq-mark::before, .gs-faq-mark::after { transition: none; }
+}

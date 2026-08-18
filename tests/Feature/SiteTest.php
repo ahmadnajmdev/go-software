@@ -122,12 +122,14 @@ class SiteTest extends TestCase
     {
         $admin = User::first();
 
+        $before = \App\Models\Service::count();
+
         $this->actingAs($admin)->postJson('/admin/api/items', ['model' => 'services'])->assertOk();
-        $this->assertSame(5, \App\Models\Service::count());
+        $this->assertSame($before + 1, \App\Models\Service::count());
 
         $new = \App\Models\Service::orderByDesc('position')->first();
         $this->actingAs($admin)->deleteJson('/admin/api/items', ['model' => 'services', 'id' => $new->id])->assertOk();
-        $this->assertSame(4, \App\Models\Service::count());
+        $this->assertSame($before, \App\Models\Service::count());
     }
 
     public function test_sections_toggle_hides_from_guests(): void

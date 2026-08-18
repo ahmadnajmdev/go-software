@@ -5,12 +5,19 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LegalController;
 use App\Http\Controllers\ProjectsController;
+use App\Http\Controllers\ServiceController;
 use Illuminate\Support\Facades\Route;
 
 // Full project archive, with the same locale prefixes as the home page.
 Route::get('/projects', [ProjectsController::class, '__invoke'])->name('projects');
 Route::get('/{locale}/projects', ProjectsController::class)
     ->where('locale', 'ar|ckb')->name('projects.locale');
+
+// Service pages, locale-prefixed like everything else. Registered before the
+// /{locale?} catch-all so their paths win.
+Route::get('/services/{slug}', ServiceController::class)->name('service');
+Route::get('/{locale}/services/{slug}', ServiceController::class)
+    ->where('locale', 'ar|ckb')->name('service.locale');
 
 // Legal pages. Registered before the /{locale?} catch-all so their paths win.
 foreach (['privacy-policy' => 'privacy', 'terms-of-service' => 'terms'] as $slug => $method) {
