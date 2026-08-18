@@ -249,6 +249,8 @@ class AcceptanceTest extends TestCase
 
     public function test_the_hero_image_is_sized_and_never_lazy_loaded(): void
     {
+        \App\Support\Settings::set('images.hero', 'uploads/2026/08/office.jpg');
+
         $html = $this->get('/')->assertOk()->getContent();
         $hero = substr($html, strpos($html, 'gs-hero-media'), 700);
 
@@ -257,5 +259,52 @@ class AcceptanceTest extends TestCase
         // it is the LCP element
         $this->assertStringContainsString('fetchpriority="high"', $hero);
         $this->assertStringNotContainsString('loading="lazy"', $hero);
+    }
+
+    #[DataProvider('pages')]
+    public function test_no_stock_photography(string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        foreach (['unsplash.com', 'pexels.com', 'pixabay.com'] as $stock) {
+            $this->assertStringNotContainsString($stock, $html, "{$url} still serves stock photography");
+        }
+    }
+
+    #[DataProvider('pages')]
+    public function test_no_image_is_hot_linked_from_a_third_party(string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        preg_match_all('#(?:<img[^>]+src|background-image:\s*url\()\([\'"]?|<img[^>]+src="([^"]+)"#i', $html, $_);
+        preg_match_all('#<img[^>]+src="(https?://[^"]+)"#i', $html, $tags);
+        preg_match_all("#background-image:\s*url\('(https?://[^']+)'#i", $html, $backgrounds);
+
+        foreach (array_merge($tags[1], $backgrounds[1]) as $src) {
+            $host = parse_url($src, PHP_URL_HOST);
+            $this->assertContains($host, ['gosoftware.test', 'localhost', parse_url(config('app.url'), PHP_URL_HOST)],
+                "{$url} hot-links an image from {$host}");
+        }
+    }
+
+    public function test_a_missing_photo_renders_a_branded_panel_not_a_stranger(): void
+    {
+        \App\Support\Settings::set('images.about_main', null);
+
+        $html = $this->get('/')->assertOk()->getContent();
+
+        // a designed gap, not a broken image and not a stranger's face
+        $this->assertStringNotContainsString('<img src=""', $html);
+        $this->assertStringNotContainsString("background-image: url('')", $html);
+        $this->assertStringContainsString('role="img"', $html);
+    }
+
+    public function test_a_real_photo_is_used_the_moment_one_is_uploaded(): void
+    {
+        \App\Support\Settings::set('images.about_main', 'uploads/2026/08/real-office.jpg');
+
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringContainsString('real-office.jpg', $html);
     }
 }

@@ -9,7 +9,9 @@
       @foreach ($services as $i => $service)
         <div class="gs-service-card hov-lift" data-item-id="{{ $service->id }}" data-item-model="services" style="background: #fff; border-radius: var(--gs-r-card, 18px); overflow: hidden; border: 1px solid #eaefef; transition: .3s; position: relative;">
           <div style="position: relative; overflow: hidden; height: 220px;">
-            <div style="width: 100%; height: 100%; background: #e7edee center/cover no-repeat; background-image: url('{{ media_url($service->image) }}');" @auth data-edit-image data-image-field="image" @endauth></div>
+            @php($serviceImage = media_url($service->image))
+            <div class="{{ $serviceImage ? '' : 'gs-photo-empty' }}" @auth data-edit-image data-image-field="image" @endauth
+                 style="width: 100%; height: 100%;@if ($serviceImage) background: #e7edee center/cover no-repeat; background-image: url('{{ $serviceImage }}');@endif"></div>
             @auth<button type="button" class="gs-edit-x" data-edit-delete title="Delete service">✕</button>@endauth
             <span style="position: absolute; top: 16px; left: 16px; background: rgba(13,24,38,.85); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 12px; padding: 6px 13px; border-radius: var(--gs-r-sm, 8px); letter-spacing: .06em;">{{ sprintf('%02d', $i + 1) }} · <span class="gs-edit" @auth data-edit-model="services" data-edit-id="{{ $service->id }}" data-edit-field="tag" @endauth>{{ $service->tag }}</span></span>
           </div>

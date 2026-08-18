@@ -19,7 +19,6 @@ use Illuminate\Support\Str;
 
 class DatabaseSeeder extends Seeder
 {
-    private const UNSPLASH = 'https://images.unsplash.com/';
 
     public function run(): void
     {
@@ -112,19 +111,19 @@ class DatabaseSeeder extends Seeder
         $strings = require database_path('seeders/data/ui_strings.php');
 
         $items = [
-            ['Tom Harding', $strings['tst1R'], $strings['tst1Q'], 'photo-1568602471122-7832951cc4c5'],
-            ['Priya Nair', $strings['tst2R'], $strings['tst2Q'], 'photo-1580489944761-15a19d654956'],
-            ['Sarah Doyle', $strings['tst3R'], $strings['tst3Q'], 'photo-1607990281513-2c110a25bd8c'],
+            ['Tom Harding', $strings['tst1R'], $strings['tst1Q']],
+            ['Priya Nair', $strings['tst2R'], $strings['tst2Q']],
+            ['Sarah Doyle', $strings['tst3R'], $strings['tst3Q']],
         ];
 
         Testimonial::query()->delete();
-        foreach ($items as $i => [$author, $role, $quote, $photo]) {
+        foreach ($items as $i => [$author, $role, $quote]) {
             Testimonial::create([
                 'position' => $i + 1,
                 'author' => $author,
                 'role' => $role,
                 'quote' => $quote,
-                'avatar' => self::UNSPLASH."{$photo}?auto=format&fit=crop&w=100&q=80",
+                'avatar' => null,
                 'rating' => 5,
             ]);
         }
@@ -170,17 +169,15 @@ class DatabaseSeeder extends Seeder
             'logo.dark' => 'images/logo-dark.png',
             'logo.light' => 'images/logo-light.png',
             'about.ceo_name' => 'Ahmad Najm',
-            'images.hero' => self::UNSPLASH.'photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=80',
-            'images.hero_avatars' => [
-                self::UNSPLASH.'photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=80&q=80',
-                self::UNSPLASH.'photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=80&q=80',
-                self::UNSPLASH.'photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=80&q=80',
-            ],
-            'images.about_main' => self::UNSPLASH.'photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=800&q=80',
-            'images.about_inset' => self::UNSPLASH.'photo-1531482615713-2afd69097998?auto=format&fit=crop&w=400&q=80',
-            'images.ceo' => self::UNSPLASH.'photo-1560250097-0b93528c311a?auto=format&fit=crop&w=100&q=80',
-            'images.founder' => self::UNSPLASH.'photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80',
-            'images.why' => self::UNSPLASH.'photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=900&q=80',
+            // No stock photography ships as a default. Real photos are
+            // uploaded through the admin media panel; until then <x-photo>
+            // renders a plain branded panel. See BLOCKED.md for the shots needed.
+            'images.hero' => null,
+            'images.about_main' => null,
+            'images.about_inset' => null,
+            'images.ceo' => null,
+            'images.founder' => null,
+            'images.why' => null,
         ];
 
         foreach ($values as $key => $value) {

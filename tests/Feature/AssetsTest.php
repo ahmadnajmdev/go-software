@@ -131,7 +131,9 @@ class AssetsTest extends TestCase
         Storage::fake('public');
         Http::fake(['*' => Http::response('JPEGDATA', 200, ['Content-Type' => 'image/jpeg'])]);
 
-        // seeded projects carry Unsplash URLs; they belong to CRO-11, not here
+        Project::first()->update(['image' => 'https://images.unsplash.com/photo-1467232004584']);
+
+        // Unsplash placeholders are CRO-11's business, not this command's
         $this->artisan('media:localise', ['--apply' => true])->assertSuccessful();
         Http::assertNothingSent();
 

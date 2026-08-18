@@ -360,6 +360,8 @@ class SiteTest extends TestCase
     public function test_project_image_fit_controls_how_the_tile_renders(): void
     {
         $project = \App\Models\Project::first();
+        // no stock imagery is seeded any more, so give the tile a real one
+        $project->update(['image' => 'uploads/2026/08/shot.jpg']);
 
         $project->update(['fit' => 'cover']);
         $html = $this->get('/projects')->assertOk()->getContent();
@@ -508,5 +510,15 @@ class SiteTest extends TestCase
             'contact_phone' => '+1', 'contact_email' => 'a@b.co', 'about_ceo_name' => 'X',
             'contact_map_embed' => 'https://evil.example/maps', 'sections' => $sections,
         ])->assertSessionHasErrors('contact_map_embed');
+    }
+
+    public function test_a_project_without_an_image_gets_a_branded_panel(): void
+    {
+        \App\Models\Project::first()->update(['image' => null]);
+
+        $html = $this->get('/projects')->assertOk()->getContent();
+
+        $this->assertStringContainsString('gs-photo-empty', $html);
+        $this->assertStringNotContainsString("background-image: url('')", $html);
     }
 }

@@ -3,7 +3,7 @@
   <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: .85fr 1.15fr; gap: 64px; align-items: center;" class="gs-2col">
     <div style="position: relative;">
       <div style="border-radius: var(--gs-r-card, 18px); overflow: hidden;">
-        <img src="{{ media_url(gs_setting('images.founder', gs_setting('images.ceo'))) }}" alt="{{ gs_setting('about.ceo_name') }}" @auth data-edit-image data-image-setting="images.founder" @endauth style="width: 100%; height: 480px; object-fit: cover; display: block;">
+        <x-photo setting="images.founder" :alt="gs_setting('about.ceo_name').', Founder & CEO'" :height="480"/>
       </div>
       <div style="position: absolute; bottom: 22px; inset-inline-start: 22px; background: #0d1826; color: #fff; border-radius: var(--gs-r-tile, 12px); padding: 14px 20px;">
         <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 17px;">{{ gs_setting('about.ceo_name') }}</div>

@@ -234,3 +234,34 @@ body[data-edit="true"] [data-edit-image]:hover { outline: 3px dashed var(--gs-ac
   .gs-hero-media img { height: 210px !important; }
   .gs-hero-logos { gap: 22px !important; }
 }
+
+/* ===== Missing photography (CRO-11) =====
+   The site used recognisable stock photos as "the team". They are gone, and
+   nothing stock replaces them — where a real photo has not been supplied yet,
+   this branded panel stands in. It reads as "no photo yet" rather than as a
+   stranger being passed off as us. Used for CSS-background contexts; the
+   <x-photo> component paints the same thing for <img> contexts. */
+.gs-photo-empty {
+  background-color: #16283c;
+  background-image:
+    linear-gradient(135deg, #16283c 0%, #0d1826 60%, #123037 100%),
+    linear-gradient(rgba(255, 255, 255, .028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .028) 1px, transparent 1px);
+  background-size: auto, 26px 26px, 26px 26px;
+  display: grid;
+  place-items: center;
+}
+
+.gs-photo-empty::after {
+  content: "";
+  width: 42px;
+  height: 42px;
+  opacity: .5;
+  background: var(--gs-accent, #2CA69C);
+  -webkit-mask: var(--gs-photo-glyph) center / contain no-repeat;
+  mask: var(--gs-photo-glyph) center / contain no-repeat;
+}
+
+:root {
+  --gs-photo-glyph: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.3' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='16' rx='2.5'/%3E%3Ccircle cx='8.6' cy='9.6' r='1.7'/%3E%3Cpath d='M3.5 17l4.8-4.6 3.4 3.2 3-2.7 5.8 5'/%3E%3C/svg%3E");
+}

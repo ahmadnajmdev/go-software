@@ -18,7 +18,7 @@
     </div>
     <div style="position: relative;">
       <div style="border-radius: var(--gs-r-card, 18px); overflow: hidden;">
-        <img src="{{ media_url(gs_setting('images.why')) }}" @auth data-edit-image data-image-setting="images.why" @endauth style="width: 100%; height: 460px; object-fit: cover; display: block;">
+        <x-photo setting="images.why" alt="GoSoftware engineers in Erbil" :height="460"/>
       </div>
       @if (\App\Support\Stats::hasAward())
         {{-- Rendered only when config/stats.php names who gave the award. An

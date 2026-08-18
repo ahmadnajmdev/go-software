@@ -8,7 +8,7 @@ return array (
     0 => 
     array (
       'id' => 'svc-web',
-      'img' => 'https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=700&q=80',
+      'img' => null,
       'tag' => 'WEB',
       'title' => 
       array (
@@ -26,7 +26,7 @@ return array (
     1 => 
     array (
       'id' => 'svc-webapp',
-      'img' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80',
+      'img' => null,
       'tag' => 'WEB APPS',
       'title' => 
       array (
@@ -44,7 +44,7 @@ return array (
     2 => 
     array (
       'id' => 'svc-mobile',
-      'img' => 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=700&q=80',
+      'img' => null,
       'tag' => 'MOBILE',
       'title' => 
       array (
@@ -62,7 +62,7 @@ return array (
     3 => 
     array (
       'id' => 'svc-systems',
-      'img' => 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=700&q=80',
+      'img' => null,
       'tag' => 'SYSTEMS',
       'title' => 
       array (
@@ -83,7 +83,7 @@ return array (
     0 => 
     array (
       'id' => 'prj-corp',
-      'img' => 'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?auto=format&fit=crop&w=600&q=80',
+      'img' => null,
       'cat' => 
       array (
         'en' => 'WEBSITE',
@@ -100,7 +100,7 @@ return array (
     1 => 
     array (
       'id' => 'prj-saas',
-      'img' => 'https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=600&q=80',
+      'img' => null,
       'cat' => 
       array (
         'en' => 'WEB APP',
@@ -117,7 +117,7 @@ return array (
     2 => 
     array (
       'id' => 'prj-delivery',
-      'img' => 'https://images.unsplash.com/photo-1607252650355-f7fd0460ccdb?auto=format&fit=crop&w=600&q=80',
+      'img' => null,
       'cat' => 
       array (
         'en' => 'MOBILE APP',
@@ -134,7 +134,7 @@ return array (
     3 => 
     array (
       'id' => 'prj-inventory',
-      'img' => 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=600&q=80',
+      'img' => null,
       'cat' => 
       array (
         'en' => 'SYSTEM',

@@ -19,10 +19,11 @@
         {{-- Whole image on white — transparent PNG logos need a clean ground,
              not the artwork blurred behind them. --}}
         <div class="gs-proj-media" @auth data-edit-image data-image-field="image" @endauth>
-            <div class="gs-proj-fit" style="background-image: url('{{ $src }}');"></div>
+            <div class="gs-proj-fit {{ $src ? '' : 'gs-photo-empty' }}" @if ($src) style="background-image: url('{{ $src }}');" @endif></div>
         </div>
     @else
-        <div style="width: 100%; height: 100%; background: #dfe7e7 center/cover no-repeat; background-image: url('{{ $src }}');" @auth data-edit-image data-image-field="image" @endauth></div>
+        <div class="{{ $src ? '' : 'gs-photo-empty' }}" @auth data-edit-image data-image-field="image" @endauth
+             style="width: 100%; height: 100%;@if ($src) background: #dfe7e7 center/cover no-repeat; background-image: url('{{ $src }}');@endif"></div>
     @endif
 
     @auth<button type="button" class="gs-edit-x" data-edit-delete title="Delete project">✕</button>@endauth

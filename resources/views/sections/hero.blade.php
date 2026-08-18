@@ -10,7 +10,6 @@
     subhead, both CTAs and the three trust lines.
 --}}
 @php
-    $heroImage = media_url(gs_setting('images.hero'));
     $clients = \App\Models\Client::ordered()->get();
 @endphp
 <!-- ===== HERO ===== -->
@@ -50,12 +49,8 @@
          and contributes nothing to CLS. --}}
     <div class="gs-hero-media" style="position: relative;">
       <div style="border-radius: var(--gs-r-card, 20px); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.08);">
-        @if ($heroImage)
-          <img src="{{ $heroImage }}" alt="{{ gs_setting_tr('contact.address') ?: 'GoSoftware' }}"
-               width="620" height="500" fetchpriority="high" decoding="async"
-               @auth data-edit-image data-image-setting="images.hero" @endauth
-               style="width: 100%; height: 500px; object-fit: cover; display: block; background: #16283c;">
-        @endif
+        <x-photo setting="images.hero" :alt="gs_setting_tr('contact.address') ?: 'GoSoftware'"
+                 :height="500" :width="620" eager style="background: #16283c;"/>
       </div>
     </div>
   </div>

@@ -157,7 +157,34 @@ that made it worse was already removed in an earlier commit.)
 
 ---
 
-## Assets — photography
+## Photography (CRO-11) — this is the biggest visual gap
+
+All stock imagery has been removed: the "GoSoftware team" photo, the three
+stock faces used as client avatars, the "Coding" inset and the "Why Choose Us"
+photo were recognisable Unsplash pictures, and to anyone who recognises them
+they say the site is a template.
+
+Nothing stock replaced them — that would repeat the mistake. Where a photo is
+missing the site now renders a plain branded panel, which reads as "no photo
+yet" rather than as a stranger being passed off as us. **Each one appears the
+moment you upload a real photo through Admin → Media; no code change needed.**
+
+Please send these shots. Aspect ratios matter — they are what the layout
+reserves, so a photo at the right ratio drops in without cropping badly:
+
+| Where | Setting | Ratio | Rendered at | What it should show |
+|---|---|---|---|---|
+| Hero | `images.hero` | **5:4 landscape** | 620×500 | The strongest single image you have: the team at work in the Erbil office, or a real screen from a system you built. This is the first thing a visitor sees. |
+| About — main | `images.about_main` | **4:5 portrait** | 620×460 | The office, or the team together. |
+| About — inset | `images.about_inset` | **7:5 landscape** | 210×150 | A close detail — a screen, a whiteboard, hands on a keyboard. Small, so keep it simple. |
+| About — byline | `images.ceo` | **1:1 square** | 50×50 | Ahmad, head and shoulders. Crops to a circle. |
+| Founder | `images.founder` | **4:5 portrait** | 620×480 | Ahmad, larger. This is the strongest trust asset on the site. |
+| Why GoSoftware | `images.why` | **4:5 portrait** | 620×460 | Engineers working — real desks, real screens. |
+| Service cards ×4 | per service | **16:10 landscape** | 620×220 | One per service. A real screen from that kind of project is stronger than a photo of people. |
+| Project tiles | per project | **1:1 square** | 600×600 | A screenshot of each project. |
+
+Please send at 2× the rendered size, so 1240px wide for the hero. JPEG or PNG
+is fine — CRO-21 converts them to WebP.
 
 - [ ] **The founder photo is missing from disk.**
       Found while verifying pages in a browser: the `images.founder` setting

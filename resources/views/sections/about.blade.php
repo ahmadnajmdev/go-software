@@ -3,10 +3,10 @@
   <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center;" class="gs-2col">
     <div style="position: relative;">
       <div style="border-radius: var(--gs-r-card, 18px); overflow: hidden;">
-        <img src="{{ media_url(gs_setting('images.about_main')) }}" alt="GoSoftware office" @auth data-edit-image data-image-setting="images.about_main" @endauth style="width: 100%; height: 460px; object-fit: cover; display: block;">
+        <x-photo setting="images.about_main" alt="GoSoftware's office in Erbil" :height="460"/>
       </div>
       <div style="position: absolute; bottom: -28px; right: -14px; width: 210px; border-radius: var(--gs-r-tile, 14px); overflow: hidden; border: 6px solid #fff; box-shadow: 0 24px 50px rgba(13,24,38,.18);">
-        <img src="{{ media_url(gs_setting('images.about_inset')) }}" alt="Coding" @auth data-edit-image data-image-setting="images.about_inset" @endauth style="width: 100%; height: 150px; object-fit: cover; display: block;">
+        <x-photo setting="images.about_inset" alt="The GoSoftware team at work" :height="150"/>
       </div>
       <div style="position: absolute; top: 22px; left: 22px; background: #0d1826; color: #fff; border-radius: var(--gs-r-tile, 12px); padding: 15px 20px; text-align: center;">
         <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 32px; color: var(--gs-accent-lite, #6FDED3); line-height: 1;">{{ config('stats.years_in_software') }}+</div>
@@ -26,7 +26,7 @@
       <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
         <a href="{{ route('home') }}#contact" class="hov-accent-solid" style="background: #0d1826; color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 14px 28px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="aboutCta"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         <div style="display: flex; align-items: center; gap: 12px;">
-          <img src="{{ media_url(gs_setting('images.ceo')) }}" @auth data-edit-image data-image-setting="images.ceo" @endauth style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+          <x-photo setting="images.ceo" :alt="gs_setting('about.ceo_name')" :height="50" :width="50" round style="width: 50px; height: 50px; flex-shrink: 0;"/>
           <div><div style="font-family: 'Space Grotesk'; font-weight: 700; color: #0d1826;">{{ gs_setting('about.ceo_name') }}</div><div style="font-size: 13px; color: #6a7a8a;"><x-t k="ceoRole"/></div></div>
         </div>
       </div>
