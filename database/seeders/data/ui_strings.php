@@ -1395,4 +1395,76 @@ return array (
     'ar' => 'لم تجد إجابتك؟',
     'ckb' => 'هێشتا وەڵامت نەدۆزیوەتەوە؟',
   ),
+  'probTag' => 
+  array (
+    'en' => 'SOUND FAMILIAR?',
+    'ar' => 'هل يبدو هذا مألوفاً؟',
+    'ckb' => 'ئاشنا دیارە؟',
+  ),
+  'probTitle' => 
+  array (
+    'en' => 'You can\'t answer simple questions about your own business',
+    'ar' => 'لا تستطيع الإجابة عن أسئلة بسيطة عن عملك أنت',
+    'ckb' => 'ناتوانیت وەڵامی پرسیارە سادەکان دەربارەی کارەکەی خۆت بدەیتەوە',
+  ),
+  'probBody' => 
+  array (
+    'en' => 'Sales in one Excel file. Stock in another. Orders in a WhatsApp group. Staff hours on paper. Every month you spend days pulling the numbers together — and you still can\'t say which branch made money, which product is about to run out, or who is actually owed what.',
+    'ar' => 'المبيعات في ملف إكسل. المخزون في ملف آخر. الطلبات في مجموعة واتساب. ساعات الموظفين على الورق. كل شهر تقضي أياماً في تجميع الأرقام — ومع ذلك لا تستطيع أن تقول أي فرع ربح، وأي منتج أوشك على النفاد، ومن له مستحقات فعلاً.',
+    'ckb' => 'فرۆشتن لە فایلێکی ئێکسڵدا. کۆگا لە فایلێکی تردا. داواکارییەکان لە گرووپێکی واتسئەپدا. کاتژمێری کارمەندان لەسەر کاغەز. هەموو مانگێک ڕۆژانێک بەسەر کۆکردنەوەی ژمارەکاندا دەبەیت — و هێشتا ناتوانیت بڵێیت کام لق قازانجی کردووە، کام بەرهەم خەریکە تەواو بێت، یان بەڕاستی کێ چەندی لەسەرە.',
+  ),
+  'probFix' => 
+  array (
+    'en' => 'It does not have to work like this. One system, one set of numbers, and answers you can get from your phone.',
+    'ar' => 'لا يجب أن يكون الأمر هكذا. نظام واحد، وأرقام واحدة، وإجابات تحصل عليها من هاتفك.',
+    'ckb' => 'پێویست ناکات بەم شێوەیە بێت. یەک سیستەم، یەک کۆمەڵە ژمارە، و وەڵامێک کە لە مۆبایلەکەتەوە وەریدەگریت.',
+  ),
+  'indTag' => 
+  array (
+    'en' => 'START HERE',
+    'ar' => 'ابدأ من هنا',
+    'ckb' => 'لێرەوە دەست پێبکە',
+  ),
+  'indTitle' => 
+  array (
+    'en' => 'Which best describes you?',
+    'ar' => 'أيّها يصفك أكثر؟',
+    'ckb' => 'کامیان زۆرتر وەسفت دەکات؟',
+  ),
+  'indRetail' => 
+  array (
+    'en' => 'Retail & shops',
+    'ar' => 'التجزئة والمحلات',
+    'ckb' => 'فرۆشتن و دوکان',
+  ),
+  'indFood' => 
+  array (
+    'en' => 'Restaurants & cafés',
+    'ar' => 'المطاعم والمقاهي',
+    'ckb' => 'چێشتخانە و کافێ',
+  ),
+  'indAcademy' => 
+  array (
+    'en' => 'Academies & clinics',
+    'ar' => 'الأكاديميات والعيادات',
+    'ckb' => 'ئەکادیمیا و نەخۆشخانە',
+  ),
+  'indProperty' => 
+  array (
+    'en' => 'Real estate',
+    'ar' => 'العقارات',
+    'ckb' => 'خانووبەرە',
+  ),
+  'indDelivery' => 
+  array (
+    'en' => 'Delivery & logistics',
+    'ar' => 'التوصيل واللوجستيات',
+    'ckb' => 'گەیاندن و لۆجستی',
+  ),
+  'indEcom' => 
+  array (
+    'en' => 'Selling online',
+    'ar' => 'البيع أونلاين',
+    'ckb' => 'فرۆشتنی ئۆنڵاین',
+  ),
 );

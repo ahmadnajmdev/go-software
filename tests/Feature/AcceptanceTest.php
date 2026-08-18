@@ -379,4 +379,58 @@ class AcceptanceTest extends TestCase
         $this->assertStringContainsString(e(gs_setting('about.ceo_name')), $html);
         $this->assertStringContainsString(e(t('founderQuote', 'en')), $html);
     }
+
+    public function test_the_problem_section_and_router_sit_below_the_hero(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+        $at = fn (string $key) => strpos($html, 'data-section="'.$key.'"');
+
+        $this->assertGreaterThan($at('hero'), $at('problem'));
+        $this->assertGreaterThan($at('problem'), $at('industries'));
+        $this->assertLessThan($at('services'), $at('industries'));
+    }
+
+    public function test_the_problem_is_stated_in_each_language_not_translated_word_for_word(): void
+    {
+        // the Excel / WhatsApp-group recognition has to land the same way
+        $this->get('/')->assertOk()->assertSee('Orders in a WhatsApp group', false);
+        $this->get('/ar')->assertOk()->assertSee('الطلبات في مجموعة واتساب', false);
+        $this->get('/ckb')->assertOk()->assertSee('گرووپێکی واتسئەپدا', false);
+
+        foreach (['en' => '/', 'ar' => '/ar', 'ckb' => '/ckb'] as $locale => $url) {
+            $html = $this->get($url)->assertOk()->getContent();
+            $this->assertStringContainsString(e(t('probTitle', $locale)), $html);
+            $this->assertStringContainsString(e(t('probFix', $locale)), $html);
+        }
+    }
+
+    public function test_all_six_industry_tiles_route_to_a_real_page(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $expected = [
+            'indRetail' => 'pos-inventory',
+            'indFood' => 'pos-inventory',
+            'indAcademy' => 'management-systems',
+            'indProperty' => 'web-applications',
+            'indDelivery' => 'mobile-app-development',
+            'indEcom' => 'ecommerce',
+        ];
+
+        $this->assertSame(6, substr_count($html, 'data-gs-location="industry_router"'));
+
+        foreach ($expected as $key => $slug) {
+            $this->assertStringContainsString(e(t($key, 'en')), $html);
+            $this->assertStringContainsString(url("/services/{$slug}"), $html);
+            $this->get("/services/{$slug}")->assertOk();
+        }
+    }
+
+    public function test_industry_tiles_stay_on_the_visitors_locale(): void
+    {
+        $html = $this->get('/ckb')->assertOk()->getContent();
+
+        $this->assertStringContainsString(url('/ckb/services/pos-inventory'), $html);
+        $this->assertStringContainsString(e(t('indRetail', 'ckb')), $html);
+    }
 }

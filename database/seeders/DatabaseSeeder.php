@@ -64,7 +64,7 @@ class DatabaseSeeder extends Seeder
         // The founder sits directly after the case studies and before "Why
         // GoSoftware" — at roughly 45% scroll rather than 80%, where no phone
         // visitor arriving from Instagram ever reached it.
-        $keys = ['hero', 'strip', 'about', 'services', 'projects', 'founder',
+        $keys = ['hero', 'problem', 'industries', 'strip', 'about', 'services', 'projects', 'founder',
                  'why', 'process', 'stats', 'testimonials', 'faq', 'contact'];
 
         foreach ($keys as $i => $key) {

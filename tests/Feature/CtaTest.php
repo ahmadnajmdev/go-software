@@ -50,14 +50,25 @@ class CtaTest extends TestCase
         foreach (['/', '/ar', '/ckb', '/projects', '/services/ecommerce'] as $url) {
             $html = $this->get($url)->assertOk()->getContent();
 
-            preg_match_all('/data-gs-track="cta_click"[^>]*data-gs-label="([^"]+)"/', $html, $m);
+            preg_match_all(
+                '/data-gs-track="cta_click"[^>]*?data-gs-label="([^"]+)"[^>]*?data-gs-location="([^"]+)"/',
+                $html, $m, PREG_SET_ORDER
+            );
+            $this->assertNotEmpty($m, "no tracked CTA on {$url}");
 
-            foreach ($m[1] as $label) {
-                // "Get estimate" is the sticky bar, which has no room for the
-                // full label; "Learn More" is navigation, not the primary CTA.
-                $this->assertContains($label, [
-                    t('ctaEstimate', 'en'), t('barEstimate', 'en'), t('learnMore', 'en'),
-                ], "unexpected CTA label “{$label}” on {$url}");
+            // These three locations are navigation rather than the primary
+            // call to action: the sticky bar has no room for the full label,
+            // service cards say "Learn More", and the industry router names
+            // the industry. Everywhere else must carry the one primary label.
+            $navigation = ['sticky_bar', 'service_card', 'industry_router'];
+
+            foreach ($m as [, $label, $location]) {
+                if (in_array($location, $navigation, true)) {
+                    continue;
+                }
+
+                $this->assertSame(t('ctaEstimate', 'en'), $label,
+                    "the CTA at “{$location}” on {$url} uses a different label");
             }
         }
     }
