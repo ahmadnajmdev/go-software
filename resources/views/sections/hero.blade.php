@@ -38,21 +38,6 @@
       <div style="border-radius: var(--gs-r-card, 20px); overflow: hidden; box-shadow: 0 40px 80px rgba(0,0,0,.4); border: 1px solid rgba(255,255,255,.08);">
         <img src="{{ media_url(gs_setting('images.hero')) }}" alt="GoSoftware team" @auth data-edit-image data-image-setting="images.hero" @endauth style="width: 100%; height: 500px; object-fit: cover; display: block;">
       </div>
-      <div style="position: absolute; bottom: 24px; left: -26px; background: #fff; color: #0d1826; border-radius: var(--gs-r-tile, 14px); padding: 16px 20px; box-shadow: 0 24px 50px rgba(0,0,0,.28); display: flex; align-items: center; gap: 14px; animation: gsFloat 5s ease-in-out infinite;">
-        <div style="display: flex;">
-          @foreach (gs_setting('images.hero_avatars') as $avatar)
-            <img src="{{ media_url($avatar) }}" style="width: 38px; height: 38px; border-radius: 50%; border: 2px solid #fff; object-fit: cover;{{ $loop->first ? '' : ' margin-left: -12px;' }}">
-          @endforeach
-        </div>
-        <div>
-          <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 19px;">300+</div>
-          <div style="font-size: 12.5px; color: #6a7a8a;"><x-t k="projDelivered"/></div>
-        </div>
-      </div>
-      <div style="position: absolute; top: -20px; right: -12px; background: var(--gs-accent, #2CA69C); color: #fff; border-radius: var(--gs-r-tile, 14px); padding: 15px 19px; box-shadow: 0 20px 40px color-mix(in srgb, var(--gs-accent, #2CA69C) 40%, transparent); animation: gsFloat 6s ease-in-out infinite;">
-        <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 21px;"><x-t k="yrsBadge"/></div>
-        <div style="font-size: 12px; opacity: .9;"><x-t k="ofEng"/></div>
-      </div>
     </div>
   </div>
 </section>
