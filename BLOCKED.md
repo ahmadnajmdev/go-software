@@ -100,6 +100,33 @@ currently in the code as a result.
 
 ---
 
+## FAQ answers (CRO-17) — two need your decision
+
+Eight questions now sit above the final CTA on the home page, plus a
+service-specific set on each service page, with `FAQPage` schema so Google can
+surface the answers directly. Six are answered outright. Two are written
+carefully because the honest answer is not mine to give:
+
+- [ ] **Q4 — payment integrations.** The answer names **cash on delivery**,
+      which is real, and deliberately does **not** name FIB, Zain Cash or Nass
+      Wallet. It says we confirm what we can connect before promising anything.
+      Tell me which you have actually built and I will name them — it is a
+      strong answer and right now it is a cautious one. (Same item as the
+      e-commerce page above.)
+
+- [ ] **Q6 — what happens when something breaks.** The answer currently says
+      response times are written into your agreement. It does **not** claim
+      "30 days of free bug fixes after launch", because that is a commitment
+      you have to make, not one I can make for you. Confirm it and the answer
+      becomes much stronger — a specific warranty is far more persuasive than
+      a promise to have written something down. (Also CRO-23.)
+
+Questions 1, 2, 3, 5, 7 and 8 are answered fully and need nothing from you,
+though they are worth reading: Q1 and Q2 commit to an indicative range within
+one working day and to fixing scope and price in writing before starting.
+
+---
+
 ## Service pages (CRO-13)
 
 - [ ] **Pricing.** Every service page has a "What it costs" section, and none of

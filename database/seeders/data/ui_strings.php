@@ -1377,4 +1377,22 @@ return array (
     'ar' => 'النتيجة',
     'ckb' => 'ئەنجامەکە',
   ),
+  'faqTag' => 
+  array (
+    'en' => 'BEFORE YOU ASK',
+    'ar' => 'قبل أن تسأل',
+    'ckb' => 'پێش ئەوەی بپرسیت',
+  ),
+  'faqTitle' => 
+  array (
+    'en' => 'Questions people ask before they commit',
+    'ar' => 'أسئلة يطرحها الناس قبل أن يقرّروا',
+    'ckb' => 'ئەو پرسیارانەی خەڵک پێش بڕیاردان دەیکەن',
+  ),
+  'faqStill' => 
+  array (
+    'en' => 'Still not answered?',
+    'ar' => 'لم تجد إجابتك؟',
+    'ckb' => 'هێشتا وەڵامت نەدۆزیوەتەوە؟',
+  ),
 );

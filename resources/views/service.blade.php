@@ -117,6 +117,7 @@
           <div class="gs-faq-body">{{ $faq['a'] }}</div>
         </details>
       @endforeach
+      @include('partials.faq-schema', ['faqEntries' => $page['faqs']])
     </section>
 
     {{-- IP ownership: no local competitor states this (CRO-23) --}}
