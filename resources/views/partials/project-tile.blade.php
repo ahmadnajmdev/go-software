@@ -8,7 +8,10 @@
 @endphp
 <{{ $tag }} class="gs-proj{{ filled($project->url) ? ' is-linked' : '' }}"
     data-item-id="{{ $project->id }}" data-item-model="projects"
-    @if (filled($project->url)) href="{{ $project->url }}" target="_blank" rel="noopener" @endif
+    @if (filled($project->url))
+        href="{{ $project->url }}" target="_blank" rel="noopener"
+        data-gs-track="project_view" data-gs-project="{{ $project->tr('title', 'en') }}"
+    @endif
     x-show="cat === 'all' || cat === '{{ $project->category?->slug ?? '' }}'" x-transition.opacity
     style="position: relative; border-radius: var(--gs-r-card, 16px); overflow: hidden; aspect-ratio: 1 / 1; display: block;">
 

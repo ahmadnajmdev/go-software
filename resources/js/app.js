@@ -1,4 +1,5 @@
 import Alpine from 'alpinejs';
+import { gsTrack } from './analytics';
 
 // Hero carousel: 2 slides, auto-advance every 7s (paused in inline-edit mode).
 Alpine.data('heroCarousel', () => ({
@@ -33,21 +34,41 @@ Alpine.data('contactForm', () => ({
         if (this.sending) return;
         this.sending = true;
         const form = event.target;
+        const data = new FormData(form);
         try {
             const response = await fetch(form.action, {
                 method: 'POST',
                 headers: { 'Accept': 'application/json' },
-                body: new FormData(form),
+                body: data,
             });
             if (response.ok) {
                 this.submitted = true;
+                // budget and timeline arrive with the multi-step form; until
+                // then they are simply absent rather than reported as empty.
+                gsTrack('form_submit', {
+                    service: data.get('service') || '(none)',
+                    ...(data.has('budget') ? { budget: data.get('budget') } : {}),
+                    ...(data.has('timeline') ? { timeline: data.get('timeline') } : {}),
+                });
             } else {
+                await this.reportErrors(response);
                 form.submit(); // fall back to a full POST so validation errors render
             }
         } catch {
             form.submit();
         } finally {
             this.sending = false;
+        }
+    },
+    /** One form_error per rejected field, so the drop-off field is visible. */
+    async reportErrors(response) {
+        try {
+            const body = await response.json();
+            const fields = Object.keys(body.errors || {});
+            if (!fields.length) throw new Error('no field errors');
+            fields.forEach((field) => gsTrack('form_error', { field }));
+        } catch {
+            gsTrack('form_error', { field: '(unknown)' });
         }
     },
 }));

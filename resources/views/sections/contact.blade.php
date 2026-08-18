@@ -70,7 +70,7 @@
         </div>
       </div>
       <div x-show="!submitted">
-        <form action="{{ route('contact.store') }}" method="POST" @submit.prevent="submit($event)" style="display: flex; flex-direction: column; gap: 14px;">
+        <form action="{{ route('contact.store') }}" method="POST" data-gs-form="contact" @submit.prevent="submit($event)" style="display: flex; flex-direction: column; gap: 14px;">
           @csrf
           <input type="text" name="website" value="" style="display:none" tabindex="-1" autocomplete="off">
           <input required name="name" placeholder="{{ t('phName') }}" class="foc-accent" style="width: 100%; padding: 14px 16px; border: 1px solid #e2e8e8; border-radius: var(--gs-r-btn, 10px); font-family: 'DM Sans'; font-size: 15px; outline: none;">

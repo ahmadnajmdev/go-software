@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="csrf-token" content="{{ csrf_token() }}">
+@include('partials.gtm-head')
 <title>@yield('title', 'GoSoftware — '.t('h1Tag'))</title>
 <meta name="description" content="@yield('meta_description', t('h1Body'))">
 <link rel="canonical" href="{{ url()->current() }}">
@@ -23,6 +24,7 @@
 @endauth
 </head>
 <body dir="{{ app()->getLocale() === 'en' ? 'ltr' : 'rtl' }}">
+@include('partials.gtm-body')
 
 <div style="overflow-x: clip; width: 100%; display: flex; flex-direction: column;">
 
