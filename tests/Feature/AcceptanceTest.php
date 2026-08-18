@@ -355,4 +355,28 @@ class AcceptanceTest extends TestCase
         // one in the hero trust row, one in the clients section.
         $this->assertSame(2, substr_count($html, media_url($client->logo)));
     }
+
+    public function test_the_founder_sits_after_the_case_studies_and_before_why(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $at = fn (string $key) => strpos($html, 'data-section="'.$key.'"');
+
+        // it used to sit at roughly 80% scroll, past where any phone visitor
+        // arriving from Instagram ever reaches
+        $this->assertGreaterThan($at('projects'), $at('founder'));
+        $this->assertLessThan($at('why'), $at('founder'));
+        $this->assertLessThan($at('contact'), $at('founder'));
+    }
+
+    public function test_the_founder_section_keeps_its_photo_and_quote(): void
+    {
+        \App\Support\Settings::set('images.founder', 'uploads/2026/08/ahmad.jpg');
+
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringContainsString('ahmad.jpg', $html);
+        $this->assertStringContainsString(e(gs_setting('about.ceo_name')), $html);
+        $this->assertStringContainsString(e(t('founderQuote', 'en')), $html);
+    }
 }

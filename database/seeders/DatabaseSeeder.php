@@ -61,8 +61,11 @@ class DatabaseSeeder extends Seeder
 
     private function sections(): void
     {
-        $keys = ['hero', 'strip', 'about', 'services', 'why', 'process', 'projects',
-                 'stats', 'founder', 'testimonials', 'contact'];
+        // The founder sits directly after the case studies and before "Why
+        // GoSoftware" — at roughly 45% scroll rather than 80%, where no phone
+        // visitor arriving from Instagram ever reached it.
+        $keys = ['hero', 'strip', 'about', 'services', 'projects', 'founder',
+                 'why', 'process', 'stats', 'testimonials', 'contact'];
 
         foreach ($keys as $i => $key) {
             Section::updateOrCreate(['key' => $key], ['position' => $i + 1, 'visible' => true]);
