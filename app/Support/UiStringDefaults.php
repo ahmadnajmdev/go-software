@@ -61,8 +61,8 @@ class UiStringDefaults
     {
         return match (true) {
             str_starts_with($key, 'nav') || in_array($key, ['getQuote', 'location', 'followUs']) => 'Navigation',
-            str_starts_with($key, 'h1') || str_starts_with($key, 'h2')
-                || in_array($key, ['projDelivered', 'yrsBadge', 'ofEng']) => 'Hero',
+            str_starts_with($key, 'h1') || str_starts_with($key, 'h2') || str_starts_with($key, 'hero')
+                || in_array($key, ['projDelivered', 'yrsBadge', 'ofEng', 'ctaEstimate', 'trustedBy']) => 'Hero',
             (bool) preg_match('/^f\d/', $key) => 'Feature strip',
             str_starts_with($key, 'about') || (bool) preg_match('/^ab\d/', $key)
                 || in_array($key, ['ceoRole', 'yearsIn']) => 'About',

@@ -30,7 +30,7 @@ class SiteTest extends TestCase
     {
         $this->get($locale === 'en' ? '/' : '/'.$locale)
             ->assertOk()
-            ->assertSee(t('h1TitleA', $locale));
+            ->assertSee(t('heroTitle', $locale), false);
     }
 
     public function test_locale_paths_and_hreflang_alternates(): void
@@ -249,9 +249,9 @@ class SiteTest extends TestCase
         Storage::disk('public')->assertExists($logo);
         $this->assertSame(1, \App\Models\Media::where('path', $logo)->count());
 
-        // the logo now renders as an image, linked, twice (the marquee loops)
+        // the logo now renders as an image and the client is linked
         $html = $this->get('/')->assertOk()->getContent();
-        $this->assertSame(2, substr_count($html, media_url($logo)));
+        $this->assertGreaterThanOrEqual(1, substr_count($html, media_url($logo)));
         $this->assertStringContainsString('href="https://northwind.example"', $html);
 
         // a bad website URL is rejected before anything is stored

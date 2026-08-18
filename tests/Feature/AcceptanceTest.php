@@ -212,4 +212,50 @@ class AcceptanceTest extends TestCase
 
         $this->assertSame('Everything', t('catAll', 'en'));
     }
+
+    public function test_the_hero_is_one_static_message_not_a_carousel(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+
+        $this->assertStringNotContainsString('heroCarousel', $html);
+        // exactly one H1, and it is the one headline
+        $this->assertSame(1, substr_count($html, '<h1'));
+        $this->assertStringContainsString(e(t('heroTitle', 'en')), $html);
+        $this->assertStringNotContainsString(e(t('h2TitleA', 'en')), $html);
+    }
+
+    public function test_the_hero_headline_reads_naturally_in_each_language(): void
+    {
+        // written for those readers, not transliterated: the Excel/WhatsApp
+        // recognition has to land the same way
+        $this->get('/')->assertOk()->assertSee('Excel and WhatsApp groups', false);
+        $this->get('/ar')->assertOk()->assertSee('إكسل ومجموعات واتساب', false);
+        $this->get('/ckb')->assertOk()->assertSee('ئێکسڵ و گرووپی واتسئەپ', false);
+    }
+
+    public function test_the_hero_offers_both_ctas_and_the_three_trust_lines(): void
+    {
+        foreach (['en' => '/', 'ar' => '/ar', 'ckb' => '/ckb'] as $locale => $url) {
+            $html = $this->get($url)->assertOk()->getContent();
+
+            $this->assertStringContainsString(e(t('ctaEstimate', $locale)), $html);
+            $this->assertStringContainsString(e(t('waTalk', $locale)), $html);
+
+            foreach (['heroTrust1', 'heroTrust2', 'heroTrust3'] as $trust) {
+                $this->assertStringContainsString(e(t($trust, $locale)), $html);
+            }
+        }
+    }
+
+    public function test_the_hero_image_is_sized_and_never_lazy_loaded(): void
+    {
+        $html = $this->get('/')->assertOk()->getContent();
+        $hero = substr($html, strpos($html, 'gs-hero-media'), 700);
+
+        // explicit dimensions so it reserves its space and adds nothing to CLS
+        $this->assertMatchesRegularExpression('/width="\d+"\s+height="\d+"/', $hero);
+        // it is the LCP element
+        $this->assertStringContainsString('fetchpriority="high"', $hero);
+        $this->assertStringNotContainsString('loading="lazy"', $hero);
+    }
 }

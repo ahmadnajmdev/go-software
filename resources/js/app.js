@@ -1,31 +1,6 @@
 import Alpine from 'alpinejs';
 import { gsTrack } from './analytics';
 
-// Hero carousel: 2 slides, auto-advance every 7s (paused in inline-edit mode).
-Alpine.data('heroCarousel', () => ({
-    slide: 0,
-    timer: null,
-    init() {
-        this.timer = setInterval(() => {
-            if (document.body.dataset.edit !== 'true') this.toggle();
-        }, 7000);
-    },
-    toggle() {
-        this.slide = this.slide === 0 ? 1 : 0;
-    },
-    trackTransform() {
-        const rtl = document.body.dir === 'rtl';
-        const shift = rtl ? '50%' : '-50%';
-        return this.slide === 1 ? `translateX(${shift})` : 'translateX(0)';
-    },
-    label() {
-        return `0${this.slide + 1} / 02`;
-    },
-    destroy() {
-        clearInterval(this.timer);
-    },
-}));
-
 // Contact form: fetch-submit and swap to the success panel, like the design.
 Alpine.data('contactForm', (serverErrors = {}, sent = false) => ({
     // Seeded from the server so a no-JS submission that came back with errors

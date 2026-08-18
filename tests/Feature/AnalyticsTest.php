@@ -75,13 +75,12 @@ class AnalyticsTest extends TestCase
         $html = $this->get('/ckb')->assertOk()->getContent();
 
         $this->assertStringContainsString('data-gs-track="cta_click"', $html);
-        $this->assertStringContainsString('data-gs-location="hero_slide1"', $html);
-        $this->assertStringContainsString('data-gs-location="hero_slide2"', $html);
+        $this->assertStringContainsString('data-gs-location="hero"', $html);
 
         // the label stays English on the Kurdish page so one CTA aggregates
         // into one row rather than splitting three ways
-        $this->assertStringContainsString('data-gs-label="'.e(t('h1Cta1', 'en')).'"', $html);
-        $this->assertStringNotContainsString('data-gs-label="'.e(t('h1Cta1', 'ckb')).'"', $html);
+        $this->assertStringContainsString('data-gs-label="'.e(t('ctaEstimate', 'en')).'"', $html);
+        $this->assertStringNotContainsString('data-gs-label="'.e(t('ctaEstimate', 'ckb')).'"', $html);
     }
 
     public function test_service_cards_and_the_contact_form_are_instrumented(): void

@@ -1281,4 +1281,46 @@ return array (
     'ar' => 'احصل على تقدير',
     'ckb' => 'خەمڵاندن وەربگرە',
   ),
+  'heroTitle' => 
+  array (
+    'en' => 'Stop running your business on Excel and WhatsApp groups',
+    'ar' => 'لا تُدِر عملك على إكسل ومجموعات واتساب',
+    'ckb' => 'کارەکەت بە ئێکسڵ و گرووپی واتسئەپ بەڕێوە مەبە',
+  ),
+  'heroSub' => 
+  array (
+    'en' => 'GoSoftware builds custom management systems, POS and mobile apps for businesses in Erbil and across Iraq. Built here, supported here.',
+    'ar' => 'تبني GoSoftware أنظمة إدارة مخصّصة وأنظمة نقاط بيع وتطبيقات موبايل لشركات في أربيل وعموم العراق. نبنيها هنا وندعمها هنا.',
+    'ckb' => 'GoSoftware سیستەمی بەڕێوەبردنی تایبەت و سیستەمی فرۆشتن (POS) و ئەپی مۆبایل بۆ کۆمپانیاکانی هەولێر و سەرانسەری عێراق دروست دەکات. لێرە دروستی دەکەین، لێرەش پشتگیری دەکەین.',
+  ),
+  'heroTrust1' => 
+  array (
+    'en' => 'Reply within 1 working day',
+    'ar' => 'نردّ خلال يوم عمل واحد',
+    'ckb' => 'لە ماوەی یەک ڕۆژی کاردا وەڵامت دەدەینەوە',
+  ),
+  'heroTrust2' => 
+  array (
+    'en' => 'Fixed scope and price before we start',
+    'ar' => 'نطاق وسعر ثابتان قبل أن نبدأ',
+    'ckb' => 'پێکهاتە و نرخی جێگیر پێش دەستپێکردن',
+  ),
+  'heroTrust3' => 
+  array (
+    'en' => 'Kurdish · Arabic · English',
+    'ar' => 'كردي · عربي · إنجليزي',
+    'ckb' => 'کوردی · عەرەبی · ئینگلیزی',
+  ),
+  'ctaEstimate' => 
+  array (
+    'en' => 'Get a Free Project Estimate',
+    'ar' => 'احصل على تقدير مجاني لمشروعك',
+    'ckb' => 'خەمڵاندنی خۆڕایی بۆ پرۆژەکەت وەربگرە',
+  ),
+  'trustedBy' => 
+  array (
+    'en' => 'Trusted by',
+    'ar' => 'يثق بنا',
+    'ckb' => 'متمانەیان پێمان هەیە',
+  ),
 );

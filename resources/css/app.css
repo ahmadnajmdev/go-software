@@ -213,3 +213,24 @@ body[data-edit="true"] [data-edit-image]:hover { outline: 3px dashed var(--gs-ac
 @media (prefers-reduced-motion: reduce) {
   .gs-sticky { transition: none; }
 }
+
+/* ===== Static hero (CRO-10) =====
+   On a 390×844 phone the eyebrow, H1, subhead, both CTAs and the three trust
+   lines all have to land above the fold, so the image moves below them and
+   the vertical rhythm tightens. */
+@media (max-width: 900px) {
+  .gs-hero-grid { grid-template-columns: 1fr !important; gap: 30px !important; padding: 26px 20px 34px !important; }
+  .gs-hero-media img { height: 260px !important; }
+  .gs-hero-ctas > * { flex: 1 1 auto; justify-content: center; }
+}
+
+@media (max-width: 560px) {
+  .gs-hero-grid { padding: 18px 18px 26px !important; gap: 22px !important; }
+  .gs-hero-copy h1 { font-size: 30px !important; line-height: 1.12 !important; margin-bottom: 12px !important; }
+  .gs-hero-copy > p { font-size: 15px !important; line-height: 1.55 !important; margin-bottom: 18px !important; }
+  .gs-hero-ctas { gap: 10px !important; margin-bottom: 18px !important; }
+  .gs-hero-ctas > * { width: 100%; padding-top: 13px !important; padding-bottom: 13px !important; font-size: 15px !important; }
+  .gs-hero-trust li { font-size: 13.5px !important; }
+  .gs-hero-media img { height: 210px !important; }
+  .gs-hero-logos { gap: 22px !important; }
+}
