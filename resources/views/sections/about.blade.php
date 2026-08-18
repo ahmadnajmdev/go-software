@@ -8,10 +8,13 @@
       <div style="position: absolute; bottom: -28px; right: -14px; width: 210px; border-radius: var(--gs-r-tile, 14px); overflow: hidden; border: 6px solid #fff; box-shadow: 0 24px 50px rgba(13,24,38,.18);">
         <x-photo setting="images.about_inset" alt="The GoSoftware team at work" :height="150"/>
       </div>
-      <div style="position: absolute; top: 22px; left: 22px; background: #0d1826; color: #fff; border-radius: var(--gs-r-tile, 12px); padding: 15px 20px; text-align: center;">
-        <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 32px; color: var(--gs-accent-lite, #6FDED3); line-height: 1;">{{ config('stats.years_in_software') }}+</div>
+      @if (\App\Support\Stats::years())
+        {{-- Shown only when config/stats.php holds a real, sourceable number. --}}
+        <div style="position: absolute; top: 22px; left: 22px; background: #0d1826; color: #fff; border-radius: var(--gs-r-tile, 12px); padding: 15px 20px; text-align: center;">
+        <div style="font-family: 'Space Grotesk'; font-weight: 700; font-size: 32px; color: var(--gs-accent-lite, #6FDED3); line-height: 1;">{{ \App\Support\Stats::years() }}+</div>
         <div style="font-size: 12px; margin-top: 4px; color: #a3b0bd;"><x-t k="yearsIn"/></div>
       </div>
+      @endif
     </div>
     <div>
       <div style="display: flex; align-items: center; gap: 11px; margin-bottom: 16px;"><span style="width: 30px; height: 2px; background: var(--gs-accent, #2CA69C);"></span><span style="color: var(--gs-accent, #2CA69C); font-family: 'Space Grotesk'; font-weight: 600; letter-spacing: .16em; font-size: 13px;"><x-t k="aboutTag"/></span></div>

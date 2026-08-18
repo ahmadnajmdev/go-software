@@ -155,31 +155,35 @@ one working day and to fixing scope and price in writing before starting.
 
 ---
 
-## Statistics (CRO-09) — the numbers on the homepage are unverified
+## Statistics (CRO-09) — all removed, none are claimed
 
-Every figure now lives in **`config/stats.php`**. Correct them there and each
-one updates everywhere it appears. I have changed none of them — they are what
-the site was already claiming.
+**The numbers are off the site.** You said you have no proof for them, so
+nothing is claimed anywhere: the teal band (300+ projects, 180+ clients, 15+
+years, 98% satisfaction) does not render, the "15+ Years in software" badge on
+the About photo is gone, and the "98% satisfaction rate" that was also written
+into the Why GoSoftware copy has been replaced.
 
-Why this matters: the page showed "300+ Projects delivered" and "15+ Years in
-software" within two screens of each other. That reads as 20 projects a year
-for fifteen years, or as numbers nobody counted. A prospect who notices
-discounts everything else on the page. (The "3+ yrs of engineering" hero widget
-that made it worse was already removed in an earlier commit.)
+Nothing was left as an empty shell — the band renders no markup at all, so
+there is no blank strip where it used to be.
 
-- [ ] **True number of projects delivered.** Currently claims **300+**.
-- [ ] **True founding year** — currently implied by **15+ years in software**,
-      shown both in the stats band and on the About photo badge.
-- [ ] **Number of clients.** Currently claims **180+**.
-- [ ] **Is the 98% satisfaction rate measured, and from what sample?** If it is
-      not measured, say so and I will remove it. An unmeasured percentage is
-      the easiest claim on the page to disbelieve.
-- [ ] **Who awarded "Top-rated Software agency 2025"?**
-      **The badge is currently hidden**, because it claimed an award without
-      naming who gave it, and an unsourced award costs more trust than it earns.
-      Set `award.awarded_by` in `config/stats.php` to the organisation's name
-      and the badge returns, with the source shown next to it. If there is no
-      awarding body, leave it — the badge stays off.
+Everything is still wired. Put a real, defensible number in
+**`config/stats.php`** and it comes straight back on its own — the band renders
+whichever subset you fill in (one figure, or four), and the About badge follows
+`years_in_software`. Nothing else to change.
+
+- [ ] **True number of projects delivered** — `projects_delivered`
+- [ ] **True number of clients** — `happy_clients`
+- [ ] **True years in business** — `years_in_software` (also drives the About badge)
+- [ ] **A measured satisfaction rate** — `satisfaction_rate`. Only if it is
+      actually measured, and worth saying from what sample.
+- [ ] **Who awarded "Top-rated Software agency 2025"?** The badge is hidden.
+      Set `award.awarded_by` and it returns with the source shown beside it.
+
+The Why GoSoftware panel that carried the 98% now reads **"Straight answers, in
+writing — fixed scope and price agreed before we start, and a reply within one
+working day."** Both of those are commitments already made elsewhere on the
+site, so they are yours to keep rather than mine to invent. Say the word if you
+would rather it said something else.
 
 ---
 

@@ -147,12 +147,6 @@ return array (
     'ar' => 'مشروع منجز',
     'ckb' => 'پرۆژەی گەیەنراو',
   ),
-  'yrsBadge' => 
-  array (
-    'en' => '15+ yrs',
-    'ar' => '+15 سنة',
-    'ckb' => '+15 ساڵ',
-  ),
   'ofEng' => 
   array (
     'en' => 'of engineering',
@@ -365,15 +359,15 @@ return array (
   ),
   'why2T' => 
   array (
-    'en' => 'Proven Client Satisfaction',
-    'ar' => 'رضا عملاء مثبت',
-    'ckb' => 'ڕەزامەندی سەلمێنراوی کڕیاران',
+    'en' => 'Straight answers, in writing',
+    'ar' => 'إجابات واضحة ومكتوبة',
+    'ckb' => 'وەڵامی ڕوون، بە نووسراوی',
   ),
   'why2D' => 
   array (
-    'en' => 'A 98% satisfaction rate and long-term partnerships across industries.',
-    'ar' => 'نسبة رضا 98% وشراكات طويلة الأمد في مختلف القطاعات.',
-    'ckb' => 'ڕێژەی ڕەزامەندی 98% و هاوبەشی درێژخایەن لە کەرتە جیاوازەکاندا.',
+    'en' => 'Fixed scope and price agreed before we start, and a reply within one working day — so you always know where the project stands.',
+    'ar' => 'نطاق وسعر ثابتان يُتَّفق عليهما قبل أن نبدأ، وردّ خلال يوم عمل واحد — فتعرف دائماً أين وصل مشروعك.',
+    'ckb' => 'پێکهاتە و نرخی جێگیر پێش دەستپێکردن ڕێککەوتوو، و وەڵام لە ماوەی یەک ڕۆژی کاردا — بۆیە هەمیشە دەزانیت پرۆژەکەت لە چ قۆناغێکدایە.',
   ),
   'whyCta' => 
   array (
