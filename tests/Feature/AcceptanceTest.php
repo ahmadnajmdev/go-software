@@ -129,4 +129,87 @@ class AcceptanceTest extends TestCase
     {
         $this->get('/')->assertOk()->assertDontSee(t('ftCareers', 'en'));
     }
+
+    /** Every key referenced by a view, scraped from the Blade source. */
+    private function keysUsedInViews(): array
+    {
+        $used = [];
+
+        foreach (\Illuminate\Support\Facades\File::allFiles(resource_path('views')) as $file) {
+            $src = $file->getContents();
+            preg_match_all('/<x-t\s+k="([A-Za-z0-9_]+)"/', $src, $component);
+            preg_match_all("/\\bt\\(\\s*'([A-Za-z0-9_]+)'/", $src, $helper);
+
+            foreach (array_merge($component[1], $helper[1]) as $key) {
+                $used[$key] = true;
+            }
+        }
+
+        return array_keys($used);
+    }
+
+    public function test_every_key_a_view_uses_exists_in_all_three_languages(): void
+    {
+        // t() falls back to returning the key name, so a key missing here is a
+        // raw camelCase string rendering on the page.
+        $strings = \App\Models\UiString::pluck('value', 'key')->all();
+
+        foreach ($this->keysUsedInViews() as $key) {
+            $this->assertArrayHasKey($key, $strings, "t('{$key}') has no row — it renders as the raw key");
+
+            foreach (['en', 'ar', 'ckb'] as $locale) {
+                $this->assertNotEmpty($strings[$key][$locale] ?? null, "{$key} has no {$locale} translation");
+            }
+        }
+    }
+
+    #[DataProvider('pages')]
+    public function test_no_raw_translation_key_renders_as_visible_text(string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+        $text = trim(preg_replace('/\s+/', ' ', strip_tags($html)));
+
+        foreach ($this->keysUsedInViews() as $key) {
+            // Only camelCase keys are checked. Single lowercase keys like
+            // "privacy" and "terms" are ordinary English words that legitimately
+            // appear in prose — a missing one of those is caught instead by
+            // test_every_key_a_view_uses_exists_in_all_three_languages.
+            if (! preg_match('/[a-z][A-Z]/', $key)) {
+                continue;
+            }
+
+            // a key only counts as leaked if it appears as a standalone word
+            $this->assertDoesNotMatchRegularExpression(
+                '/(?<![A-Za-z0-9_])'.preg_quote($key, '/').'(?![A-Za-z0-9_])/',
+                $text,
+                "{$url} renders the raw key “{$key}” as visible text"
+            );
+        }
+    }
+
+    public function test_a_key_missing_from_an_install_is_repaired_by_the_sync(): void
+    {
+        \App\Models\UiString::whereIn('key', ['catAll', 'projNone', 'visitUs', 'getDirections'])->delete();
+        \Illuminate\Support\Facades\Cache::forget('gs.strings');
+
+        // this is exactly what the live site was doing
+        $this->assertSame('catAll', t('catAll', 'en'));
+
+        $created = \App\Support\UiStringDefaults::syncMissing();
+
+        $this->assertEqualsCanonicalizing(['catAll', 'projNone', 'visitUs', 'getDirections'], $created);
+        $this->assertSame('All', t('catAll', 'en'));
+        $this->assertSame('هەموو', t('catAll', 'ckb'));
+        $this->assertSame('الكل', t('catAll', 'ar'));
+    }
+
+    public function test_the_sync_never_overwrites_copy_edited_in_the_admin_panel(): void
+    {
+        \App\Models\UiString::where('key', 'catAll')->update(['value' => ['en' => 'Everything']]);
+        \Illuminate\Support\Facades\Cache::forget('gs.strings');
+
+        \App\Support\UiStringDefaults::syncMissing();
+
+        $this->assertSame('Everything', t('catAll', 'en'));
+    }
 }

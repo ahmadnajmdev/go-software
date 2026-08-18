@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\UiString;
+use App\Support\UiStringDefaults;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -48,9 +49,12 @@ class UiStringController extends Controller
 
     public function reset()
     {
-        $defaults = require database_path('seeders/data/ui_strings.php');
+        // Re-create anything missing first, then reset the rest: a key absent
+        // from this install would otherwise stay absent and keep rendering as
+        // its own name on the page.
+        UiStringDefaults::syncMissing();
 
-        foreach ($defaults as $key => $value) {
+        foreach (UiStringDefaults::all() as $key => $value) {
             UiString::where('key', $key)->update(['value' => $value]);
         }
 

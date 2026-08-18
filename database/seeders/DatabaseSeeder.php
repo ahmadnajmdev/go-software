@@ -10,6 +10,7 @@ use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Testimonial;
 use App\Models\UiString;
+use App\Support\UiStringDefaults;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Cache;
@@ -46,55 +47,16 @@ class DatabaseSeeder extends Seeder
 
     private function uiStrings(): void
     {
-        $strings = require database_path('seeders/data/ui_strings.php');
-
-        foreach ($strings as $key => $value) {
-            $group = $this->groupFor($key);
-
-            // pricing, blog and the team grid were removed from the site
-            if (in_array($group, ['Pricing', 'Blog', 'Team'])
-                || in_array($key, ['navPricing', 'navBlog', 'ftBlog', 'ftTeam'])) {
+        foreach (UiStringDefaults::all() as $key => $value) {
+            if (UiStringDefaults::isRetired($key)) {
                 continue;
             }
 
             UiString::updateOrCreate(
                 ['key' => $key],
-                ['value' => $value, 'group' => $group],
+                ['value' => $value, 'group' => UiStringDefaults::groupFor($key)],
             );
         }
-    }
-
-    /** Bucket design keys into admin-editor groups by their prefix conventions. */
-    private function groupFor(string $key): string
-    {
-        return match (true) {
-            str_starts_with($key, 'nav') || in_array($key, ['getQuote', 'location', 'followUs']) => 'Navigation',
-            str_starts_with($key, 'h1') || str_starts_with($key, 'h2')
-                || in_array($key, ['projDelivered', 'yrsBadge', 'ofEng']) => 'Hero',
-            (bool) preg_match('/^f\d/', $key) => 'Feature strip',
-            str_starts_with($key, 'about') || (bool) preg_match('/^ab\d/', $key)
-                || in_array($key, ['ceoRole', 'yearsIn']) => 'About',
-            str_starts_with($key, 'svc') || in_array($key, ['webDev', 'mgmtSystems', 'learnMore']) => 'Services',
-            str_starts_with($key, 'why') || str_starts_with($key, 'mq')
-                || in_array($key, ['topRated', 'agency2025', 'mobileApps']) => 'Why us',
-            str_starts_with($key, 'proc') || (bool) preg_match('/^p\d/', $key) => 'Process',
-            str_starts_with($key, 'proj') || (bool) preg_match('/^cat\d/', $key)
-                || in_array($key, ['allProjects', 'catAll']) => 'Projects',
-            (bool) preg_match('/^st\d/', $key) => 'Stats',
-            str_starts_with($key, 'team') || (bool) preg_match('/^role\d/', $key) => 'Team',
-            str_starts_with($key, 'founder') => 'Founder',
-            str_starts_with($key, 'tst') => 'Testimonials',
-            str_starts_with($key, 'price') || str_starts_with($key, 'plan') || str_starts_with($key, 'feat')
-                || in_array($key, ['monthly', 'annual', 'save20', 'getStarted', 'mostPopular', 'month', 'year']) => 'Pricing',
-            str_starts_with($key, 'blog') || $key === 'readMore' => 'Blog',
-            str_starts_with($key, 'ct') || str_starts_with($key, 'ph') || str_starts_with($key, 'opt')
-                || str_starts_with($key, 'err')
-                || in_array($key, ['callUs', 'emailUs', 'visitUs', 'getDirections', 'formTitle', 'formSub',
-                    'sendMsg', 'thanksT', 'thanksB']) => 'Contact',
-            str_starts_with($key, 'ft')
-                || in_array($key, ['copyright', 'privacy', 'terms', 'lastUpdated', 'legalContact']) => 'Footer',
-            default => 'Other',
-        };
     }
 
     private function sections(): void
