@@ -12,8 +12,11 @@
       {{-- One logo. It used to render twice — once here and once inside the
            mobile drawer. --}}
       <a href="{{ $home }}#home" style="display: flex; align-items: center;">
+        {{-- 4000×1000 → 152×38. Both dimensions declared so the header
+             reserves the space and does not shift when the logo lands. --}}
         <img src="{{ media_url(gs_setting('logo.dark', 'images/logo-dark.png')) }}" alt="GoSoftware"
-             height="38" style="height: 38px; width: auto; display: block;">
+             width="152" height="38" fetchpriority="high" decoding="async"
+             style="height: 38px; width: auto; display: block;">
       </a>
 
       {{-- One nav. The same element is a horizontal bar on desktop and the

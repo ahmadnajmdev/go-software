@@ -3,7 +3,9 @@
 <footer style="background: #0a1420; color: #a3b0bd; padding: 70px 0 0;">
   <div style="max-width: 1240px; margin: 0 auto; padding: 0 24px; display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 40px;" class="gs-footer-grid">
     <div>
-      <img src="{{ media_url(gs_setting('logo.light', 'images/logo-light.png')) }}" alt="GoSoftware" style="height: 38px; margin-bottom: 20px;">
+      <img src="{{ media_url(gs_setting('logo.light', 'images/logo-light.png')) }}" alt="GoSoftware"
+           width="253" height="38" loading="lazy" decoding="async"
+           style="height: 38px; width: auto; margin-bottom: 20px;">
       <p style="font-size: 15px; line-height: 1.7; margin-bottom: 22px; max-width: 300px;"><x-t k="ftBlurb"/></p>
       @php($social = \App\Support\Social::company())
       @if ($social)

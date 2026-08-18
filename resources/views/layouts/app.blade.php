@@ -41,7 +41,23 @@
 <link rel="icon" type="image/png" href="{{ asset('images/logo-dark.png') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+@php
+    // IBM Plex Sans Arabic is ~45KB and is only needed on the Arabic and
+    // Kurdish pages. Serving the full multilingual set to every visitor
+    // regardless of language is the standard waste on a trilingual site.
+    $gsFamilies = [
+        'Space+Grotesk:wght@400;500;600;700',
+        'DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700',
+    ];
+
+    if (app()->getLocale() !== 'en') {
+        $gsFamilies[] = 'IBM+Plex+Sans+Arabic:wght@400;500;600;700';
+    }
+
+    $gsFontHref = 'https://fonts.googleapis.com/css2?family='
+        .implode('&family=', $gsFamilies).'&display=swap';
+@endphp
+<link href="{{ $gsFontHref }}" rel="stylesheet">
 <style>:root { {!! \App\Support\Theme::cssVars() !!} }</style>
 @auth
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/admin-edit.js'])

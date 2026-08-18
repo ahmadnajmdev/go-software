@@ -212,6 +212,26 @@ that made it worse was already removed in an earlier commit.)
 
 ---
 
+## Performance (CRO-21) — partly done, one piece needs a decision
+
+Page weight on the home page went from **817 KB to 151 KB** and LCP from 616ms
+to 440ms (measured locally, so treat the absolute times as indicative — the
+*ratio* is the real result). Two things did it: the Google Maps embed no longer
+loads until someone asks for it, and the Arabic font is no longer served to
+English visitors.
+
+- [ ] **WebP conversion and responsive srcset are NOT done.** Every image on
+      the site is uploaded through the admin panel, so this needs a conversion
+      step at upload time plus a backfill command for existing files — and it
+      changes how uploads are stored, which I did not want to do without
+      asking. It matters much less than it did: with the map gone the page is
+      151 KB, and there is currently almost no photography on the site anyway
+      (see the Photography section). **My recommendation: send the photos
+      first, then I will add WebP conversion and srcset in one pass, sized to
+      the real images rather than guessed.**
+
+---
+
 ## Trust plumbing (CRO-23)
 
 Everything below is wired and hidden. Each appears the moment you fill it in —

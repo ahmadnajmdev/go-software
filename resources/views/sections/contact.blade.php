@@ -139,21 +139,33 @@
       </div>
     </div>
     @if ($hasMap)
-      <div class="gs-map" style="grid-column: 1 / -1; margin-top: 16px; border-radius: var(--gs-r-card, 20px); overflow: hidden; border: 1px solid rgba(255,255,255,.10); background: #e9eef0; position: relative;">
-        {{-- not lazy-loaded on purpose: the Google embed sizes its map when it
-             loads, and lazy-loading makes that happen mid-scroll, which leaves
-             a small map floating in a full-width frame --}}
-        <iframe src="{{ $embed }}" title="{{ $address ?: 'GoSoftware office location' }}"
-                width="1200" height="360"
-                referrerpolicy="no-referrer-when-downgrade" allowfullscreen
-                style="width: 100%; height: 360px; border: 0; display: block;"></iframe>
-        @if ($address)
-          {{-- top-left in both directions: Google keeps its logo bottom-left and terms bottom-right --}}
-          <a href="{{ $directions }}" target="_blank" rel="noopener" class="gs-map-chip" style="position: absolute; top: 18px; left: 18px; max-width: min(420px, calc(100% - 36px)); display: inline-flex; align-items: center; gap: 11px; background: rgba(13,24,38,.94); color: #fff; padding: 12px 18px; border-radius: var(--gs-r-btn, 10px); box-shadow: 0 14px 34px rgba(13,24,38,.28); transition: .2s;">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; color: var(--gs-accent-lite, #6FDED3);"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
-            <span style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 14.5px; line-height: 1.4;">{{ $address }}</span>
-          </a>
-        @endif
+      {{-- Click-to-load. The Google embed was loading eagerly on every page
+           view and costing 434KB of an 817KB page — over half the payload for
+           a map most visitors never look at. Nothing is requested from Google
+           until someone actually asks for the map. --}}
+      <div class="gs-map" x-data="{ loaded: false }"
+           style="grid-column: 1 / -1; margin-top: 16px; border-radius: var(--gs-r-card, 20px); overflow: hidden; border: 1px solid rgba(255,255,255,.10); position: relative;">
+
+        <template x-if="loaded">
+          <iframe src="{{ $embed }}" title="{{ $address ?: 'GoSoftware office location' }}"
+                  width="1200" height="360" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+                  style="width: 100%; height: 360px; border: 0; display: block;"></iframe>
+        </template>
+
+        <div x-show="!loaded" class="gs-map-facade" style="height: 360px;">
+          <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="var(--gs-accent-lite, #6FDED3)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2.4"/></svg>
+          @if ($address)
+            <p style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 16px; color: #fff; margin: 14px 0 4px; text-align: center; max-width: 420px;">{{ $address }}</p>
+          @endif
+          <p style="font-size: 12.5px; color: #7d8d9c; margin-bottom: 16px;"><x-t k="mapNote"/></p>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+            <button type="button" @click="loaded = true"
+                    style="background: var(--gs-accent, #2CA69C); color: #fff; border: none; font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; padding: 12px 22px; border-radius: var(--gs-r-btn, 10px); cursor: pointer;"><x-t k="mapLoad"/></button>
+            <a href="{{ $directions }}" target="_blank" rel="noopener"
+               style="background: rgba(255,255,255,.08); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; padding: 12px 22px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 8px;"><x-t k="getDirections"/> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+          </div>
+        </div>
       </div>
     @endif
   </div>

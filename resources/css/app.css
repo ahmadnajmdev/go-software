@@ -346,3 +346,18 @@ body[dir="rtl"] .gs-industry:hover .gs-industry-arrow { transform: translateX(-3
   .gs-industry-icon { width: 40px; height: 40px; }
 }
 @media (prefers-reduced-motion: reduce) { .gs-industry, .gs-industry-arrow { transition: none; } }
+
+/* ===== Map facade (CRO-21) =====
+   Stands in for the Google embed until someone asks for it. The embed was
+   434KB of an 817KB page, loaded on every view for a map most people never
+   open. */
+.gs-map-facade {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 24px;
+  background-color: #16283c;
+  background-image:
+    linear-gradient(135deg, #16283c 0%, #0d1826 60%, #123037 100%),
+    linear-gradient(rgba(255, 255, 255, .03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, .03) 1px, transparent 1px);
+  background-size: auto, 30px 30px, 30px 30px;
+}
