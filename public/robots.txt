@@ -1,2 +1,8 @@
 User-agent: *
-Disallow:
+Allow: /
+
+# The admin panel is behind auth, but there is no reason to crawl it.
+Disallow: /admin
+Disallow: /admin/
+
+Sitemap: https://gosoftware.krd/sitemap.xml

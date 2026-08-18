@@ -3,6 +3,14 @@
 @section('title', $page['title'])
 @section('meta_description', $page['meta'])
 
+@push('schema')
+<script type="application/ld+json">{!! json_encode(\App\Support\Seo::breadcrumbs([
+    ['name' => t('navHome'), 'url' => gs_route('')],
+    ['name' => t('navServices'), 'url' => gs_route('').'#services'],
+    ['name' => $page['name'], 'url' => gs_route('services/'.$page['slug'])],
+]), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) !!}</script>
+@endpush
+
 @section('content')
 @php($clients = \App\Models\Client::ordered()->get())
 

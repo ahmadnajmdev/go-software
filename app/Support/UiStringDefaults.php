@@ -72,6 +72,7 @@ class UiStringDefaults
             str_starts_with($key, 'proc') || (bool) preg_match('/^p\d/', $key) => 'Process',
             str_starts_with($key, 'proj') || (bool) preg_match('/^cat\d/', $key)
                 || in_array($key, ['allProjects', 'catAll']) => 'Projects',
+            str_starts_with($key, 'meta') => 'SEO',
             str_starts_with($key, 'prob') => 'Problem',
             str_starts_with($key, 'ind') => 'Industries',
             (bool) preg_match('/^st\d/', $key) => 'Stats',

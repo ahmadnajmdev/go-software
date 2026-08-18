@@ -339,9 +339,12 @@ class AcceptanceTest extends TestCase
         $nav = substr($html, $start, strpos($html, '</nav>', $start) - $start);
         $this->assertSame(5, substr_count($nav, 'class="gs-nav-link'), 'nav links are duplicated');
 
-        // the logo used to render again inside the mobile drawer
+        // the logo used to render again inside the mobile drawer. Count <img>
+        // tags only — the JSON-LD blocks reference the same file as the
+        // organisation logo, which is not duplicated markup.
         $body = substr($html, strpos($html, '<body'));
-        $this->assertSame(1, substr_count($body, 'logo-dark'));
+        preg_match_all('#<img[^>]+src="[^"]*logo-dark[^"]*"#', $body, $logos);
+        $this->assertCount(1, $logos[0]);
     }
 
     public function test_client_logos_render_once_not_twice(): void

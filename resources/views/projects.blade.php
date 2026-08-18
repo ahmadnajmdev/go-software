@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('title', t('projTitle').' — GoSoftware')
+@section('title', t('metaProjectsTitle'))
+@section('meta_description', t('metaProjectsDesc'))
 
 @section('content')
     <section style="background: #f5f8f8; padding: 78px 0 94px;" x-data="{ cat: '{{ $selected }}' }">

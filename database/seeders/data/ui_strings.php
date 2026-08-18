@@ -1467,4 +1467,28 @@ return array (
     'ar' => 'البيع أونلاين',
     'ckb' => 'فرۆشتنی ئۆنڵاین',
   ),
+  'metaHomeTitle' => 
+  array (
+    'en' => 'Custom Software, Apps & POS Systems in Erbil | GoSoftware',
+    'ar' => 'برمجيات وتطبيقات وأنظمة نقاط بيع مخصّصة في أربيل | GoSoftware',
+    'ckb' => 'سۆفتوێر و ئەپ و سیستەمی فرۆشتنی تایبەت لە هەولێر | GoSoftware',
+  ),
+  'metaHomeDesc' => 
+  array (
+    'en' => 'GoSoftware builds custom management systems, POS, mobile apps and websites for businesses in Erbil and across Iraq. Kurdish, Arabic and English. Free estimate within one working day.',
+    'ar' => 'تبني GoSoftware أنظمة إدارة مخصّصة وأنظمة نقاط بيع وتطبيقات موبايل ومواقع لشركات في أربيل وعموم العراق. بالكردية والعربية والإنجليزية. تقدير مجاني خلال يوم عمل واحد.',
+    'ckb' => 'GoSoftware سیستەمی بەڕێوەبردنی تایبەت و سیستەمی فرۆشتن و ئەپی مۆبایل و ماڵپەڕ بۆ کۆمپانیاکانی هەولێر و سەرانسەری عێراق دروست دەکات. بە کوردی و عەرەبی و ئینگلیزی. خەمڵاندنی خۆڕایی لە یەک ڕۆژی کاردا.',
+  ),
+  'metaProjectsTitle' => 
+  array (
+    'en' => 'Our Work — Software Projects Delivered in Iraq | GoSoftware',
+    'ar' => 'أعمالنا — مشاريع برمجية أنجزناها في العراق | GoSoftware',
+    'ckb' => 'کارەکانمان — پرۆژەی سۆفتوێری ئەنجامدراو لە عێراق | GoSoftware',
+  ),
+  'metaProjectsDesc' => 
+  array (
+    'en' => 'Websites, mobile apps, POS and management systems GoSoftware has delivered for businesses across Kurdistan and Iraq. See the work, then tell us about yours.',
+    'ar' => 'مواقع وتطبيقات موبايل وأنظمة نقاط بيع وأنظمة إدارة أنجزتها GoSoftware لشركات في كردستان وعموم العراق. اطّلع على الأعمال ثم أخبرنا عن مشروعك.',
+    'ckb' => 'ماڵپەڕ و ئەپی مۆبایل و سیستەمی فرۆشتن و بەڕێوەبردن کە GoSoftware بۆ کۆمپانیاکانی کوردستان و عێراق ئەنجامیداون. کارەکان ببینە، پاشان باسی هی خۆتمان بۆ بکە.',
+  ),
 );
