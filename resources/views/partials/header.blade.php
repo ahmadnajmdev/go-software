@@ -22,6 +22,11 @@
       {{-- One nav. The same element is a horizontal bar on desktop and the
            off-canvas drawer on phones — the links used to be written out twice
            and shipped to every visitor twice. --}}
+      {{-- The shell is `display: contents` on desktop, so the nav sits in the
+           header flex as if it were not there. On phones it becomes a fixed,
+           viewport-sized clipping box, which is what stops the off-canvas
+           drawer adding its own width to the document's scrollable area. --}}
+      <div class="gs-nav-shell">
       <nav id="gs-nav" class="gs-nav" :class="{ 'is-open': open }" aria-label="Main">
         <button type="button" class="gs-nav-close" @click="open = false" aria-label="Close menu">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
@@ -35,6 +40,7 @@
 
         <x-cta-primary location="nav" tone="dark" size="sm" class="gs-nav-cta" @click="open = false"/>
       </nav>
+      </div>
 
       <button type="button" @click="open = true" class="gs-burger" aria-label="Open menu"
               :aria-expanded="open" aria-controls="gs-nav"

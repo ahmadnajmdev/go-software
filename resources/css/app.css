@@ -105,6 +105,7 @@ a.gs-client:hover, a.gs-client:focus-visible { opacity: .75; }
    One <nav> serves both layouts: a horizontal bar on desktop, an off-canvas
    drawer on phones. The links and the logo used to be written out twice and
    shipped to every visitor twice. */
+.gs-nav-shell { display: contents; }
 .gs-nav { display: flex; align-items: center; gap: 32px; }
 .gs-nav-link { font-family: 'Space Grotesk', sans-serif; font-weight: 500; font-size: 15px; color: #0d1826; }
 .gs-nav-close { display: none; }
@@ -115,9 +116,18 @@ a.gs-client:hover, a.gs-client:focus-visible { opacity: .75; }
 @media (max-width: 900px) {
   .gs-burger { display: flex !important; }
 
+  /* The drawer is parked off the edge when closed. Left unclipped that adds
+     its own width to the document's scrollable area — a fixed element is not
+     clipped by overflow on the root, so the shell does the clipping. It lets
+     clicks through while closed. */
+  .gs-nav-shell {
+    display: block; position: fixed; inset: 0; z-index: 60;
+    overflow: hidden; pointer-events: none;
+  }
+
   /* the same nav element, repositioned as a drawer */
   .gs-nav {
-    position: fixed; top: 0; inset-inline-end: 0; z-index: 60;
+    position: absolute; top: 0; inset-inline-end: 0; pointer-events: auto;
     height: 100%; width: 300px; max-width: 82vw;
     flex-direction: column; align-items: stretch; gap: 4px;
     background: #fff; padding: 24px; overflow-y: auto;

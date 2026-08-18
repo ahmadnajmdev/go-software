@@ -441,4 +441,20 @@ class AcceptanceTest extends TestCase
         $this->assertStringContainsString(url('/ckb/services/pos-inventory'), $html);
         $this->assertStringContainsString(e(t('indRetail', 'ckb')), $html);
     }
+
+    #[DataProvider('pages')]
+    public function test_the_off_canvas_drawer_is_clipped(string $url): void
+    {
+        $html = $this->get($url)->assertOk()->getContent();
+
+        // The drawer is parked off the edge when closed. Without a clipping
+        // shell it adds its own 300px to the document's scrollable width on
+        // every page — a fixed element is not clipped by overflow on the root.
+        $this->assertStringContainsString('class="gs-nav-shell"', $html);
+
+        $shell = strpos($html, 'class="gs-nav-shell"');
+        $nav = strpos($html, '<nav id="gs-nav"');
+        $this->assertNotFalse($shell);
+        $this->assertLessThan($nav, $shell, 'the nav is not inside its clipping shell');
+    }
 }
