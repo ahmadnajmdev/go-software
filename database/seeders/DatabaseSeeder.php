@@ -118,31 +118,12 @@ class DatabaseSeeder extends Seeder
 
     private function testimonials(): void
     {
-        $strings = require database_path('seeders/data/ui_strings.php');
-
-        $items = [
-            ['Tom Harding', $strings['tst1R'], $strings['tst1Q']],
-            ['Priya Nair', $strings['tst2R'], $strings['tst2Q']],
-            ['Sarah Doyle', $strings['tst3R'], $strings['tst3Q']],
-        ];
-
-        Testimonial::query()->delete();
-        foreach ($items as $i => [$author, $role, $quote]) {
-            Testimonial::create([
-                'position' => $i + 1,
-                'author' => $author,
-                'role' => $role,
-                'quote' => $quote,
-                'avatar' => null,
-                'rating' => 5,
-            ]);
-        }
+        // Deliberately empty. Testimonials must be real, with permission to
+        // publish, and are entered through the admin panel. The section does
+        // not render until at least one exists — an invented quote is worse
+        // than no quote. See BLOCKED.md.
     }
 
-    /**
-     * Placeholder marquee names. Keyed by name so re-seeding never wipes a
-     * logo that was uploaded through Admin → Clients.
-     */
     private function clients(): void
     {
         $names = ['Northwind', 'Vertex', 'Loopline', 'Brightsend', 'Corely', 'Magnify'];

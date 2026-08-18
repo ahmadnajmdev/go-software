@@ -185,6 +185,35 @@ that made it worse was already removed in an earlier commit.)
 
 ---
 
+## Testimonials (CRO-15) — nothing is rendered until you supply real ones
+
+The section was headed **TESTIMONIALS** and contained a client logo marquee,
+duplicated twice, with no quote, no name and no result. The heading primes a
+visitor to look for endorsement and gives them none, which is worse than not
+having the section.
+
+It is now honestly headed **"Companies we work with"** and shows the logos once,
+statically. The three seeded quotes ("Tom Harding", "Priya Nair", "Sarah Doyle")
+were invented by nobody and have been deleted. **The quotes area does not render
+at all** until a real testimonial exists.
+
+- [ ] **Three client testimonials, with permission to publish.** For each:
+      - Name and role
+      - Company
+      - The quote itself
+      - **One concrete result** — "monthly stock-taking went from three days to
+        two hours" persuades far more than five stars. There is a dedicated
+        field for it and it renders in its own highlighted block.
+      - A photo of the person (square, min 200×200) — optional; without one the
+        card shows their initial rather than a stock face.
+      - **Optional 30–45s phone video.** You mentioned filming with Folivya,
+        Fantasy Town and Zuu — the field is built and takes a YouTube or Vimeo
+        **embed** URL. A video clip outperforms any written quote.
+
+      Add them at **Admin → Testimonials**. Each appears the moment it is saved.
+
+---
+
 ## Photography (CRO-11) — this is the biggest visual gap
 
 All stock imagery has been removed: the "GoSoftware team" photo, the three

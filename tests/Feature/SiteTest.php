@@ -262,13 +262,17 @@ class SiteTest extends TestCase
         ])->assertSessionHasErrors('url');
     }
 
-    public function test_marquee_hides_itself_when_there_are_no_clients(): void
+    public function test_the_clients_section_disappears_when_there_is_nothing_real_to_show(): void
     {
         \App\Models\Client::query()->delete();
+        \App\Models\Testimonial::query()->delete();
 
         $html = $this->get('/')->assertOk()->getContent();
+
+        // no logos, and no heading promising endorsement that isn't there
         $this->assertStringNotContainsString('gs-client', $html);
-        $this->assertStringContainsString(t('tstTitle', 'en'), $html); // section still renders
+        $this->assertStringNotContainsString(t('tstTitle', 'en'), $html);
+        $this->assertStringNotContainsString(t('tstVoicesTitle', 'en'), $html);
     }
 
     public function test_projects_page_lists_every_project_with_category_chips(): void

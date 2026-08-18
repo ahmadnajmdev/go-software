@@ -18,7 +18,7 @@ class InlineEditController extends Controller
     private const MODELS = [
         'services' => [Service::class, ['tag', 'title', 'description'], ['image']],
         'projects' => [Project::class, ['title'], ['image']],
-        'testimonials' => [Testimonial::class, ['author', 'role', 'quote'], ['avatar']],
+        'testimonials' => [Testimonial::class, ['author', 'role', 'quote', 'result'], ['avatar']],
     ];
 
     /** Settings keys whose image may be swapped from inline edit mode. */

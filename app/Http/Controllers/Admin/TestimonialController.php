@@ -56,6 +56,15 @@ class TestimonialController extends Controller
             'quote.en' => ['required', 'string', 'max:1000'],
             'quote.ar' => ['nullable', 'string', 'max:1000'],
             'quote.ckb' => ['nullable', 'string', 'max:1000'],
+            'company' => ['nullable', 'string', 'max:120'],
+            'result.en' => ['nullable', 'string', 'max:300'],
+            'result.ar' => ['nullable', 'string', 'max:300'],
+            'result.ckb' => ['nullable', 'string', 'max:300'],
+            // An embed URL only — a watch link renders nothing, and an
+            // arbitrary URL in an iframe is somebody else's page on ours.
+            'video_url' => ['nullable', 'url:https', 'max:500', 'regex:#^https://(www\\.)?(youtube\\.com/embed/|player\\.vimeo\\.com/video/)#'],
+        ], [
+            'video_url.regex' => 'Paste the embed URL from YouTube or Vimeo (Share → Embed), not the normal watch link.',
         ]);
     }
 }

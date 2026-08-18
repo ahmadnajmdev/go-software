@@ -645,17 +645,17 @@ return array (
     'ar' => 'تعرّف على المؤسس',
     'ckb' => 'ناسینی دامەزرێنەر',
   ),
-  'tstTag' =>
+  'tstTag' => 
   array (
-    'en' => 'TESTIMONIALS',
-    'ar' => 'آراء العملاء',
-    'ckb' => 'ڕای کڕیاران',
+    'en' => 'CLIENTS',
+    'ar' => 'عملاؤنا',
+    'ckb' => 'کڕیارەکان',
   ),
   'tstTitle' => 
   array (
-    'en' => 'Trusted by teams across industries',
-    'ar' => 'موثوقون لدى فرق من مختلف القطاعات',
-    'ckb' => 'متمانەپێکراو لای تیمەکان لە کەرتە جیاوازەکاندا',
+    'en' => 'Companies we work with',
+    'ar' => 'شركات نعمل معها',
+    'ckb' => 'ئەو کۆمپانیایانەی لەگەڵیان کار دەکەین',
   ),
   'tst1Q' => 
   array (
@@ -1358,5 +1358,23 @@ return array (
     'en' => 'All services',
     'ar' => 'كل الخدمات',
     'ckb' => 'هەموو خزمەتگوزارییەکان',
+  ),
+  'tstVoicesTag' => 
+  array (
+    'en' => 'IN THEIR WORDS',
+    'ar' => 'بكلماتهم',
+    'ckb' => 'بە قسەی خۆیان',
+  ),
+  'tstVoicesTitle' => 
+  array (
+    'en' => 'What our clients say',
+    'ar' => 'ماذا يقول عملاؤنا',
+    'ckb' => 'کڕیارەکانمان چی دەڵێن',
+  ),
+  'tstResult' => 
+  array (
+    'en' => 'The result',
+    'ar' => 'النتيجة',
+    'ckb' => 'ئەنجامەکە',
   ),
 );
