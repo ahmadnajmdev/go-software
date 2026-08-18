@@ -13,7 +13,7 @@
         @endforeach
       </nav>
       <div style="display: flex; align-items: center; gap: 14px;">
-        <a href="{{ $home }}#contact" class="gs-header-cta hov-accent-solid" style="background: #0d1826; color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; padding: 12px 24px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="getQuote"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <x-cta-primary location="header" tone="dark" size="sm" class="gs-header-cta"/>
         <button @click="open = true" class="gs-burger" style="display: none; background: #0d1826; color: #fff; border: none; width: 46px; height: 46px; border-radius: var(--gs-r-btn, 10px); cursor: pointer; align-items: center; justify-content: center;"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       </div>
     </div>
@@ -31,7 +31,7 @@
           <a href="{{ $home }}#{{ $anchor }}" @click="open = false" style="padding: 13px 6px; border-bottom: 1px solid #eef1f2; font-family: 'Space Grotesk'; font-weight: 500; color: #0d1826;"><x-t :k="$key"/></a>
         @endif
       @endforeach
-      <a href="{{ $home }}#contact" @click="open = false" style="margin-top: 16px; background: var(--gs-accent, #2CA69C); color: #fff; text-align: center; font-family: 'Space Grotesk'; font-weight: 600; padding: 14px; border-radius: var(--gs-r-btn, 10px);"><x-t k="getQuote"/></a>
+      <x-cta-primary location="mobile_menu" @click="open = false" style="margin-top: 16px; width: 100%;"/>
     </div>
   </div>
 </div>

@@ -22,10 +22,7 @@
     <p style="font-size: clamp(15.5px, 1.7vw, 18px); line-height: 1.7; color: var(--gs-deep-muted, #A9B6C3); max-width: 660px; margin-bottom: 28px;">{{ $page['intro'] }}</p>
 
     <div class="gs-hero-ctas" style="display: flex; gap: 14px; flex-wrap: wrap;">
-      <a href="{{ route('home') }}#contact" class="hov-white"
-         data-gs-track="cta_click" data-gs-label="{{ t('ctaEstimate', 'en') }}" data-gs-location="service_hero"
-         data-gs-service="{{ $page['slug'] }}"
-         style="background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 16px; padding: 15px 28px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="ctaEstimate"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <x-cta-primary location="service_hero" :service="$page['slug']"/>
       <x-whatsapp-cta :source="$page['whatsapp']" :service="$page['slug']" variant="secondary"/>
     </div>
   </div>
@@ -77,10 +74,7 @@
       <div style="border: 1px solid #e6eded; border-radius: var(--gs-r-card, 16px); padding: 26px 28px; background: #fff;">
         <p style="font-size: 16.5px; line-height: 1.7; color: #4d5d6c; margin-bottom: 18px;"><x-t k="svcCostBody"/></p>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <a href="{{ route('home') }}#contact" class="hov-accent-solid"
-             data-gs-track="cta_click" data-gs-label="{{ t('ctaEstimate', 'en') }}" data-gs-location="service_pricing"
-             data-gs-service="{{ $page['slug'] }}"
-             style="background: #0d1826; color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 15px; padding: 13px 24px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="ctaEstimate"/></a>
+          <x-cta-primary location="service_pricing" tone="dark" size="sm" :service="$page['slug']"/>
           <x-whatsapp-cta :source="$page['whatsapp']" :service="$page['slug']" variant="light"/>
         </div>
       </div>

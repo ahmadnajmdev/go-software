@@ -14,7 +14,7 @@
           <div><h4 style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 18px; color: #0d1826; margin-bottom: 4px;"><x-t k="why2T"/></h4><p style="font-size: 14px; color: #6a7a8a; line-height: 1.6;"><x-t k="why2D"/></p></div>
         </div>
       </div>
-      <a href="{{ route('home') }}#about" class="hov-dark" style="background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 14px 28px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="whyCta"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <x-cta-primary location="why"/>
     </div>
     <div style="position: relative;">
       <div style="border-radius: var(--gs-r-card, 18px); overflow: hidden;">

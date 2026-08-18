@@ -1031,9 +1031,9 @@ return array (
   ),
   'sendMsg' => 
   array (
-    'en' => 'Send Message',
-    'ar' => 'أرسل الرسالة',
-    'ckb' => 'نامەکە بنێرە',
+    'en' => 'Get My Free Estimate',
+    'ar' => 'احصل على تقديري المجاني',
+    'ckb' => 'خەمڵاندنی خۆڕاییەکەم وەربگرە',
   ),
   'thanksT' => 
   array (

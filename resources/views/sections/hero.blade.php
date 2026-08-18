@@ -29,9 +29,7 @@
       <p style="font-size: clamp(15px, 1.6vw, 17px); line-height: 1.65; color: var(--gs-deep-muted, #A9B6C3); max-width: 520px; margin-bottom: 26px;"><x-t k="heroSub"/></p>
 
       <div class="gs-hero-ctas" style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 24px;">
-        <a href="{{ route('home') }}#contact" class="hov-white"
-           data-gs-track="cta_click" data-gs-label="{{ t('ctaEstimate', 'en') }}" data-gs-location="hero"
-           style="background: var(--gs-accent, #2CA69C); color: #fff; font-family: 'Space Grotesk'; font-weight: 600; font-size: 16px; padding: 15px 28px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="ctaEstimate"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <x-cta-primary location="hero"/>
         <x-whatsapp-cta source="hero" variant="secondary"/>
       </div>
 

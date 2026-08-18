@@ -24,7 +24,7 @@
         <div style="display: flex; gap: 12px; align-items: flex-start;"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:1px;color:var(--gs-accent, #2CA69C);"><path d="M20 6L9 17l-5-5"/></svg><div><strong style="color: #0d1826; font-family: 'Space Grotesk';"><x-t k="ab4T"/></strong><div style="font-size: 14px; color: #6a7a8a;"><x-t k="ab4D"/></div></div></div>
       </div>
       <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
-        <a href="{{ route('home') }}#contact" class="hov-accent-solid" style="background: #0d1826; color: #fff; font-family: 'Space Grotesk'; font-weight: 600; padding: 14px 28px; border-radius: var(--gs-r-btn, 10px); display: inline-flex; align-items: center; gap: 9px; transition: .25s;"><x-t k="aboutCta"/> <svg class="gs-flip" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <x-cta-primary location="about" tone="dark"/>
         <div style="display: flex; align-items: center; gap: 12px;">
           <x-photo setting="images.ceo" :alt="gs_setting('about.ceo_name')" :height="50" :width="50" round style="width: 50px; height: 50px; flex-shrink: 0;"/>
           <div><div style="font-family: 'Space Grotesk'; font-weight: 700; color: #0d1826;">{{ gs_setting('about.ceo_name') }}</div><div style="font-size: 13px; color: #6a7a8a;"><x-t k="ceoRole"/></div></div>

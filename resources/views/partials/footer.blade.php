@@ -29,21 +29,9 @@
     <div>
       <h4 style="font-family: 'Space Grotesk'; font-weight: 600; font-size: 17px; color: #fff; margin-bottom: 20px;"><x-t k="ftServices"/></h4>
       <div style="display: flex; flex-direction: column; gap: 13px; font-size: 15px;">
-        @if (gs_section_visible('services') || auth()->check())
-          <a href="{{ $home }}#services" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="webDev"/></a>
-        @endif
-        @if (gs_section_visible('services') || auth()->check())
-          <a href="{{ $home }}#services" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="ftWebApps"/></a>
-        @endif
-        @if (gs_section_visible('services') || auth()->check())
-          <a href="{{ $home }}#services" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="mobileApps"/></a>
-        @endif
-        @if (gs_section_visible('services') || auth()->check())
-          <a href="{{ $home }}#services" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="mgmtSystems"/></a>
-        @endif
-        @if (gs_section_visible('services') || auth()->check())
-          <a href="{{ $home }}#services" class="hov-accent-text" style="color: #a3b0bd;"><x-t k="ftSupport"/></a>
-        @endif
+        @foreach (\App\Support\ServiceCatalogue::published() as $footerService)
+          <a href="{{ gs_route('services/'.$footerService->slug) }}" class="hov-accent-text" style="color: #a3b0bd;">{{ \App\Support\ServiceCatalogue::page($footerService->slug)['name'] }}</a>
+        @endforeach
       </div>
     </div>
     <div>
