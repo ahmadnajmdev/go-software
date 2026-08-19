@@ -40,7 +40,10 @@
 <meta name="twitter:title" content="{!! $gsTitle !!}">
 <meta name="twitter:description" content="{!! $gsDescription !!}">
 <meta name="twitter:image" content="@yield('og_image', Seo::ogImage())">
-<link rel="icon" type="image/png" href="{{ asset('images/logo-dark.png') }}">
+<link rel="icon" href="{{ asset('favicon.ico') }}" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ asset('images/favicon-32x32.png') }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ asset('images/favicon-16x16.png') }}">
+<link rel="apple-touch-icon" href="{{ asset('images/apple-touch-icon.png') }}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 @php
